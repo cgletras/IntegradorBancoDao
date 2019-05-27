@@ -89,7 +89,7 @@ public class ProgramUsuario {
 		return carregaUsuario(usuario.getIdUsuario());			
 	}
 
-	private static Usuario carregaUsuario(int id) {
+	public static Usuario carregaUsuario(int id) {
 		
 		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 		Usuario usuario = usuarioDao.findById(id);
