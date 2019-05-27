@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.dao.LeilaoDao;
 import model.entities.Leilao;
+import model.entities.Usuario;
 
 public class LeilaoDaoJDBC implements LeilaoDao {
 
@@ -27,12 +28,6 @@ private Connection conn;
 	}
 
 	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Leilao findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -40,6 +35,18 @@ private Connection conn;
 
 	@Override
 	public List<Leilao> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void cancel(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Leilao> findByUser(Usuario obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}

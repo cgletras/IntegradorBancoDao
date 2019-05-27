@@ -3,12 +3,10 @@ package model.dao;
 import java.util.List;
 
 import model.entities.Escritor;
+import model.entities.Produto;
 
 public interface EscritorDao {
 
-	void insert(Escritor obj);
-	void update(Escritor obj);
-	void deleteById(Integer id);
-	Escritor  findById(Integer id);
-	List<Escritor> findAll();
+	Escritor findById(Integer id);
+	List<Escritor> findByProduto(Produto obj);
 }

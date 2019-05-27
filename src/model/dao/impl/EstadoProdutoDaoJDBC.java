@@ -13,27 +13,9 @@ private Connection conn;
 	public EstadoProdutoDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
-	
-	@Override
-	public void insert(EstadoProduto obj) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
-	public void update(EstadoProduto obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public EstadoProduto findById(Integer id) {
+	public EstadoProduto findById() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -43,5 +25,7 @@ private Connection conn;
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }
