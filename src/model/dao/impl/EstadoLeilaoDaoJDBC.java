@@ -5,11 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import db.DB;
 import db.DbException;
 import model.dao.EstadoLeilaoDao;
 import model.entities.EstadoLeilao;
+import model.entities.Usuario;
 
 public class EstadoLeilaoDaoJDBC implements EstadoLeilaoDao {
 
@@ -54,23 +58,21 @@ public class EstadoLeilaoDaoJDBC implements EstadoLeilaoDao {
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT * FROM Estado_leilao "
-					+ "ORDER BY id_estado_leilao");
+					"SELECT id_estado_leilao, estado "
+					+ "FROM Estado_leilao "
+					+ "ORDER BY estado");
 			
 			rs = st.executeQuery();
 			
 			List<EstadoLeilao> list = new ArrayList<>();
+			Map<Integer, EstadoLeilao> map = new HashMap<>();
 			
 			while (rs.next()) {
-				
 				EstadoLeilao obj = new EstadoLeilao();
 				obj.setIdEstadoLeilao(rs.getInt("id_estado_leilao"));
 				obj.setEstado(rs.getString("estado"));
+				
 				list.add(obj);
-			}
-			
-			for (EstadoLeilao estadoLeilao : list) {
-				System.out.println(estadoLeilao);
 			}
 			return list;
 		}
