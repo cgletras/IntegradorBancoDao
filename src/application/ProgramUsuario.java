@@ -12,7 +12,7 @@ import model.dao.UsuarioDao;
 import model.entities.EstadoLeilao;
 import model.entities.Usuario;
 
-public class Program {
+public class ProgramUsuario {
 
 	public static void main(String[] args) throws ParseException {
 		
@@ -35,15 +35,16 @@ public class Program {
 		
 		// LISTA TODOS OS USUARIOS RETORNA UMA LISTA
 		
-//OK	listarUsuarios();
-		
+
+//OK 	listarUsuarios()) {
+			
 		// procura 1 usuario pelo email e retorna
 			
 //OK 	carregarUsuarioPorEmail(email));
 		
-//OK		inativaUsuarioPorId(id);
+//OK	inativaUsuarioPorId(id);
 
-//OK		ativaUsuarioPorId(id);
+//OK	ativaUsuarioPorId(id);
 		
 	}
 

@@ -213,12 +213,6 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Usuario> findByLeilao(Leilao obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void activate(Integer id) {
 		PreparedStatement st = null;
 		try {

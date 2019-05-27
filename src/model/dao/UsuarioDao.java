@@ -14,5 +14,4 @@ public interface UsuarioDao {
 	Usuario findById(Integer id);
 	Usuario findByEmail(String email);
 	List<Usuario> findAll();
-	List<Usuario> findByLeilao(Leilao obj);
 }
