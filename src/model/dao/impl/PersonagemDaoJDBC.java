@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.dao.PersonagemDao;
 import model.entities.Personagem;
+import model.entities.Produto;
 
 public class PersonagemDaoJDBC implements PersonagemDao {
 
@@ -12,24 +13,6 @@ private Connection conn;
 	
 	public PersonagemDaoJDBC(Connection conn) {
 		this.conn = conn;
-	}
-	
-	@Override
-	public void insert(Personagem obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update(Personagem obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -39,9 +22,8 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Personagem> findAll() {
+	public List<Personagem> findByProduto(Produto obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

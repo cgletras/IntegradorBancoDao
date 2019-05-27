@@ -6,9 +6,6 @@ import model.entities.EstadoProduto;
 
 public interface EstadoProdutoDao {
 
-	void insert(EstadoProduto obj);
-	void update(EstadoProduto obj);
-	void deleteById(Integer id);
-	EstadoProduto  findById(Integer id);
+	EstadoProduto findById();
 	List<EstadoProduto> findAll();
 }

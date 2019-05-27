@@ -3,12 +3,10 @@ package model.dao;
 import java.util.List;
 
 import model.entities.Personagem;
+import model.entities.Produto;
 
 public interface PersonagemDao {
-
-	void insert(Personagem obj);
-	void update(Personagem obj);
-	void deleteById(Integer id);
-	Personagem  findById(Integer id);
-	List<Personagem> findAll();
+	
+	Personagem findById(Integer id);
+	List<Personagem> findByProduto(Produto obj);
 }
