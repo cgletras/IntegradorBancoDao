@@ -33,9 +33,7 @@ public class LanceDaoJDBC implements LanceDao {
 			st.setDate(2, new java.sql.Date(obj.getDataLance().getTime()));
 			st.setInt(3, obj.getLeilao().getIdLeilao());
 			st.setInt(4, obj.getUsuario().getIdUsuario());
-			System.out.println("um");
 			int rowsAffected = st.executeUpdate();
-			System.out.println("dois");
 			if (rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
 				if (rs.next()) {
