@@ -52,7 +52,6 @@ public class LanceDaoJDBC implements LanceDao {
 		finally {
 			DB.closeStatement(st);
 		}
-
 	}
 
 	@Override

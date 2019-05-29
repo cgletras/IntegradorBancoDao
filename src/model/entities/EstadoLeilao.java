@@ -10,9 +10,8 @@ public class EstadoLeilao implements Serializable{
 	private String estado;
 	
 	public EstadoLeilao() {
-		
 	}
-
+	
 	public EstadoLeilao(Integer idEstadoLeilao, String estado) {
 		super();
 		this.idEstadoLeilao = idEstadoLeilao;

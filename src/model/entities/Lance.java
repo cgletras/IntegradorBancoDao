@@ -15,6 +15,10 @@ public class Lance implements Serializable {
 	private Leilao leilao;
 	private Usuario usuario;
 	
+	public Lance() {
+	super();
+	}
+
 	public Lance(Integer idLance, double valorLance, Date dataLance, Leilao leilao, Usuario usuario) {
 		super();
 		this.idLance = idLance;
