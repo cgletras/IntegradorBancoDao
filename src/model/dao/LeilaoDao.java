@@ -9,6 +9,7 @@ public interface LeilaoDao {
 
 	void insert(Leilao obj);
 	void update(Leilao obj);
+	void updateValorAtual(Leilao obj);
 	void cancel(Integer id);
 	Leilao  findById(Integer id);
 	List<Leilao> findAll();

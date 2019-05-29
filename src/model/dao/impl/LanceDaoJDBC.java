@@ -4,10 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import db.DB;
 import db.DbException;
+import model.dao.DaoFactory;
 import model.dao.LanceDao;
+import model.dao.LeilaoDao;
+import model.dao.UsuarioDao;
 import model.entities.Lance;
 import model.entities.Leilao;
 import model.entities.Usuario;
@@ -25,6 +32,8 @@ public class LanceDaoJDBC implements LanceDao {
 		
 		PreparedStatement st = null;
 		try {
+			
+			conn.setAutoCommit(false);
 			st = conn.prepareStatement(
 					"INSERT INTO Lance (valor_lance, data_lance, id_leilao, id_usuario) " + "VALUES " + "(?, ?, ?, ?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
@@ -45,9 +54,22 @@ public class LanceDaoJDBC implements LanceDao {
 			else {
 				throw new DbException("Unexpected error! No rows affected!");
 			}
+			
+			// incrementa valor atual leilao
+			LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+			Leilao leilao = leilaoDao.findById(obj.getLeilao().getIdLeilao());
+			leilaoDao.updateValorAtual(leilao);
+			// --
+			
+			conn.commit();
 		} 
 		catch (SQLException e) {
-			throw new DbException(e.getMessage());
+			try {
+				conn.rollback();
+				throw new DbException("Uma das operações falhou: "+e.getMessage());
+			} catch (SQLException e1) {
+				throw new DbException("Falhou o rollback");
+			}
 		} 
 		finally {
 			DB.closeStatement(st);
@@ -56,14 +78,83 @@ public class LanceDaoJDBC implements LanceDao {
 
 	@Override
 	public Lance findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT * FROM Lance "
+					+ "WHERE id_lance = ?");
+			
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			
+			if (rs.next()) {
+				Lance obj = new Lance();
+				obj.setIdLance(rs.getInt("id_lance"));
+				obj.setValorLance(rs.getDouble("valor_lance"));
+				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
+				//
+				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
+				obj.setLeilao(leilao);
+				//
+				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
+				obj.setUsuario(usuario);
+				
+				return obj;
+			}
+			return null;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
 	public List<Lance> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT id_lance, valor_lance, data_lance, id_leilao, id_usuario "
+					+ "FROM Lance "
+					+ "ORDER BY id_lance");
+			
+			rs = st.executeQuery();
+			
+			List<Lance> list = new ArrayList<>();
+			Map<Integer, Lance> map = new HashMap<>();
+			
+			while (rs.next()) {
+				Lance obj = new Lance();
+				obj.setIdLance(rs.getInt("id_lance"));
+				obj.setValorLance(rs.getDouble("valor_lance"));
+				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
+				//
+				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
+				obj.setLeilao(leilao);
+				//
+				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
+				obj.setUsuario(usuario);
+						
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
@@ -73,9 +164,47 @@ public class LanceDaoJDBC implements LanceDao {
 	}
 
 	@Override
-	public List<Lance> findByLeilao(Leilao obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Lance> findByLeilao(Leilao leilaoId) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT id_lance, valor_lance, data_lance, id_leilao, id_usuario "
+					+ "FROM Lance "
+					+ "WHERE id_leilao = ? "
+					+ "ORDER BY id_lance");
+			
+			st.setInt(1, leilaoId.getIdLeilao());
+			rs = st.executeQuery();
+			
+			List<Lance> list = new ArrayList<>();
+			Map<Integer, Lance> map = new HashMap<>();
+			
+			while (rs.next()) {
+				Lance obj = new Lance();
+				obj.setIdLance(rs.getInt("id_lance"));
+				obj.setValorLance(rs.getDouble("valor_lance"));
+				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
+				//
+				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
+				obj.setLeilao(leilao);
+				//
+				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
+				obj.setUsuario(usuario);
+						
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	

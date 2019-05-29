@@ -36,6 +36,28 @@ private Connection conn;
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public void updateValorAtual(Leilao obj) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Leilao " + 
+					"SET valor_atual= ? " + 
+					"WHERE id_leilao= ?");
+
+			st.setDouble(1, obj.getValorAtual()+obj.getLancePadrao());
+			st.setInt(2, obj.getIdLeilao());
+									
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+	}
 
 	@Override
 	public Leilao findById(Integer id) {
@@ -101,5 +123,4 @@ private Connection conn;
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

@@ -1,6 +1,7 @@
 package application;
 
 import java.util.Date;
+import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.LanceDao;
@@ -15,8 +16,34 @@ public class ProgramLance {
 		
 		int id_usuario = 1;
 		int id_leilao = 1;
+		int id_lance = 1;
 		
-		insereLance(id_usuario, id_leilao);
+	//	insereLance(id_usuario, id_leilao);
+		
+	//	carregaLance(id_lance);
+		
+	//  carregaTodosLances();
+		
+	//	carregaLancesPorLeilao(id_leilao);
+		
+	// carregaLancesPorLeilao(id_leilao);
+		
+		
+	}
+
+	private static List carregaLancesPorLeilao(int id_leilao) {
+		LanceDao lanceDao = DaoFactory.createLanceDao();
+		return lanceDao.findByLeilao(ProgramLeilao.carregaLeilaoPorId(id_leilao));
+	}
+
+	private static List<Lance> carregaTodosLances() {
+		LanceDao lanceDao = DaoFactory.createLanceDao();
+		return lanceDao.findAll();
+	}
+
+	private static Lance carregaLance(int id_lance) {
+		LanceDao lanceDao = DaoFactory.createLanceDao();
+		return lanceDao.findById(id_lance);
 	}
 
 	private static void insereLance(int id_usuario, int id_leilao) {
