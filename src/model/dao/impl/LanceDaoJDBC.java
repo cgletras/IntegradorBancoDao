@@ -158,9 +158,47 @@ public class LanceDaoJDBC implements LanceDao {
 	}
 
 	@Override
-	public List<Lance> findByUser(Usuario obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Lance> findByUser(Usuario usuarioId) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT id_lance, valor_lance, data_lance, id_leilao, id_usuario "
+					+ "FROM Lance "
+					+ "WHERE id_usuario = ? "
+					+ "ORDER BY id_lance");
+			
+			st.setInt(1, usuarioId.getIdUsuario());
+			rs = st.executeQuery();
+			
+			List<Lance> list = new ArrayList<>();
+			Map<Integer, Lance> map = new HashMap<>();
+			
+			while (rs.next()) {
+				Lance obj = new Lance();
+				obj.setIdLance(rs.getInt("id_lance"));
+				obj.setValorLance(rs.getDouble("valor_lance"));
+				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
+				//
+				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
+				obj.setLeilao(leilao);
+				//
+				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
+				obj.setUsuario(usuario);
+						
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
