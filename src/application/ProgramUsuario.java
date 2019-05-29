@@ -36,7 +36,7 @@ public class ProgramUsuario {
 		// LISTA TODOS OS USUARIOS RETORNA UMA LISTA
 		
 
-//OK 	listarUsuarios()) {
+//OK 	listarUsuarios();
 			
 		// procura 1 usuario pelo email e retorna
 			

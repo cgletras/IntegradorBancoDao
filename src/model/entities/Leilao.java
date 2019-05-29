@@ -8,27 +8,36 @@ public class Leilao  implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private int idLeilao, duracao;
-	private Date dataInicio, dataFim;
+	private Date dataInicio;
 	private double valorInicial, valorAtual, lancePadrao;
 	
+	private EstadoLeilao estado;
 	private Produto produto;
 	private Usuario usuario;
 	
 	public Leilao() {
 	}
 
-	public Leilao(int idLeilao, int duracao, Date dataInicio, Date dataFim, double valorInicial, double valorAtual,
-			double lancePadrao, Produto produto, Usuario usuario) {
+	public Leilao(int idLeilao, int duracao, Date dataInicio, double valorInicial, double valorAtual,
+			double lancePadrao, EstadoLeilao estado, Produto produto, Usuario usuario) {
 		super();
 		this.idLeilao = idLeilao;
 		this.duracao = duracao;
 		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
 		this.valorInicial = valorInicial;
 		this.valorAtual = valorAtual;
 		this.lancePadrao = lancePadrao;
+		this.estado = estado;
 		this.produto = produto;
 		this.usuario = usuario;
+	}
+
+	public EstadoLeilao getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoLeilao estado) {
+		this.estado = estado;
 	}
 
 	public Produto getProduto() {
@@ -71,16 +80,8 @@ public class Leilao  implements Serializable{
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDataFim() {
-		return dataFim;
-	}
-
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
-	}
-
 	public double getValorInicial() {
-		return valorInicial;
+	return valorInicial;
 	}
 
 	public void setValorInicial(double valorInicial) {
@@ -131,8 +132,10 @@ public class Leilao  implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Leilao [idLeilao=" + idLeilao + ", duracao=" + duracao + ", dataInicio=" + dataInicio + ", dataFim="
-				+ dataFim + ", valorInicial=" + valorInicial + ", valorAtual=" + valorAtual + ", lancePadrao="
-				+ lancePadrao + ", produto=" + produto + ", usuario=" + usuario + "]";
+		return "Leilao [idLeilao=" + idLeilao + ", duracao=" + duracao + ", dataInicio=" + dataInicio
+				+ ", valorInicial=" + valorInicial + ", valorAtual=" + valorAtual + ", lancePadrao=" + lancePadrao
+				+ ", produto=" + produto + ", usuario=" + usuario + "]";
 	}
+
+	
 }
