@@ -14,21 +14,25 @@ public class ProgramLance {
 
 	public static void main(String[] args) {
 		
-		int id_usuario = 1;
+		int id_usuario = 3;
 		int id_leilao = 1;
 		int id_lance = 1;
 		
-	//	insereLance(id_usuario, id_leilao);
+		//	insereLance(id_usuario, id_leilao);
 		
 	//	carregaLance(id_lance);
 		
 	//  carregaTodosLances();
 		
 	//	carregaLancesPorLeilao(id_leilao);
+			
+	//  carregaLancesPorUsuario(id_usuario);
 		
-	// carregaLancesPorLeilao(id_leilao);
-		
-		
+	}
+
+	private static List<Lance> carregaLancesPorUsuario(int id_usuario) {
+		LanceDao lanceDao = DaoFactory.createLanceDao();
+		return lanceDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));		
 	}
 
 	private static List carregaLancesPorLeilao(int id_leilao) {
