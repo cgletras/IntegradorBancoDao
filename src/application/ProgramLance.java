@@ -1,5 +1,8 @@
 package application;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -9,48 +12,61 @@ import model.entities.Lance;
 import model.entities.Leilao;
 import model.entities.Usuario;
 import application.*;
+import db.DB;
+import db.DbIntegrityException;
 
 public class ProgramLance {
 
+	
 	public static void main(String[] args) {
 		
-		int id_usuario = 3;
+		int id_usuario = 5;
 		int id_leilao = 1;
-		int id_lance = 1;
+		int id_lance = 5;
 		
-		//	insereLance(id_usuario, id_leilao);
 		
-	//	carregaLance(id_lance);
+		insereLance(id_usuario, id_leilao);
+		
+	// carregaLance(id_lance));
 		
 	//  carregaTodosLances();
 		
 	//	carregaLancesPorLeilao(id_leilao);
-			
-	//  carregaLancesPorUsuario(id_usuario);
+		
+	
+	
+		
+		 deletarLance(14);
 		
 	}
 
-	private static List<Lance> carregaLancesPorUsuario(int id_usuario) {
+	public static void deletarLance(int id_lance) {
+		LanceDao lanceDao = DaoFactory.createLanceDao();
+		lanceDao.deleteLanceById(id_lance);
+		
+	}
+
+	public static List<Lance> carregaLancesPorUsuario(int id_usuario) {
 		LanceDao lanceDao = DaoFactory.createLanceDao();
 		return lanceDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));		
 	}
 
-	private static List carregaLancesPorLeilao(int id_leilao) {
+	public static List carregaLancesPorLeilao(int id_leilao) {
 		LanceDao lanceDao = DaoFactory.createLanceDao();
 		return lanceDao.findByLeilao(ProgramLeilao.carregaLeilaoPorId(id_leilao));
 	}
 
-	private static List<Lance> carregaTodosLances() {
+	public static List<Lance> carregaTodosLances() {
 		LanceDao lanceDao = DaoFactory.createLanceDao();
 		return lanceDao.findAll();
 	}
 
-	private static Lance carregaLance(int id_lance) {
+	public static Lance carregaLance(int id_lance) {
 		LanceDao lanceDao = DaoFactory.createLanceDao();
 		return lanceDao.findById(id_lance);
 	}
 
-	private static void insereLance(int id_usuario, int id_leilao) {
+	public static void insereLance(int id_usuario, int id_leilao) {
 		
 		LanceDao lanceDao = DaoFactory.createLanceDao();
 		lanceDao.insert

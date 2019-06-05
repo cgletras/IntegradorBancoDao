@@ -13,4 +13,5 @@ public interface LanceDao {
 	List<Lance> findAll();
 	List<Lance> findByUser(Usuario obj);
 	List<Lance> findByLeilao(Leilao obj);
+	void deleteLanceById(Integer id_lance);
 }

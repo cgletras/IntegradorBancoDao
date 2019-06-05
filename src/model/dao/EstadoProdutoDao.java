@@ -6,6 +6,6 @@ import model.entities.EstadoProduto;
 
 public interface EstadoProdutoDao {
 
-	EstadoProduto findById();
+	EstadoProduto findById(Integer id);
 	List<EstadoProduto> findAll();
 }
