@@ -48,35 +48,35 @@ public class ProgramUsuario {
 		
 	}
 
-	private static void ativaUsuarioPorId(int id) {
+	public static void ativaUsuarioPorId(int id) {
 		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 		usuarioDao.activate(id);
 	}
 
-	private static void inativaUsuarioPorId(int id) {
+	public static void inativaUsuarioPorId(int id) {
 		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 		usuarioDao.inactivate(id);
 	}
 
-	private static Usuario carregarUsuarioPorEmail(String email) {
+	public static Usuario carregarUsuarioPorEmail(String email) {
 		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 		Usuario usuario = usuarioDao.findByEmail(email);
 		return usuario;
 	}
 
-	private static List<Usuario> listarUsuarios() {
+	public static List<Usuario> listarUsuarios() {
 		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 		List<Usuario> list = new ArrayList<>();
 		return list = usuarioDao.findAll();
 		
 	}
 
-	private static Usuario atualizarUsuario(Usuario usuario) throws ParseException {
+	public static Usuario atualizarUsuario(Usuario usuario) throws ParseException {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 		
-		//cerragar dados informados na pagina de atualizaçao abaixo
+		//carregar dados informados na pagina de atualizaçao abaixo
 		
 		usuario.setNome("Ricardo");
 		usuario.setEmail("rrrr@gmail.com");
@@ -96,7 +96,7 @@ public class ProgramUsuario {
 		return usuario;
 	}
 
-	private static void insereUsuario() throws ParseException {
+	public static void insereUsuario() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();

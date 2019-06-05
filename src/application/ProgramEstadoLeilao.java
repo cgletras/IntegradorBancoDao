@@ -30,12 +30,12 @@ public class ProgramEstadoLeilao {
 				
 	}
 
-	private static List<EstadoLeilao> listarEstadosLeilao() {
+	public static List<EstadoLeilao> listarEstadosLeilao() {
 		EstadoLeilaoDao estadoLeilaoDao = DaoFactory.createEstadoLeilaoDao();
 		return estadoLeilaoDao.findAll();
 	}
 
-	private static EstadoLeilao estadoLeilaoPorId(int id) {
+	public static EstadoLeilao estadoLeilaoPorId(int id) {
 		EstadoLeilaoDao estadoLeilaoDao = DaoFactory.createEstadoLeilaoDao();
 		return estadoLeilaoDao.findById(id);
 	}

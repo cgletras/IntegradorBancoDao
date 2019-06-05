@@ -11,6 +11,7 @@ import java.util.Map;
 
 import db.DB;
 import db.DbException;
+import db.DbIntegrityException;
 import model.dao.DaoFactory;
 import model.dao.LanceDao;
 import model.dao.LeilaoDao;
@@ -245,6 +246,29 @@ public class LanceDaoJDBC implements LanceDao {
 		}
 	}
 
-	
+	@Override
+	public void deleteLanceById(Integer id_lance) {
+		Connection conn = null;
+		PreparedStatement st = null;
 
+		try {
+			conn = DB.getConnection();
+
+			st = conn.prepareStatement(
+					"DELETE FROM Lance "
+					+"WHERE "
+					+"id_lance = ?");
+			st.setInt(1, id_lance);
+			
+
+			int rowsAffected = st.executeUpdate();
+			System.out.println("Linhas afetadas" + rowsAffected);
+
+		} catch (SQLException e) {
+			throw new DbIntegrityException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+			DB.closeConnection();
+		}
+	}
 }
