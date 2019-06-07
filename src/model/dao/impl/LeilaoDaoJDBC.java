@@ -71,8 +71,32 @@ private Connection conn;
 
 	@Override
 	public void update(Leilao obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Leilao " + 
+					"SET data_inicio= ?, duracao= ?, valor_inicial= ?, valor_atual= ?, lance_padrao= ?, id_estado_leilao= ?, id_usuario= ?, id_produto= ? " + 
+					"WHERE id_leilao= ?");
 
+			st.setDate(1, new java.sql.Date(obj.getDataInicio().getTime()));
+			st.setInt(2, obj.getDuracao());
+			st.setDouble(3, obj.getValorInicial());
+			st.setDouble(4, obj.getValorInicial());
+			st.setDouble(5, obj.getLancePadrao());
+			st.setInt(6, obj.getEstado().getIdEstadoLeilao());
+			st.setInt(7, obj.getUsuario().getIdUsuario());
+			st.setInt(8, obj.getProduto().getIdProduto());
+			st.setInt(9, obj.getIdLeilao());	
+			
+			st.executeUpdate();
+			System.out.println("Leilao atualizado com sucesso");
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 	
 	@Override
@@ -194,14 +218,75 @@ private Connection conn;
 	}
 
 	@Override
-	public void cancel(Integer id) {
-		// TODO Auto-generated method stub
-		
+	public List<Leilao> findByUser(Usuario user) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT id_leilao, data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, id_estado_leilao, id_usuario, id_produto " 
+					+ "FROM Leilao "
+					+ "WHERE id_usuario = ?");
+			
+			st.setInt(1, user.getIdUsuario());
+			rs = st.executeQuery();
+			
+			List<Leilao> list = new ArrayList<>();
+			Map<Integer, Leilao> map = new HashMap<>();
+			
+			while (rs.next()) {
+				Leilao leilao = new Leilao();
+							
+				leilao.setIdLeilao(rs.getInt("id_leilao"));
+				leilao.setDataInicio(new java.sql.Date(rs.getDate("data_inicio").getTime()));
+				leilao.setDuracao(rs.getInt("duracao"));
+				leilao.setValorInicial(rs.getDouble("valor_inicial"));
+				leilao.setValorAtual(rs.getDouble("valor_atual"));
+				leilao.setLancePadrao(rs.getDouble("lance_padrao"));
+				
+				EstadoLeilaoDao estadoleilaoDao = DaoFactory.createEstadoLeilaoDao();
+				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
+				leilao.setEstado(estadoLeilao);
+				
+				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
+				leilao.setUsuario(usuario);
+								
+				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
+				leilao.setProduto(produto);
+								
+				list.add(leilao);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
-	public List<Leilao> findByUser(Usuario obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public void changeStatusLeilao(Integer id, EstadoLeilao estado) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Leilao " + 
+					"SET id_estado_leilao= ? " + 
+					"WHERE id_leilao= ?");
+			
+			st.setInt(1, estado.getIdEstadoLeilao());
+			st.setInt(2, id);;
+									
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}		
 	}
 }

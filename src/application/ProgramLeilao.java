@@ -6,6 +6,7 @@ import java.util.List;
 import model.dao.DaoFactory;
 import model.dao.LeilaoDao;
 import model.entities.EstadoLeilao;
+import model.entities.Lance;
 import model.entities.Leilao;
 
 public class ProgramLeilao {
@@ -13,6 +14,8 @@ public class ProgramLeilao {
 	public static void main(String[] args) {
 
 		int id_leilao = 1;
+		int id_usuario = 2;
+		int id_estado_leilao = 2;
 
 	//	carregaLeilaoPorId(id_leilao);
 		
@@ -21,7 +24,22 @@ public class ProgramLeilao {
 	//	insereLeilao();
 		
 	//	listarLeiloes();
-			
+		
+	// listarLeilaoPorUsuario(id_usuario)) {
+		
+	//	updateLeilao(id_leilao);
+		
+		mudaStatusLeilao(id_leilao, id_estado_leilao);
+	}
+
+	public static void mudaStatusLeilao(int id_leilao, int id_estado_leilao) {
+		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+		leilaoDao.changeStatusLeilao(id_leilao, ProgramEstadoLeilao.estadoLeilaoPorId(id_estado_leilao));
+	}
+
+	public static List<Leilao> listarLeilaoPorUsuario(int id_usuario) {
+		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+		return leilaoDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));
 	}
 
 	public static List<Leilao> listarLeiloes() {
@@ -32,20 +50,42 @@ public class ProgramLeilao {
 	public static void insereLeilao() {
 		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
 		Leilao leilao = new Leilao();
+		//carregar dados informados na pagina de atualizaçao abaixo
+		
 		leilao.setDuracao(10);
 		leilao.setDataInicio(new Date());
 		leilao.setValorInicial(450);
 		leilao.setValorAtual(leilao.getValorInicial());
 		leilao.setLancePadrao(20);
 		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
-		leilao.setProduto(ProgramProduto.carregarProdutoByID(4));
-		leilao.setUsuario(ProgramUsuario.carregaUsuario(1));
+		leilao.setProduto(ProgramProduto.carregarProdutoByID(5));
+		leilao.setUsuario(ProgramUsuario.carregaUsuario(2));
 		leilaoDao.insert(leilao);
 	}
 
 	public static void updateLeilao(int id_leilao) {
-		// TODO Auto-generated method stub
+		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
+		Leilao leilao = new Leilao();
+		//carregar dados informados na pagina de atualizaçao abaixo
 		
+		leilao.setIdLeilao(id_leilao);
+		leilao.setDuracao(20);
+		leilao.setDataInicio(new Date());
+		leilao.setValorInicial(200);
+		leilao.setValorAtual(leilao.getValorInicial());
+		leilao.setLancePadrao(30);
+		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
+		leilao.setProduto(ProgramProduto.carregarProdutoByID(3));
+		leilao.setUsuario(ProgramUsuario.carregaUsuario(1));
+		
+		List<Lance> lances = ProgramLance.carregaLancesPorLeilao(id_leilao);
+		System.out.println(lances.size());
+		
+		if(lances.size()==0) {
+			leilaoDao.update(leilao);
+		} else {
+			System.out.println("Um leilão com lances não pode ser modificado");
+		}
 	}
 
 	public static Leilao carregaLeilaoPorId(int id_leilao) {

@@ -17,26 +17,22 @@ import db.DbIntegrityException;
 
 public class ProgramLance {
 
-	
 	public static void main(String[] args) {
 		
-		int id_usuario = 5;
+		int id_usuario = 2;
 		int id_leilao = 1;
-		int id_lance = 5;
+		// int id_lance = 5;
 		
 		
 		insereLance(id_usuario, id_leilao);
 		
 	// carregaLance(id_lance));
 		
-	//  carregaTodosLances();
+	// carregaTodosLances();
 		
-	//	carregaLancesPorLeilao(id_leilao);
+	// carregaLancesPorLeilao(id_leilao);
 		
-	
-	
-		
-		 deletarLance(14);
+	// deletarLance(23);
 		
 	}
 
@@ -72,7 +68,7 @@ public class ProgramLance {
 		lanceDao.insert
 		(new Lance(null, 
 				ProgramLeilao.carregaLeilaoPorId(id_leilao).getLancePadrao(), 
-				new Date(), 
+				null, 
 				ProgramLeilao.carregaLeilaoPorId(id_leilao), 
 				ProgramUsuario.carregaUsuario(id_usuario)));		
 	}
