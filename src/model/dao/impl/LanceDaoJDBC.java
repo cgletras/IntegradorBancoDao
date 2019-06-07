@@ -36,13 +36,13 @@ public class LanceDaoJDBC implements LanceDao {
 			
 			conn.setAutoCommit(false);
 			st = conn.prepareStatement(
-					"INSERT INTO Lance (valor_lance, data_lance, id_leilao, id_usuario) " + "VALUES " + "(?, ?, ?, ?)",
+					"INSERT INTO Lance (valor_lance, id_leilao, id_usuario) " + "VALUES " + "(?, ?, ?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 
 			st.setDouble(1, obj.getValorLance());
-			st.setDate(2, new java.sql.Date(obj.getDataLance().getTime()));
-			st.setInt(3, obj.getLeilao().getIdLeilao());
-			st.setInt(4, obj.getUsuario().getIdUsuario());
+		//	st.setDate(2, new java.sql.Date(obj.getDataLance().getTime()));
+			st.setInt(2, obj.getLeilao().getIdLeilao());
+			st.setInt(3, obj.getUsuario().getIdUsuario());
 			int rowsAffected = st.executeUpdate();
 			if (rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();

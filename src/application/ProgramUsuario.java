@@ -111,6 +111,5 @@ public class ProgramUsuario {
 		
 		usuarioDao.insert(usuario);
 		System.out.println("Usuario inserido com sucesso");
-		
 	}
 }
