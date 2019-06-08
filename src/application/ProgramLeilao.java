@@ -29,7 +29,14 @@ public class ProgramLeilao {
 		
 	//	updateLeilao(id_leilao);
 		
-		mudaStatusLeilao(id_leilao, id_estado_leilao);
+	//	mudaStatusLeilao(id_leilao, id_estado_leilao);
+		
+		cancelarLeilao(id_leilao);
+		
+	}
+
+	private static void cancelarLeilao(int id_leilao) {
+		mudaStatusLeilao(id_leilao, 5);
 	}
 
 	public static void mudaStatusLeilao(int id_leilao, int id_estado_leilao) {
