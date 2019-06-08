@@ -152,4 +152,27 @@ private Connection conn;
 			DB.closeStatement(st);
 		}
 	}
+
+	@Override
+	public void changeStatusProduct(Integer id, EstadoProduto estado) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Produto " + 
+					"SET id_estado_produto= ? " + 
+					"WHERE id_produto= ?");
+			
+			st.setInt(1, estado.getIdEstadoProduto());
+			st.setInt(2, id);
+									
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+		
+	}
 }

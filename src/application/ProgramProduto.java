@@ -12,14 +12,22 @@ public class ProgramProduto {
 
 	public static void main(String[] args) {
 
-		int id_produto = 4;
+		int id_produto = 11;
 		int id_usuario = 1;
+		int id_estado_produto = 1;
 		
 	//	carregarProdutoByID(id_produto);
 		
 	// carregarProdutosPorUsuario(id_usuario);
 			
 	//	inserirProduto(id_usuario);
+		
+		mudaStatusProduto(id_produto, id_estado_produto);
+	}
+
+	private static void mudaStatusProduto(int id_produto, int id_estado_produto) {
+		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+		produtoDao.changeStatusProduct(id_produto, ProgramEstadoProduto.estadoProdutoPorId(id_estado_produto));
 	}
 
 	public static void inserirProduto(int id_usuario) {
@@ -31,12 +39,9 @@ public class ProgramProduto {
 		produto.setNumeroPaginas(85);
 		produto.setPeso(150);
 		produto.setCapaImagem("capaImagem");
-		
-		EstadoProduto estado = new EstadoProduto();
-		estado.setIdEstadoProduto(1);
-		produto.setEstado(estado);
-		
+		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
 		produto.setUsuario(ProgramUsuario.carregaUsuario(id_usuario));
+		
 		produtoDao.insertProduct(produto);
 	}
 
