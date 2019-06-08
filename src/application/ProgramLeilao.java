@@ -15,7 +15,7 @@ public class ProgramLeilao {
 
 		int id_leilao = 1;
 		int id_usuario = 2;
-		int id_estado_leilao = 2;
+		int id_estado_leilao = 1;
 
 	//	carregaLeilaoPorId(id_leilao);
 		
@@ -29,14 +29,22 @@ public class ProgramLeilao {
 		
 	//	updateLeilao(id_leilao);
 		
-	//	mudaStatusLeilao(id_leilao, id_estado_leilao);
+		mudaStatusLeilao(id_leilao, id_estado_leilao);
 		
 		cancelarLeilao(id_leilao);
 		
 	}
 
 	private static void cancelarLeilao(int id_leilao) {
-		mudaStatusLeilao(id_leilao, 5);
+		
+		List<Lance> lances = ProgramLance.carregaLancesPorLeilao(id_leilao);
+		System.out.println(lances.size());
+		
+		if(lances.size()==0) {
+			mudaStatusLeilao(id_leilao, 5);
+		} else {
+			System.out.println("Um leilão com lances não pode ser cancelado");
+		}		
 	}
 
 	public static void mudaStatusLeilao(int id_leilao, int id_estado_leilao) {
