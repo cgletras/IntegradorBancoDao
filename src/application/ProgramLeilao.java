@@ -13,10 +13,6 @@ public class ProgramLeilao {
 
 	public static void main(String[] args) {
 
-		int id_leilao = 1;
-		int id_usuario = 2;
-		int id_estado_leilao = 1;
-
 	//	carregaLeilaoPorId(id_leilao);
 		
 	//	updateLeilao(id_leilao);
@@ -29,9 +25,9 @@ public class ProgramLeilao {
 		
 	//	updateLeilao(id_leilao);
 		
-		mudaStatusLeilao(id_leilao, id_estado_leilao);
+	//	mudaStatusLeilao(id_leilao, id_estado_leilao);
 		
-		cancelarLeilao(id_leilao);
+	//	cancelarLeilao(id_leilao);
 		
 	}
 
