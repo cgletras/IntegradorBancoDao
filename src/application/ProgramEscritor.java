@@ -1,18 +1,10 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import model.dao.DaoFactory;
 import model.dao.EscritorDao;
-import model.dao.EstadoLeilaoDao;
-import model.dao.UsuarioDao;
 import model.entities.Escritor;
-import model.entities.EstadoLeilao;
-import model.entities.Usuario;
 
 public class ProgramEscritor {
 

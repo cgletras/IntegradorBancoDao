@@ -10,14 +10,12 @@ import java.util.List;
 import db.DB;
 import db.DbException;
 import model.dao.DaoFactory;
-import model.dao.EstadoLeilaoDao;
 import model.dao.EstadoProdutoDao;
 import model.dao.ProdutoDao;
-import model.dao.UsuarioDao;
-import model.entities.EstadoLeilao;
+import model.dao.UserDao;
 import model.entities.EstadoProduto;
 import model.entities.Produto;
-import model.entities.Usuario;
+import model.entities.User;
 
 public class ProdutoDaoJDBC implements ProdutoDao {
 
@@ -53,9 +51,9 @@ private Connection conn;
 				EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getInt("id_estado_produto"));
 				obj.setEstado(estadoProduto);
 				
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 				
 				return obj;
 			}
@@ -71,7 +69,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Produto> findAllByUser(Usuario usuario) {
+	public List<Produto> findAllByUser(User usuario) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -79,7 +77,7 @@ private Connection conn;
 					"SELECT * FROM Produto "
 					+ "WHERE id_usuario = ?");
 			
-			st.setInt(1, usuario.getIdUsuario());
+			st.setInt(1, usuario.getUserID());
 			rs = st.executeQuery();
 			List<Produto> produtos = new ArrayList<Produto>();
 			
@@ -97,9 +95,9 @@ private Connection conn;
 				EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getInt("id_estado_produto"));
 				obj.setEstado(estadoProduto);
 				
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario user = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(user);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 				
 				produtos.add(obj);
 			}
@@ -129,7 +127,7 @@ private Connection conn;
 			st.setInt(5, obj.getPeso());
 			st.setString(6, obj.getCapaImagem());
 			st.setInt(7, obj.getEstado().getIdEstadoProduto());
-			st.setInt(8, obj.getUsuario().getIdUsuario());
+			st.setInt(8, obj.getUser().getUserID());
 			
 			int rowsAffected = st.executeUpdate();
 		

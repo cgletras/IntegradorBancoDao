@@ -1,19 +1,10 @@
 package application;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.LanceDao;
 import model.entities.Lance;
-import model.entities.Leilao;
-import model.entities.Usuario;
-import application.*;
-import db.DB;
-import db.DbIntegrityException;
 
 public class ProgramLance {
 

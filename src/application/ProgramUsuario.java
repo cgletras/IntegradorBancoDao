@@ -3,27 +3,24 @@ package application;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
-import model.dao.EstadoLeilaoDao;
-import model.dao.UsuarioDao;
-import model.entities.EstadoLeilao;
-import model.entities.Usuario;
+import model.dao.UserDao;
+import model.entities.User;
 
 public class ProgramUsuario {
 
 	public static void main(String[] args) throws ParseException {
 		
-		// Buscar a ID na sessão
+		// Buscar a ID na sessï¿½o
 		int id = 2; 
-		// Buscar a EMAIL na sessão
+		// Buscar a EMAIL na sessï¿½o
 		String email = "willian.freitasoliveira@gmail.com";
 		
 		//INSERIR USUARIO
 		
-//OK	insereUsuario(); //parametros são instanciados dentro da função;
+//OK	insereUsuario(); //parametros sï¿½o instanciados dentro da funï¿½ï¿½o;
 		
 		// CARREGA USUARIO POR ID
 		
@@ -49,67 +46,67 @@ public class ProgramUsuario {
 	}
 
 	public static void ativaUsuarioPorId(int id) {
-		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-		usuarioDao.activate(id);
+		UserDao userDao = DaoFactory.createUsuarioDao();
+		userDao.activate(id);
 	}
 
 	public static void inativaUsuarioPorId(int id) {
-		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-		usuarioDao.inactivate(id);
+		UserDao userDao = DaoFactory.createUsuarioDao();
+		userDao.inactivate(id);
 	}
 
-	public static Usuario carregarUsuarioPorEmail(String email) {
-		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-		Usuario usuario = usuarioDao.findByEmail(email);
-		return usuario;
+	public static User carregarUsuarioPorEmail(String email) {
+		UserDao userDao = DaoFactory.createUsuarioDao();
+		User user = userDao.findByEmail(email);
+		return user;
 	}
 
-	public static List<Usuario> listarUsuarios() {
-		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-		List<Usuario> list = new ArrayList<>();
-		return list = usuarioDao.findAll();
+	public static List<User> listarUsuarios() {
+		UserDao userDao = DaoFactory.createUsuarioDao();
+		List<User> list = new ArrayList<>();
+		return list = userDao.findAll();
 		
 	}
 
-	public static Usuario atualizarUsuario(Usuario usuario) throws ParseException {
+	public static User atualizarUsuario(User user) throws ParseException {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+		UserDao userDao = DaoFactory.createUsuarioDao();
 		
-		//carregar dados informados na pagina de atualizaçao abaixo
+		//carregar dados informados na pagina de atualizaï¿½ao abaixo
 		
-		usuario.setNome("Ricardo");
-		usuario.setEmail("rrrr@gmail.com");
-		usuario.setSenha("1234");
-		usuario.setDataNascimento(sdf.parse("18/11/2000"));
-		usuario.setAtivo(true);
+		user.setName("Ricardo");
+		user.setEmail("rrrr@gmail.com");
+		user.setPassword("1234");
+		user.setDateOfBirth(sdf.parse("18/11/2000"));
+		user.setStatus(true);
 		
-		usuarioDao.update(usuario);
+		userDao.update(user);
 		
-		return carregaUsuario(usuario.getIdUsuario());			
+		return carregaUsuario(user.getUserID());
 	}
 
-	public static Usuario carregaUsuario(int id) {
+	public static User carregaUsuario(int id) {
 		
-		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-		Usuario usuario = usuarioDao.findById(id);
-		return usuario;
+		UserDao userDao = DaoFactory.createUsuarioDao();
+		User user = userDao.findById(id);
+		return user;
 	}
 
 	public static void insereUsuario() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+		UserDao userDao = DaoFactory.createUsuarioDao();
 				
-		Usuario usuario = new Usuario();		
-		usuario.setIdUsuario(null);
-		usuario.setNome("Ricardo");
-		usuario.setEmail("r@gmail.com");
-		usuario.setSenha("1234");
-		usuario.setDataNascimento(sdf.parse("18/12/2000"));
-		usuario.setAtivo(true);
+		User user = new User();
+		user.setUserID(null);
+		user.setName("Ricardo");
+		user.setEmail("r@gmail.com");
+		user.setPassword("1234");
+		user.setDateOfBirth(sdf.parse("18/12/2000"));
+		user.setStatus(true);
 		
-		usuarioDao.insert(usuario);
-		System.out.println("Usuario inserido com sucesso");
+		userDao.insert(user);
+		System.out.println("User inserido com sucesso");
 	}
 }

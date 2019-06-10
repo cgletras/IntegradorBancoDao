@@ -15,11 +15,11 @@ import model.dao.DaoFactory;
 import model.dao.EstadoLeilaoDao;
 import model.dao.LeilaoDao;
 import model.dao.ProdutoDao;
-import model.dao.UsuarioDao;
+import model.dao.UserDao;
 import model.entities.EstadoLeilao;
 import model.entities.Leilao;
 import model.entities.Produto;
-import model.entities.Usuario;
+import model.entities.User;
 
 public class LeilaoDaoJDBC implements LeilaoDao {
 
@@ -43,7 +43,7 @@ private Connection conn;
 			st.setDouble(4, obj.getValorInicial());
 			st.setDouble(5, obj.getLancePadrao());
 			st.setInt(6, obj.getEstado().getIdEstadoLeilao());
-			st.setInt(7, obj.getUsuario().getIdUsuario());
+			st.setInt(7, obj.getUser().getUserID());
 			System.out.println(obj.getProduto());
 			st.setInt(8, obj.getProduto().getIdProduto());
 			
@@ -84,7 +84,7 @@ private Connection conn;
 			st.setDouble(4, obj.getValorInicial());
 			st.setDouble(5, obj.getLancePadrao());
 			st.setInt(6, obj.getEstado().getIdEstadoLeilao());
-			st.setInt(7, obj.getUsuario().getIdUsuario());
+			st.setInt(7, obj.getUser().getUserID());
 			st.setInt(8, obj.getProduto().getIdProduto());
 			st.setInt(9, obj.getIdLeilao());	
 			
@@ -147,9 +147,9 @@ private Connection conn;
 				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
 				obj.setEstado(estadoLeilao);
 				
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 								
 				Produto produto = new Produto();
 				produto.setIdProduto(rs.getInt("id_produto"));
@@ -196,9 +196,9 @@ private Connection conn;
 				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
 				obj.setEstado(estadoLeilao);
 				
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 								
 				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
@@ -218,7 +218,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Leilao> findByUser(Usuario user) {
+	public List<Leilao> findByUser(User user) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -227,7 +227,7 @@ private Connection conn;
 					+ "FROM Leilao "
 					+ "WHERE id_usuario = ?");
 			
-			st.setInt(1, user.getIdUsuario());
+			st.setInt(1, user.getUserID());
 			rs = st.executeQuery();
 			
 			List<Leilao> list = new ArrayList<>();
@@ -247,9 +247,9 @@ private Connection conn;
 				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
 				leilao.setEstado(estadoLeilao);
 				
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				leilao.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User usuario = userDao.findById(rs.getInt("id_usuario"));
+				leilao.setUser(usuario);
 								
 				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
