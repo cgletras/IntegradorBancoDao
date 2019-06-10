@@ -21,11 +21,19 @@ public class ProgramEscritor {
 		
 		//	carregarEscritorPorID(2);
 		
-		// inserirEscritor();	
+	//	inserirEscritor();	
 		
 	// listarEscritores();
 		
-		relacionarEscritorAProduto(2, 12);
+		//	relacionarEscritorAProduto(4, 11);
+		
+		// listarEscritoresPorProduto(id_produto)) {
+			
+	}
+
+	private static List<Escritor> listarEscritoresPorProduto(int id_produto) {
+		EscritorDao escritorDao = DaoFactory.createEscritorDao();
+		return escritorDao.findByProduto(ProgramProduto.carregarProdutoByID(id_produto));
 	}
 
 	private static Escritor carregarEscritorPorID(int id_escritor) {
@@ -45,7 +53,7 @@ public class ProgramEscritor {
 
 	public static void inserirEscritor() {
 		EscritorDao escritorDao = DaoFactory.createEscritorDao();
-		escritorDao.insertEscritor(new Escritor(null, "Stan Lee"));
+		escritorDao.insertEscritor(new Escritor(null, "Neil Gaiman"));
 	}
 
 	
