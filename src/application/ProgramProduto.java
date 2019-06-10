@@ -44,7 +44,7 @@ public class ProgramProduto {
 		
 	}
 
-	private static void mudaStatusProduto(int id_produto, int id_estado_produto) {
+	public static void mudaStatusProduto(int id_produto, int id_estado_produto) {
 		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 		produtoDao.changeStatusProduct(id_produto, ProgramEstadoProduto.estadoProdutoPorId(id_estado_produto));
 	}

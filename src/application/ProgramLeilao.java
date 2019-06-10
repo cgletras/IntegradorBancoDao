@@ -31,7 +31,7 @@ public class ProgramLeilao {
 		
 	}
 
-	private static void cancelarLeilao(int id_leilao) {
+	public static void cancelarLeilao(int id_leilao) {
 		
 		List<Lance> lances = ProgramLance.carregaLancesPorLeilao(id_leilao);
 		System.out.println(lances.size());

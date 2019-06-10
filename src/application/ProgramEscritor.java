@@ -31,22 +31,22 @@ public class ProgramEscritor {
 			
 	}
 
-	private static List<Escritor> listarEscritoresPorProduto(int id_produto) {
+	public static List<Escritor> listarEscritoresPorProduto(int id_produto) {
 		EscritorDao escritorDao = DaoFactory.createEscritorDao();
 		return escritorDao.findByProduto(ProgramProduto.carregarProdutoByID(id_produto));
 	}
 
-	private static Escritor carregarEscritorPorID(int id_escritor) {
+	public static Escritor carregarEscritorPorID(int id_escritor) {
 		EscritorDao escritorDao = DaoFactory.createEscritorDao();
 		return escritorDao.findById(id_escritor);
 	}
 
-	private static void relacionarEscritorAProduto(int id_escritor, int id_produto) {
+	public static void relacionarEscritorAProduto(int id_escritor, int id_produto) {
 		EscritorDao escritorDao = DaoFactory.createEscritorDao();
 		escritorDao.relacionarEscritorProduto(carregarEscritorPorID(id_escritor), ProgramProduto.carregarProdutoByID(id_produto));
 	}
 
-	private static List<Escritor> listarEscritores() {
+	public static List<Escritor> listarEscritores() {
 		EscritorDao escritorDao = DaoFactory.createEscritorDao();
 		return escritorDao.findByAll();
 	}
