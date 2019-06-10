@@ -54,8 +54,39 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Escritor> findByProduto(Produto obj) {
-		return null;
+	public List<Escritor> findByProduto(Produto produto) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT ep.id_escritor, e.nome " + 
+					"FROM escritor_produto ep INNER JOIN Escritor e " + 
+					"ON ep.id_escritor = e.id_escritor " + 
+					"WHERE id_produto = ?");
+			
+			st.setInt(1, produto.getIdProduto());
+			
+			rs = st.executeQuery();
+			
+			List<Escritor> list = new ArrayList<>();
+			Map<Integer, Escritor> map = new HashMap<>();
+			
+			while (rs.next()) {
+				Escritor obj = new Escritor();
+				obj.setIdEscritor(rs.getInt("id_escritor"));
+				obj.setNome(rs.getString("nome"));
+						
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
