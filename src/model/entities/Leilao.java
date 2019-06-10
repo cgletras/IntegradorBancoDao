@@ -13,13 +13,13 @@ public class Leilao  implements Serializable{
 	
 	private EstadoLeilao estado;
 	private Produto produto;
-	private Usuario usuario;
+	private User user;
 	
 	public Leilao() {
 	}
 
 	public Leilao(int idLeilao, int duracao, Date dataInicio, double valorInicial, double valorAtual,
-			double lancePadrao, EstadoLeilao estado, Produto produto, Usuario usuario) {
+			double lancePadrao, EstadoLeilao estado, Produto produto, User user) {
 		super();
 		this.idLeilao = idLeilao;
 		this.duracao = duracao;
@@ -29,7 +29,7 @@ public class Leilao  implements Serializable{
 		this.lancePadrao = lancePadrao;
 		this.estado = estado;
 		this.produto = produto;
-		this.usuario = usuario;
+		this.user = user;
 	}
 
 	public EstadoLeilao getEstado() {
@@ -48,12 +48,12 @@ public class Leilao  implements Serializable{
 		this.produto = produto;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public int getIdLeilao() {
@@ -134,7 +134,7 @@ public class Leilao  implements Serializable{
 	public String toString() {
 		return "Leilao [idLeilao=" + idLeilao + ", duracao=" + duracao + ", dataInicio=" + dataInicio
 				+ ", valorInicial=" + valorInicial + ", valorAtual=" + valorAtual + ", lancePadrao=" + lancePadrao
-				+ ", produto=" + produto + ", usuario=" + usuario + "]";
+				+ ", produto=" + produto + ", user=" + user + "]";
 	}
 
 	

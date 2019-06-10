@@ -8,7 +8,7 @@ import model.dao.impl.LanceDaoJDBC;
 import model.dao.impl.LeilaoDaoJDBC;
 import model.dao.impl.PersonagemDaoJDBC;
 import model.dao.impl.ProdutoDaoJDBC;
-import model.dao.impl.UsuarioDaoJDBC;
+import model.dao.impl.UserDaoJDBC;
 
 public class DaoFactory {
 
@@ -40,8 +40,8 @@ public class DaoFactory {
 		return new ProdutoDaoJDBC(DB.getConnection());
 	}
 	
-	public static UsuarioDao createUsuarioDao() {
-		return new UsuarioDaoJDBC(DB.getConnection());
+	public static UserDao createUsuarioDao() {
+		return new UserDaoJDBC(DB.getConnection());
 	}
 	
 }

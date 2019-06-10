@@ -4,9 +4,7 @@ import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.ProdutoDao;
-import model.entities.EstadoProduto;
 import model.entities.Produto;
-import model.entities.Usuario;
 
 public class ProgramProduto {
 
@@ -40,7 +38,7 @@ public class ProgramProduto {
 		produto.setPeso(150);
 		produto.setCapaImagem("capaImagem");
 		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
-		produto.setUsuario(ProgramUsuario.carregaUsuario(id_usuario));
+		produto.setUser(ProgramUsuario.carregaUsuario(id_usuario));
 		
 		produtoDao.insertProduct(produto);
 	}

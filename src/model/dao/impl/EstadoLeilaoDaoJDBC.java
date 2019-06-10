@@ -13,7 +13,6 @@ import db.DB;
 import db.DbException;
 import model.dao.EstadoLeilaoDao;
 import model.entities.EstadoLeilao;
-import model.entities.Usuario;
 
 public class EstadoLeilaoDaoJDBC implements EstadoLeilaoDao {
 

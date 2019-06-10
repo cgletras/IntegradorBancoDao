@@ -15,10 +15,10 @@ import db.DbIntegrityException;
 import model.dao.DaoFactory;
 import model.dao.LanceDao;
 import model.dao.LeilaoDao;
-import model.dao.UsuarioDao;
+import model.dao.UserDao;
 import model.entities.Lance;
 import model.entities.Leilao;
-import model.entities.Usuario;
+import model.entities.User;
 
 public class LanceDaoJDBC implements LanceDao {
 
@@ -42,7 +42,7 @@ public class LanceDaoJDBC implements LanceDao {
 			st.setDouble(1, obj.getValorLance());
 		//	st.setDate(2, new java.sql.Date(obj.getDataLance().getTime()));
 			st.setInt(2, obj.getLeilao().getIdLeilao());
-			st.setInt(3, obj.getUsuario().getIdUsuario());
+			st.setInt(3, obj.getUser().getUserID());
 			int rowsAffected = st.executeUpdate();
 			if (rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
@@ -67,7 +67,7 @@ public class LanceDaoJDBC implements LanceDao {
 		catch (SQLException e) {
 			try {
 				conn.rollback();
-				throw new DbException("Uma das operações falhou: "+e.getMessage());
+				throw new DbException("Uma das operaï¿½ï¿½es falhou: "+e.getMessage());
 			} catch (SQLException e1) {
 				throw new DbException("Falhou o rollback");
 			}
@@ -99,9 +99,9 @@ public class LanceDaoJDBC implements LanceDao {
 				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
 				obj.setLeilao(leilao);
 				//
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 				
 				return obj;
 			}
@@ -141,9 +141,9 @@ public class LanceDaoJDBC implements LanceDao {
 				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
 				obj.setLeilao(leilao);
 				//
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 						
 				list.add(obj);
 			}
@@ -159,7 +159,7 @@ public class LanceDaoJDBC implements LanceDao {
 	}
 
 	@Override
-	public List<Lance> findByUser(Usuario usuarioId) {
+	public List<Lance> findByUser(User userId) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -169,7 +169,7 @@ public class LanceDaoJDBC implements LanceDao {
 					+ "WHERE id_usuario = ? "
 					+ "ORDER BY id_lance");
 			
-			st.setInt(1, usuarioId.getIdUsuario());
+			st.setInt(1, userId.getUserID());
 			rs = st.executeQuery();
 			
 			List<Lance> list = new ArrayList<>();
@@ -185,9 +185,9 @@ public class LanceDaoJDBC implements LanceDao {
 				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
 				obj.setLeilao(leilao);
 				//
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 						
 				list.add(obj);
 			}
@@ -229,9 +229,9 @@ public class LanceDaoJDBC implements LanceDao {
 				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
 				obj.setLeilao(leilao);
 				//
-				UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-				Usuario usuario = usuarioDao.findById(rs.getInt("id_usuario"));
-				obj.setUsuario(usuario);
+				UserDao userDao = DaoFactory.createUsuarioDao();
+				User user = userDao.findById(rs.getInt("id_usuario"));
+				obj.setUser(user);
 						
 				list.add(obj);
 			}
