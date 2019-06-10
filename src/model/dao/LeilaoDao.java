@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.entities.EstadoLeilao;
 import model.entities.Leilao;
-import model.entities.Usuario;
+import model.entities.User;
 
 public interface LeilaoDao {
 
@@ -14,5 +14,5 @@ public interface LeilaoDao {
 	void changeStatusLeilao(Integer id, EstadoLeilao estado);
 	Leilao  findById(Integer id);
 	List<Leilao> findAll();
-	List<Leilao> findByUser(Usuario obj);
+	List<Leilao> findByUser(User obj);
 }

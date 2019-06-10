@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.LeilaoDao;
-import model.entities.EstadoLeilao;
 import model.entities.Lance;
 import model.entities.Leilao;
 
@@ -39,7 +38,7 @@ public class ProgramLeilao {
 		if(lances.size()==0) {
 			mudaStatusLeilao(id_leilao, 5);
 		} else {
-			System.out.println("Um leilão com lances não pode ser cancelado");
+			System.out.println("Um leilï¿½o com lances nï¿½o pode ser cancelado");
 		}		
 	}
 
@@ -61,7 +60,7 @@ public class ProgramLeilao {
 	public static void insereLeilao() {
 		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
 		Leilao leilao = new Leilao();
-		//carregar dados informados na pagina de atualizaçao abaixo
+		//carregar dados informados na pagina de atualizaï¿½ao abaixo
 		
 		leilao.setDuracao(10);
 		leilao.setDataInicio(new Date());
@@ -70,14 +69,14 @@ public class ProgramLeilao {
 		leilao.setLancePadrao(20);
 		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
 		leilao.setProduto(ProgramProduto.carregarProdutoByID(5));
-		leilao.setUsuario(ProgramUsuario.carregaUsuario(2));
+		leilao.setUser(ProgramUsuario.carregaUsuario(2));
 		leilaoDao.insert(leilao);
 	}
 
 	public static void updateLeilao(int id_leilao) {
 		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
 		Leilao leilao = new Leilao();
-		//carregar dados informados na pagina de atualizaçao abaixo
+		//carregar dados informados na pagina de atualizaï¿½ao abaixo
 		
 		leilao.setIdLeilao(id_leilao);
 		leilao.setDuracao(20);
@@ -87,7 +86,7 @@ public class ProgramLeilao {
 		leilao.setLancePadrao(30);
 		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
 		leilao.setProduto(ProgramProduto.carregarProdutoByID(3));
-		leilao.setUsuario(ProgramUsuario.carregaUsuario(1));
+		leilao.setUser(ProgramUsuario.carregaUsuario(1));
 		
 		List<Lance> lances = ProgramLance.carregaLancesPorLeilao(id_leilao);
 		System.out.println(lances.size());
@@ -95,7 +94,7 @@ public class ProgramLeilao {
 		if(lances.size()==0) {
 			leilaoDao.update(leilao);
 		} else {
-			System.out.println("Um leilão com lances não pode ser modificado");
+			System.out.println("Um leilï¿½o com lances nï¿½o pode ser modificado");
 		}
 	}
 

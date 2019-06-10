@@ -10,14 +10,14 @@ public class Produto implements Serializable {
 	private String editora,	titulo,	formatoDoQuadrinho, capaImagem;
 	private EstadoProduto estado;
 	
-	private Usuario usuario;
+	private User user;
 	
 	public Produto() {
 		super();
 	}
 
 	public Produto(int idProduto, int numeroPaginas, int peso, String editora, String titulo, String formatoDoQuadrinho,
-			String capaImagem, EstadoProduto estado, Usuario usuario) {
+			String capaImagem, EstadoProduto estado, User user) {
 		super();
 		this.idProduto = idProduto;
 		this.numeroPaginas = numeroPaginas;
@@ -27,7 +27,7 @@ public class Produto implements Serializable {
 		this.formatoDoQuadrinho = formatoDoQuadrinho;
 		this.capaImagem = capaImagem;
 		this.estado = estado;
-		this.usuario = usuario;
+		this.user = user;
 	}
 
 	public int getIdProduto() {
@@ -94,19 +94,19 @@ public class Produto implements Serializable {
 		this.estado = estado;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Produto [idProduto=" + idProduto + ", numeroPaginas=" + numeroPaginas + ", peso=" + peso + ", editora="
 				+ editora + ", titulo=" + titulo + ", formatoDoQuadrinho=" + formatoDoQuadrinho + ", capaImagem="
-				+ capaImagem + ", estado=" + estado + ", usuario=" + usuario + "]";
+				+ capaImagem + ", estado=" + estado + ", user=" + user + "]";
 	}
 
 }

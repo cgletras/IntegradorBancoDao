@@ -1,16 +1,10 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import model.dao.DaoFactory;
 import model.dao.EstadoProdutoDao;
-import model.dao.UsuarioDao;
 import model.entities.EstadoProduto;
-import model.entities.Usuario;
 
 public class ProgramEstadoProduto {
 

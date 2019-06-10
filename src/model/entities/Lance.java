@@ -13,19 +13,19 @@ public class Lance implements Serializable {
 	private Date dataLance;
 	
 	private Leilao leilao;
-	private Usuario usuario;
+	private User user;
 	
 	public Lance() {
 	super();
 	}
 
-	public Lance(Integer idLance, double valorLance, Date dataLance, Leilao leilao, Usuario usuario) {
+	public Lance(Integer idLance, double valorLance, Date dataLance, Leilao leilao, User user) {
 		super();
 		this.idLance = idLance;
 		this.valorLance = valorLance;
 		this.dataLance = dataLance;
 		this.leilao = leilao;
-		this.usuario = usuario;
+		this.user = user;
 	}
 
 	public Integer getIdLance() {
@@ -60,12 +60,12 @@ public class Lance implements Serializable {
 		this.leilao = leilao;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -96,6 +96,6 @@ public class Lance implements Serializable {
 	@Override
 	public String toString() {
 		return "Lance [idLance=" + idLance + ", valorLance=" + valorLance + ", dataLance=" + dataLance + ", leilao="
-				+ leilao + ", usuario=" + usuario + "]";
+				+ leilao + ", user=" + user + "]";
 	}
 }
