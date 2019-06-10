@@ -14,7 +14,6 @@ import db.DbException;
 import model.dao.EscritorDao;
 import model.entities.Escritor;
 import model.entities.Produto;
-import model.entities.Usuario;
 
 public class EscritorDaoJDBC implements EscritorDao {
 

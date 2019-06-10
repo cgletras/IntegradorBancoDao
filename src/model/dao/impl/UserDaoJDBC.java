@@ -10,31 +10,30 @@ import java.util.List;
 import java.util.Map;
 import db.DB;
 import db.DbException;
-import model.dao.UsuarioDao;
-import model.entities.Leilao;
-import model.entities.Usuario;
+import model.dao.UserDao;
+import model.entities.User;
 
-public class UsuarioDaoJDBC implements UsuarioDao {
+public class UserDaoJDBC implements UserDao {
 
 private Connection conn;
 	
-	public UsuarioDaoJDBC(Connection conn) {
+	public UserDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
 	
 	@Override
-	public void insert(Usuario obj) {
+	public void insert(User obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO Usuario (nome, email, senha, data_nascimento, ativo) " + "VALUES " + "(?, ?, ?, ?, ?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 
-			st.setString(1, obj.getNome());
+			st.setString(1, obj.getName());
 			st.setString(2, obj.getEmail());
 			st.setString(3, obj.getEmail());
-			st.setDate(4, new java.sql.Date(obj.getDataNascimento().getTime()));
-			st.setBoolean(5, obj.isAtivo());
+			st.setDate(4, new java.sql.Date(obj.getDateOfBirth().getTime()));
+			st.setBoolean(5, obj.isStatus());
 			
 			int rowsAffected = st.executeUpdate();
 			
@@ -42,7 +41,7 @@ private Connection conn;
 				ResultSet rs = st.getGeneratedKeys();
 				if (rs.next()) {
 					int id = rs.getInt(1);
-					obj.setIdUsuario(id);
+					obj.setUserID(id);
 				}
 				DB.closeResultSet(rs);
 			} 
@@ -60,7 +59,7 @@ private Connection conn;
 	}
 
 	@Override
-	public void update(Usuario obj) {
+	public void update(User obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -68,12 +67,12 @@ private Connection conn;
 					"SET nome= ?, email= ?, senha= ?, data_nascimento= ?, ativo= ? " + 
 					"WHERE id_usuario= ?");
 
-			st.setString(1, obj.getNome());
+			st.setString(1, obj.getName());
 			st.setString(2, obj.getEmail());
-			st.setString(3, obj.getSenha());
-			st.setDate(4, new java.sql.Date(obj.getDataNascimento().getTime()));
-			st.setBoolean(5, obj.isAtivo());
-			st.setInt(6, obj.getIdUsuario());
+			st.setString(3, obj.getPassword());
+			st.setDate(4, new java.sql.Date(obj.getDateOfBirth().getTime()));
+			st.setBoolean(5, obj.isStatus());
+			st.setInt(6, obj.getUserID());
 						
 			st.executeUpdate();
 		}
@@ -86,7 +85,7 @@ private Connection conn;
 	}
 
 	@Override
-	public Usuario findById(Integer id) {
+	public User findById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -98,13 +97,13 @@ private Connection conn;
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
-				Usuario obj = new Usuario();
-				obj.setIdUsuario(rs.getInt("id_usuario"));
-				obj.setNome(rs.getString("nome"));
+				User obj = new User();
+				obj.setUserID(rs.getInt("id_usuario"));
+				obj.setName(rs.getString("nome"));
 				obj.setEmail(rs.getString("email"));
-				obj.setSenha(rs.getString("senha"));
-				obj.setDataNascimento(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
-				obj.setAtivo(rs.getBoolean("ativo"));
+				obj.setPassword(rs.getString("senha"));
+				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
+				obj.setStatus(rs.getBoolean("ativo"));
 				
 				return obj;
 			}
@@ -120,7 +119,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Usuario> findAll() {
+	public List<User> findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -131,17 +130,17 @@ private Connection conn;
 			
 			rs = st.executeQuery();
 			
-			List<Usuario> list = new ArrayList<>();
-			Map<Integer, Usuario> map = new HashMap<>();
+			List<User> list = new ArrayList<>();
+			Map<Integer, User> map = new HashMap<>();
 			
 			while (rs.next()) {
-				Usuario obj = new Usuario();
-				obj.setIdUsuario(rs.getInt("id_usuario"));
-				obj.setNome(rs.getString("nome"));
+				User obj = new User();
+				obj.setUserID(rs.getInt("id_usuario"));
+				obj.setName(rs.getString("nome"));
 				obj.setEmail(rs.getString("email"));
-				obj.setSenha(rs.getString("senha"));
-				obj.setDataNascimento(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
-				obj.setAtivo(rs.getBoolean("ativo"));
+				obj.setPassword(rs.getString("senha"));
+				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
+				obj.setStatus(rs.getBoolean("ativo"));
 						
 				list.add(obj);
 			}
@@ -157,7 +156,7 @@ private Connection conn;
 	}
 
 	@Override
-	public Usuario findByEmail(String email) {
+	public User findByEmail(String email) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -169,13 +168,13 @@ private Connection conn;
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
-				Usuario obj = new Usuario();
-				obj.setIdUsuario(rs.getInt("id_usuario"));
-				obj.setNome(rs.getString("nome"));
+				User obj = new User();
+				obj.setUserID(rs.getInt("id_usuario"));
+				obj.setName(rs.getString("nome"));
 				obj.setEmail(rs.getString("email"));
-				obj.setSenha(rs.getString("senha"));
-				obj.setDataNascimento(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
-				obj.setAtivo(rs.getBoolean("ativo"));
+				obj.setPassword(rs.getString("senha"));
+				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
+				obj.setStatus(rs.getBoolean("ativo"));
 				
 				return obj;
 			}
