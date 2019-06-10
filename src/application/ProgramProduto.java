@@ -22,7 +22,26 @@ public class ProgramProduto {
 			
 	//	inserirProduto(id_usuario);
 		
-		mudaStatusProduto(id_produto, id_estado_produto);
+	//	atualizarProduto(id_produto, id_usuario);
+		
+		//	mudaStatusProduto(id_produto, id_estado_produto);
+	}
+
+	public static void atualizarProduto(int id_produto, int id_usuario) {
+		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+		Produto produto = new Produto();
+		produto.setEditora("Marvel");
+		produto.setTitulo("Greatest Vilains of the Fantastic Four");
+		produto.setFormatoDoQuadrinho("TPB");
+		produto.setNumeroPaginas(90);
+		produto.setPeso(150);
+		produto.setCapaImagem("capaImagem");
+		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
+		produto.setUsuario(ProgramUsuario.carregaUsuario(id_usuario));
+		produto.setIdProduto(id_produto);
+		
+		produtoDao.updateProduct(produto);
+		
 	}
 
 	private static void mudaStatusProduto(int id_produto, int id_estado_produto) {

@@ -175,4 +175,47 @@ private Connection conn;
 		}
 		
 	}
+
+	@Override
+	public void updateProduct(Produto obj) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Produto "
+					+ "SET editora= ?, titulo= ?, formato_do_quadrinho= ?, numero_paginas= ?, peso= ?, capa_imagem= ?, id_estado_produto= ?, id_usuario= ? " 
+					+ "WHERE id_produto= ?",
+					java.sql.Statement.RETURN_GENERATED_KEYS);
+
+			st.setString(1, obj.getEditora());
+			st.setString(2, obj.getTitulo());
+			st.setString(3, obj.getFormatoDoQuadrinho());
+			st.setInt(4, obj.getNumeroPaginas());
+			st.setInt(5, obj.getPeso());
+			st.setString(6, obj.getCapaImagem());
+			st.setInt(7, obj.getEstado().getIdEstadoProduto());
+			st.setInt(8, obj.getUsuario().getIdUsuario());
+			st.setInt(9, obj.getIdProduto());
+			
+			int rowsAffected = st.executeUpdate();
+		
+			if (rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if (rs.next()) {
+					int id = rs.getInt(1);
+					obj.setIdProduto(id);
+				}
+				DB.closeResultSet(rs);
+			} 
+			else {
+				throw new DbException("Unexpected error! No rows affected!");
+			}
+		} 
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} 
+		finally {
+			DB.closeStatement(st);
+		}
+		
+	}
 }
