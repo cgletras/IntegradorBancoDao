@@ -1,11 +1,11 @@
 package model.task.UserTasks;
 
-        import model.dao.DaoFactory;
-        import model.dao.UserDao;
-        import model.task.Task;
+import model.dao.DaoFactory;
+import model.dao.UserDao;
+import model.task.Task;
 
-        import javax.servlet.http.HttpServletRequest;
-        import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ActivateUserByID implements Task {
 
