@@ -3,14 +3,14 @@ package model.dao;
 import java.util.List;
 
 import model.entities.EstadoProduto;
-import model.entities.Produto;
+import model.entities.Product;
 import model.entities.User;
 
-public interface ProdutoDao {
+public interface ProductDao {
 	
-	void insertProduct(Produto produto);
-	void updateProduct(Produto produto);
-	Produto findById(Integer id);
-	List<Produto> findAllByUser(User user);
+	void insertProduct(Product product);
+	void updateProduct(Product product);
+	Product findById(Integer id);
+	List<Product> findAllByUser(User user);
 	void changeStatusProduct(Integer id, EstadoProduto estado);
 }

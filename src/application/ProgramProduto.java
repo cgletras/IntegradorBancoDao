@@ -3,8 +3,8 @@ package application;
 import java.util.List;
 
 import model.dao.DaoFactory;
-import model.dao.ProdutoDao;
-import model.entities.Produto;
+import model.dao.ProductDao;
+import model.entities.Product;
 
 public class ProgramProduto {
 
@@ -26,50 +26,50 @@ public class ProgramProduto {
 	}
 
 	public static void atualizarProduto(int id_produto, int id_usuario) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		Produto produto = new Produto();
-		produto.setEditora("Marvel");
-		produto.setTitulo("Greatest Vilains of the Fantastic Four");
-		produto.setFormatoDoQuadrinho("TPB");
-		produto.setNumeroPaginas(90);
-		produto.setPeso(150);
-		produto.setCapaImagem("capaImagem");
-		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
-		produto.setUsuario(ProgramUsuario.carregaUsuario(id_usuario));
-		produto.setIdProduto(id_produto);
+		ProductDao productDao = DaoFactory.createProdutoDao();
+		Product product = new Product();
+		product.setEditora("Marvel");
+		product.setTitulo("Greatest Vilains of the Fantastic Four");
+		product.setFormatoDoQuadrinho("TPB");
+		product.setNumeroPaginas(90);
+		product.setPeso(150);
+		product.setCapaImagem("capaImagem");
+		product.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
+		product.setUser(ProgramUsuario.carregaUsuario(id_usuario));
+		product.setIdProduto(id_produto);
 		
-		produtoDao.updateProduct(produto);
+		productDao.updateProduct(product);
 		
 	}
 
 	public static void mudaStatusProduto(int id_produto, int id_estado_produto) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		produtoDao.changeStatusProduct(id_produto, ProgramEstadoProduto.estadoProdutoPorId(id_estado_produto));
+		ProductDao productDao = DaoFactory.createProdutoDao();
+		productDao.changeStatusProduct(id_produto, ProgramEstadoProduto.estadoProdutoPorId(id_estado_produto));
 	}
 
 	public static void inserirProduto(int id_usuario) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		Produto produto = new Produto();
-		produto.setEditora("Marvel");
-		produto.setTitulo("Greatest Vilains of the Fantastic Four");
-		produto.setFormatoDoQuadrinho("TPB");
-		produto.setNumeroPaginas(85);
-		produto.setPeso(150);
-		produto.setCapaImagem("capaImagem");
-		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
-		produto.setUser(ProgramUsuario.carregaUsuario(id_usuario));
+		ProductDao productDao = DaoFactory.createProdutoDao();
+		Product product = new Product();
+		product.setEditora("Marvel");
+		product.setTitulo("Greatest Vilains of the Fantastic Four");
+		product.setFormatoDoQuadrinho("TPB");
+		product.setNumeroPaginas(85);
+		product.setPeso(150);
+		product.setCapaImagem("capaImagem");
+		product.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
+		product.setUser(ProgramUsuario.carregaUsuario(id_usuario));
 		
-		produtoDao.insertProduct(produto);
+		productDao.insertProduct(product);
 	}
 
-	public static List<Produto> carregarProdutosPorUsuario(int id_usuario) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		return produtoDao.findAllByUser(ProgramUsuario.carregaUsuario(id_usuario));
+	public static List<Product> carregarProdutosPorUsuario(int id_usuario) {
+		ProductDao productDao = DaoFactory.createProdutoDao();
+		return productDao.findAllByUser(ProgramUsuario.carregaUsuario(id_usuario));
 	}
 
-	public static Produto carregarProdutoByID(int id_produto) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		return produtoDao.findById(id_produto);
+	public static Product carregarProdutoByID(int id_produto) {
+		ProductDao productDao = DaoFactory.createProdutoDao();
+		return productDao.findById(id_produto);
 	}
 
 }

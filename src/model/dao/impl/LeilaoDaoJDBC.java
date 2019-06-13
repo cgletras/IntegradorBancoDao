@@ -14,11 +14,11 @@ import db.DbException;
 import model.dao.DaoFactory;
 import model.dao.EstadoLeilaoDao;
 import model.dao.LeilaoDao;
-import model.dao.ProdutoDao;
+import model.dao.ProductDao;
 import model.dao.UserDao;
 import model.entities.EstadoLeilao;
 import model.entities.Leilao;
-import model.entities.Produto;
+import model.entities.Product;
 import model.entities.User;
 
 public class LeilaoDaoJDBC implements LeilaoDao {
@@ -44,8 +44,8 @@ private Connection conn;
 			st.setDouble(5, obj.getLancePadrao());
 			st.setInt(6, obj.getEstado().getIdEstadoLeilao());
 			st.setInt(7, obj.getUser().getUserID());
-			System.out.println(obj.getProduto());
-			st.setInt(8, obj.getProduto().getIdProduto());
+			System.out.println(obj.getProduct());
+			st.setInt(8, obj.getProduct().getIdProduto());
 			
 			int rowsAffected = st.executeUpdate();
 		
@@ -85,7 +85,7 @@ private Connection conn;
 			st.setDouble(5, obj.getLancePadrao());
 			st.setInt(6, obj.getEstado().getIdEstadoLeilao());
 			st.setInt(7, obj.getUser().getUserID());
-			st.setInt(8, obj.getProduto().getIdProduto());
+			st.setInt(8, obj.getProduct().getIdProduto());
 			st.setInt(9, obj.getIdLeilao());	
 			
 			st.executeUpdate();
@@ -151,9 +151,9 @@ private Connection conn;
 				User user = userDao.findById(rs.getInt("id_usuario"));
 				obj.setUser(user);
 								
-				Produto produto = new Produto();
-				produto.setIdProduto(rs.getInt("id_produto"));
-				obj.setProduto(produto);
+				Product product = new Product();
+				product.setIdProduto(rs.getInt("id_produto"));
+				obj.setProduct(product);
 				
 				return obj;
 			}
@@ -200,9 +200,9 @@ private Connection conn;
 				User user = userDao.findById(rs.getInt("id_usuario"));
 				obj.setUser(user);
 								
-				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
-				obj.setProduto(produto);
+				ProductDao productDao = DaoFactory.createProdutoDao();
+				Product product = productDao.findById(rs.getInt("id_produto"));
+				obj.setProduct(product);
 								
 				list.add(obj);
 			}
@@ -251,9 +251,9 @@ private Connection conn;
 				User usuario = userDao.findById(rs.getInt("id_usuario"));
 				leilao.setUser(usuario);
 								
-				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
-				leilao.setProduto(produto);
+				ProductDao productDao = DaoFactory.createProdutoDao();
+				Product product = productDao.findById(rs.getInt("id_produto"));
+				leilao.setProduct(product);
 								
 				list.add(leilao);
 			}

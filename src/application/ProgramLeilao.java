@@ -68,7 +68,7 @@ public class ProgramLeilao {
 		leilao.setValorAtual(leilao.getValorInicial());
 		leilao.setLancePadrao(20);
 		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
-		leilao.setProduto(ProgramProduto.carregarProdutoByID(5));
+		leilao.setProduct(ProgramProduto.carregarProdutoByID(5));
 		leilao.setUser(ProgramUsuario.carregaUsuario(2));
 		leilaoDao.insert(leilao);
 	}
@@ -85,7 +85,7 @@ public class ProgramLeilao {
 		leilao.setValorAtual(leilao.getValorInicial());
 		leilao.setLancePadrao(30);
 		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
-		leilao.setProduto(ProgramProduto.carregarProdutoByID(3));
+		leilao.setProduct(ProgramProduto.carregarProdutoByID(3));
 		leilao.setUser(ProgramUsuario.carregaUsuario(1));
 		
 		List<Lance> lances = ProgramLance.carregaLancesPorLeilao(id_leilao);

@@ -1,6 +1,6 @@
 package model.task;
 
-import model.task.UserTasks.*;
+import model.task.user.*;
 
 import java.util.HashMap;
 import java.util.Map;
