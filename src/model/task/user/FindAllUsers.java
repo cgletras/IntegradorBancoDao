@@ -1,4 +1,4 @@
-package model.task.UserTasks;
+package model.task.user;
 
 import model.dao.DaoFactory;
 import model.dao.UserDao;
@@ -16,6 +16,6 @@ public class FindAllUsers implements Task {
         UserDao userDao = DaoFactory.createUsuarioDao();
         List<User> userList = userDao.findAll();
         request.setAttribute("usuarios", userList);
-        return "listagemUsuarios";
+        return "listagem de usuarios";
     }
 }

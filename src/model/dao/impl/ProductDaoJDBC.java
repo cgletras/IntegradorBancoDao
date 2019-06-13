@@ -11,22 +11,22 @@ import db.DB;
 import db.DbException;
 import model.dao.DaoFactory;
 import model.dao.EstadoProdutoDao;
-import model.dao.ProdutoDao;
+import model.dao.ProductDao;
 import model.dao.UserDao;
 import model.entities.EstadoProduto;
-import model.entities.Produto;
+import model.entities.Product;
 import model.entities.User;
 
-public class ProdutoDaoJDBC implements ProdutoDao {
+public class ProductDaoJDBC implements ProductDao {
 
 private Connection conn;
 	
-	public ProdutoDaoJDBC(Connection conn) {
+	public ProductDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
 	
 	@Override
-	public Produto findById(Integer id) {
+	public Product findById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -38,7 +38,7 @@ private Connection conn;
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
-				Produto obj = new Produto();
+				Product obj = new Product();
 				obj.setIdProduto(rs.getInt("id_produto"));
 				obj.setEditora(rs.getString("editora"));
 				obj.setTitulo(rs.getString("titulo"));
@@ -69,7 +69,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Produto> findAllByUser(User usuario) {
+	public List<Product> findAllByUser(User usuario) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -79,10 +79,10 @@ private Connection conn;
 			
 			st.setInt(1, usuario.getUserID());
 			rs = st.executeQuery();
-			List<Produto> produtos = new ArrayList<Produto>();
+			List<Product> products = new ArrayList<Product>();
 			
 			while (rs.next()) {
-				Produto obj = new Produto();
+				Product obj = new Product();
 				obj.setIdProduto(rs.getInt("id_produto"));
 				obj.setEditora(rs.getString("editora"));
 				obj.setTitulo(rs.getString("titulo"));
@@ -99,9 +99,9 @@ private Connection conn;
 				User user = userDao.findById(rs.getInt("id_usuario"));
 				obj.setUser(user);
 				
-				produtos.add(obj);
+				products.add(obj);
 			}
-			return produtos;
+			return products;
 		}
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
@@ -113,7 +113,7 @@ private Connection conn;
 	}
 
 	@Override
-	public void insertProduct(Produto obj) {
+	public void insertProduct(Product obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -175,7 +175,7 @@ private Connection conn;
 	}
 
 	@Override
-	public void updateProduct(Produto obj) {
+	public void updateProduct(Product obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -191,7 +191,7 @@ private Connection conn;
 			st.setInt(5, obj.getPeso());
 			st.setString(6, obj.getCapaImagem());
 			st.setInt(7, obj.getEstado().getIdEstadoProduto());
-			st.setInt(8, obj.getUsuario().getIdUsuario());
+			st.setInt(8, obj.getUser().getUserID());
 			st.setInt(9, obj.getIdProduto());
 			
 			int rowsAffected = st.executeUpdate();
