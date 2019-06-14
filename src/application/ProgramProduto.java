@@ -39,7 +39,6 @@ public class ProgramProduto {
 		produto.setIdProduto(id_produto);
 		
 		produtoDao.updateProduct(produto);
-		
 	}
 
 	public static void mudaStatusProduto(int id_produto, int id_estado_produto) {

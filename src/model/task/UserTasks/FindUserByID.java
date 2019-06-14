@@ -16,6 +16,6 @@ public class FindUserByID implements Task {
         Integer id = Integer.parseInt(request.getParameter("userID"));
         User user = userDao.findById(id);
         request.setAttribute("usuario", user);
-        return "Usuário encontrado";
+        return "Usuario encontrado";
     }
 }
