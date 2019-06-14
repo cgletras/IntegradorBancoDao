@@ -35,7 +35,7 @@ public class ProgramProduto {
 		produto.setPeso(150);
 		produto.setCapaImagem("capaImagem");
 		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
-		produto.setUsuario(ProgramUsuario.carregaUsuario(id_usuario));
+		produto.setUser(ProgramUsuario.carregaUsuario(id_usuario));
 		produto.setIdProduto(id_produto);
 		
 		produtoDao.updateProduct(produto);

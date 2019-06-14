@@ -37,11 +37,28 @@ public class ProgramUsuario {
 			
 		// procura 1 usuario pelo email e retorna
 			
-//OK 	carregarUsuarioPorEmail(email));
+// ok carregarUsuarioPorEmail("cgletras@gmail.com"));
 		
 //OK	inativaUsuarioPorId(id);
 
 //OK	ativaUsuarioPorId(id);
+		
+		
+		
+// ok		login("cgletras@gmail.com");
+		
+	}
+
+	public static void login(String email) {
+		User user = carregarUsuarioPorEmail(email);
+		
+		if (user == null) {
+			System.out.println("Usuario ou senha incorretos");
+		} else if (user.getPassword().equals("cg2468")){
+			System.out.println(user);
+		} else {
+			System.out.println("Usuario ou senha incorreta");
+		}
 		
 	}
 
