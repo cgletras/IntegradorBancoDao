@@ -1,75 +1,129 @@
 package application;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.DaoFactory;
-import model.dao.ProdutoDao;
-import model.entities.Produto;
+import model.dao.UserDao;
+import model.entities.User;
 
-public class ProgramProduto {
+public class ProgramUsuario {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
-		int id_produto = 11;
-		int id_usuario = 1;
-		int id_estado_produto = 1;
-		
-	//	carregarProdutoByID(id_produto);
-		
-	// carregarProdutosPorUsuario(id_usuario);
-			
-	//	inserirProduto(id_usuario);
-		
-	//	atualizarProduto(id_produto, id_usuario);
-		
-		//	mudaStatusProduto(id_produto, id_estado_produto);
-	}
+        // Buscar a ID na sess�o
+        int id = 2;
+        // Buscar a EMAIL na sess�o
+        String email = "willian.freitasoliveira@gmail.com";
 
-	public static void atualizarProduto(int id_produto, int id_usuario) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		Produto produto = new Produto();
-		produto.setEditora("Marvel");
-		produto.setTitulo("Greatest Vilains of the Fantastic Four");
-		produto.setFormatoDoQuadrinho("TPB");
-		produto.setNumeroPaginas(90);
-		produto.setPeso(150);
-		produto.setCapaImagem("capaImagem");
-		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
-		produto.setUser(ProgramUsuario.carregaUsuario(id_usuario));
-		produto.setIdProduto(id_produto);
-		
-		produtoDao.updateProduct(produto);
-		
-	}
+        //INSERIR USUARIO
 
-	public static void mudaStatusProduto(int id_produto, int id_estado_produto) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		produtoDao.changeStatusProduct(id_produto, ProgramEstadoProduto.estadoProdutoPorId(id_estado_produto));
-	}
+//OK	insereUsuario(); //parametros s�o instanciados dentro da fun��o;
 
-	public static void inserirProduto(int id_usuario) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		Produto produto = new Produto();
-		produto.setEditora("Marvel");
-		produto.setTitulo("Greatest Vilains of the Fantastic Four");
-		produto.setFormatoDoQuadrinho("TPB");
-		produto.setNumeroPaginas(85);
-		produto.setPeso(150);
-		produto.setCapaImagem("capaImagem");
-		produto.setEstado(ProgramEstadoProduto.estadoProdutoPorId(1));
-		produto.setUser(ProgramUsuario.carregaUsuario(id_usuario));
-		
-		produtoDao.insertProduct(produto);
-	}
+        // CARREGA USUARIO POR ID
 
-	public static List<Produto> carregarProdutosPorUsuario(int id_usuario) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		return produtoDao.findAllByUser(ProgramUsuario.carregaUsuario(id_usuario));
-	}
+//OK	carregaUsuario(id);
 
-	public static Produto carregarProdutoByID(int id_produto) {
-		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-		return produtoDao.findById(id_produto);
-	}
+        // UPDATE USUARIO
 
+//OK	atualizarUsuario(carregaUsuario(id));
+
+        // LISTA TODOS OS USUARIOS RETORNA UMA LISTA
+
+
+//OK 	listarUsuarios();
+
+        // procura 1 usuario pelo email e retorna
+
+// ok carregarUsuarioPorEmail("cgletras@gmail.com"));
+
+//OK	inativaUsuarioPorId(id);
+
+//OK	ativaUsuarioPorId(id);
+
+
+
+// ok		login("cgletras@gmail.com");
+
+    }
+
+    public static void login(String email) {
+        User user = carregarUsuarioPorEmail(email);
+
+        if (user == null) {
+            System.out.println("Usuario ou senha incorretos");
+        } else if (user.getPassword().equals("cg2468")){
+            System.out.println(user);
+        } else {
+            System.out.println("Usuario ou senha incorreta");
+        }
+
+    }
+
+    public static void ativaUsuarioPorId(int id) {
+        UserDao userDao = DaoFactory.createUsuarioDao();
+        userDao.activate(id);
+    }
+
+    public static void inativaUsuarioPorId(int id) {
+        UserDao userDao = DaoFactory.createUsuarioDao();
+        userDao.inactivate(id);
+    }
+
+    public static User carregarUsuarioPorEmail(String email) {
+        UserDao userDao = DaoFactory.createUsuarioDao();
+        User user = userDao.findByEmail(email);
+        return user;
+    }
+
+    public static List<User> listarUsuarios() {
+        UserDao userDao = DaoFactory.createUsuarioDao();
+        List<User> list = new ArrayList<>();
+        return list = userDao.findAll();
+
+    }
+
+    public static User atualizarUsuario(User user) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        UserDao userDao = DaoFactory.createUsuarioDao();
+
+        //carregar dados informados na pagina de atualiza�ao abaixo
+
+        user.setName("Ricardo");
+        user.setEmail("rrrr@gmail.com");
+        user.setPassword("1234");
+        user.setDateOfBirth(sdf.parse("18/11/2000"));
+        user.setStatus(true);
+
+        userDao.update(user);
+
+        return carregaUsuario(user.getUserID());
+    }
+
+    public static User carregaUsuario(int id) {
+
+        UserDao userDao = DaoFactory.createUsuarioDao();
+        User user = userDao.findById(id);
+        return user;
+    }
+
+    public static void insereUsuario() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        UserDao userDao = DaoFactory.createUsuarioDao();
+
+        User user = new User();
+        user.setUserID(null);
+        user.setName("Ricardo");
+        user.setEmail("r@gmail.com");
+        user.setPassword("1234");
+        user.setDateOfBirth(sdf.parse("18/12/2000"));
+        user.setStatus(true);
+
+        userDao.insert(user);
+        System.out.println("User inserido com sucesso");
+    }
 }

@@ -13,7 +13,7 @@ import db.DB;
 import db.DbException;
 import model.dao.EscritorDao;
 import model.entities.Escritor;
-import model.entities.Produto;
+import model.entities.Product;
 
 public class EscritorDaoJDBC implements EscritorDao {
 
@@ -53,7 +53,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Escritor> findByProduto(Produto produto) {
+	public List<Escritor> findByProduto(Product product) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -63,7 +63,7 @@ private Connection conn;
 					"ON ep.id_escritor = e.id_escritor " + 
 					"WHERE id_produto = ?");
 			
-			st.setInt(1, produto.getIdProduto());
+			st.setInt(1, product.getIdProduto());
 			
 			rs = st.executeQuery();
 			
@@ -154,7 +154,7 @@ private Connection conn;
 	}
 
 	@Override
-	public void relacionarEscritorProduto(Escritor escritor, Produto produto) {
+	public void relacionarEscritorProduto(Escritor escritor, Product product) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -162,7 +162,7 @@ private Connection conn;
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 
 			st.setInt(1, escritor.getIdEscritor());
-			st.setInt(2, produto.getIdProduto());
+			st.setInt(2, product.getIdProduto());
 			
 			int rowsAffected = st.executeUpdate();
 		
