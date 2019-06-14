@@ -191,7 +191,7 @@ private Connection conn;
 			st.setInt(5, obj.getPeso());
 			st.setString(6, obj.getCapaImagem());
 			st.setInt(7, obj.getEstado().getIdEstadoProduto());
-			st.setInt(8, obj.getUsuario().getIdUsuario());
+			st.setInt(8, obj.getUser().getUserID());
 			st.setInt(9, obj.getIdProduto());
 			
 			int rowsAffected = st.executeUpdate();
