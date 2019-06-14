@@ -7,7 +7,7 @@ import model.dao.impl.EstadoProdutoDaoJDBC;
 import model.dao.impl.LanceDaoJDBC;
 import model.dao.impl.LeilaoDaoJDBC;
 import model.dao.impl.PersonagemDaoJDBC;
-import model.dao.impl.ProductDaoJDBC;
+import model.dao.impl.ProdutoDaoJDBC;
 import model.dao.impl.UserDaoJDBC;
 
 public class DaoFactory {
@@ -36,8 +36,8 @@ public class DaoFactory {
 		return new PersonagemDaoJDBC(DB.getConnection());
 	}
 	
-	public static ProductDao createProdutoDao() {
-		return new ProductDaoJDBC(DB.getConnection());
+	public static ProdutoDao createProdutoDao() {
+		return new ProdutoDaoJDBC(DB.getConnection());
 	}
 	
 	public static UserDao createUsuarioDao() {

@@ -2,7 +2,7 @@ package model.entities;
 
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -12,11 +12,11 @@ public class Product implements Serializable {
 	
 	private User user;
 	
-	public Product() {
+	public Produto() {
 		super();
 	}
 
-	public Product(int idProduto, int numeroPaginas, int peso, String editora, String titulo, String formatoDoQuadrinho,
+	public Produto(int idProduto, int numeroPaginas, int peso, String editora, String titulo, String formatoDoQuadrinho,
 				   String capaImagem, EstadoProduto estado, User user) {
 		super();
 		this.idProduto = idProduto;
@@ -104,7 +104,7 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [idProduto=" + idProduto + ", numeroPaginas=" + numeroPaginas + ", peso=" + peso + ", editora="
+		return "Produto [idProduto=" + idProduto + ", numeroPaginas=" + numeroPaginas + ", peso=" + peso + ", editora="
 				+ editora + ", titulo=" + titulo + ", formatoDoQuadrinho=" + formatoDoQuadrinho + ", capaImagem="
 				+ capaImagem + ", estado=" + estado + ", user=" + user + "]";
 	}
