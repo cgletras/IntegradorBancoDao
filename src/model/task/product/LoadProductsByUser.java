@@ -1,9 +1,9 @@
 package model.task.product;
 
 import model.dao.DaoFactory;
-import model.dao.ProductDao;
+import model.dao.ProdutoDao;
 import model.dao.UserDao;
-import model.entities.Product;
+import model.entities.Produto;
 import model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +14,11 @@ public class LoadProductsByUser implements Task {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        ProductDao productDao = DaoFactory.createProdutoDao();
+        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
         UserDao userDao = DaoFactory.createUsuarioDao();
         Integer id = Integer.parseInt(request.getParameter("userID"));
-        List<Product> userProductList = productDao.findAllByUser(userDao.findById(id));
-        request.setAttribute("produtos", userProductList);
+        List<Produto> userProdutoList = produtoDao.findAllByUser(userDao.findById(id));
+        request.setAttribute("produtos", userProdutoList);
         return "produtos do usuário";
     }
 }

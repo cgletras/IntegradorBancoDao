@@ -13,7 +13,7 @@ public class ProgramUsuario {
 
 	public static void main(String[] args) throws ParseException {
 		
-		// Buscar a ID na sess�o
+		// Buscar a ID na sessao
 		int id = 2; 
 		// Buscar a EMAIL na sess�o
 		String email = "willian.freitasoliveira@gmail.com";
@@ -37,12 +37,28 @@ public class ProgramUsuario {
 			
 		// procura 1 usuario pelo email e retorna
 			
-//OK 	carregarUsuarioPorEmail(email));
+// ok carregarUsuarioPorEmail("cgletras@gmail.com"));
 		
 //OK	inativaUsuarioPorId(id);
 
 //OK	ativaUsuarioPorId(id);
 		
+		
+		
+// ok		login("cgletras@gmail.com"); 
+		
+	}
+
+	public static void login(String email, String senha) {
+		User user = carregarUsuarioPorEmail(email);
+		
+		if (user == null) {
+			System.out.println("Usuario ou senha incorretos"); //AQUI TEM QUE MODIFICAR PRA ENVIAR A RESPOSTA PRO FRONT
+		} else if (user.getPassword().equals(senha)){
+			System.out.println("Logado"); //AQUI TEM QUE MODIFICAR PRA ENVIAR A RESPOSTA PRO FRONT
+		} else {
+			System.out.println("Usuario ou senha incorreta"); //AQUI TEM QUE MODIFICAR PRA ENVIAR A RESPOSTA PRO FRONT
+		}
 	}
 
 	public static void ativaUsuarioPorId(int id) {

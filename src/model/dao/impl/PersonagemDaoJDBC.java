@@ -13,7 +13,7 @@ import db.DB;
 import db.DbException;
 import model.dao.PersonagemDao;
 import model.entities.Personagem;
-import model.entities.Product;
+import model.entities.Produto;
 
 public class PersonagemDaoJDBC implements PersonagemDao {
 
@@ -53,7 +53,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Personagem> findByProduto(Product product) {
+	public List<Personagem> findByProduto(Produto produto) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -63,7 +63,7 @@ private Connection conn;
 					"ON pp.id_personagem = p.id_personagem " + 
 					"WHERE id_produto = ?");
 			
-			st.setInt(1, product.getIdProduto());
+			st.setInt(1, produto.getIdProduto());
 			
 			rs = st.executeQuery();
 			
@@ -155,7 +155,7 @@ private Connection conn;
 	}
 
 	@Override
-	public void relacionarPersonagemProduto(Personagem personagem, Product product) {
+	public void relacionarPersonagemProduto(Personagem personagem, Produto produto) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -163,7 +163,7 @@ private Connection conn;
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 
 			st.setInt(1, personagem.getIdPersonagem());
-			st.setInt(2, product.getIdProduto());
+			st.setInt(2, produto.getIdProduto());
 			
 			int rowsAffected = st.executeUpdate();
 		

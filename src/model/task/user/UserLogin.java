@@ -8,14 +8,19 @@ import model.task.Task;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FindUserByID implements Task {
+public class UserLogin implements Task {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         UserDao userDao = DaoFactory.createUsuarioDao();
-        Integer id = Integer.parseInt(request.getParameter("userID"));
-        User user = userDao.findById(id);
-        request.setAttribute("usuario", user);
-        return "Usuario encontrado";
+        User user = userDao.findByEmail(request.getParameter("email"));
+
+        if (user == null) {
+            return "Usuario ou senha incorretos";
+        } else if (user.getPassword().equals(request.getParameter("password"))){
+            return "Logado";
+        } else {
+            return "Usuario ou senha incorreta";
+        }
     }
 }
