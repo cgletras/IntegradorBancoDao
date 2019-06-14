@@ -49,15 +49,15 @@ public class ProgramUsuario {
 		
 	}
 
-	public static void login(String email) {
+	public static void login(String email, String senha) {
 		User user = carregarUsuarioPorEmail(email);
 		
 		if (user == null) {
-			System.out.println("Usuario ou senha incorretos");
-		} else if (user.getPassword().equals("cg2468")){
-			System.out.println(user);
+			System.out.println("Usuario ou senha incorretos"); //AQUI TEM QUE MODIFICAR PRA ENVIAR A RESPOSTA PRO FRONT
+		} else if (user.getPassword().equals(senha)){
+			System.out.println("Logado"); //AQUI TEM QUE MODIFICAR PRA ENVIAR A RESPOSTA PRO FRONT
 		} else {
-			System.out.println("Usuario ou senha incorreta");
+			System.out.println("Usuario ou senha incorreta"); //AQUI TEM QUE MODIFICAR PRA ENVIAR A RESPOSTA PRO FRONT
 		}
 	}
 
