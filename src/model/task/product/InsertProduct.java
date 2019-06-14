@@ -25,8 +25,8 @@ public class InsertProduct implements Task {
         produto.setPeso(weight);
         produto.setCapaImagem(request.getParameter("CapaImagem"));
         Integer statusID = Integer.parseInt(request.getParameter("statusID"));
-        produto.setEstado();
-        produto.setUser(userDao.);
+        //produto.setEstado();
+        //produto.setUser(userDao.);
         produtoDao.insertProduct(produto);
         return "Produto Inserido";
     }
