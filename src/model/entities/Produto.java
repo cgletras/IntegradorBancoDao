@@ -17,7 +17,7 @@ public class Produto implements Serializable {
 	}
 
 	public Produto(int idProduto, int numeroPaginas, int peso, String editora, String titulo, String formatoDoQuadrinho,
-			String capaImagem, EstadoProduto estado, User user) {
+				   String capaImagem, EstadoProduto estado, User user) {
 		super();
 		this.idProduto = idProduto;
 		this.numeroPaginas = numeroPaginas;

@@ -1,4 +1,4 @@
-package model.task.UserTasks;
+package model.task.user;
 
 import model.dao.DaoFactory;
 import model.dao.UserDao;
@@ -8,13 +8,14 @@ import model.task.Task;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FindUserByEmail implements Task {
+public class FindUserByID implements Task {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         UserDao userDao = DaoFactory.createUsuarioDao();
-        User user = userDao.findByEmail(request.getParameter("email"));
+        Integer id = Integer.parseInt(request.getParameter("userID"));
+        User user = userDao.findById(id);
         request.setAttribute("usuario", user);
-        return "Usuário encontrado";
+        return "Usuario encontrado";
     }
 }

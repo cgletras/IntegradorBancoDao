@@ -19,7 +19,7 @@ public class Leilao  implements Serializable{
 	}
 
 	public Leilao(int idLeilao, int duracao, Date dataInicio, double valorInicial, double valorAtual,
-			double lancePadrao, EstadoLeilao estado, Produto produto, User user) {
+				  double lancePadrao, EstadoLeilao estado, Produto produto, User user) {
 		super();
 		this.idLeilao = idLeilao;
 		this.duracao = duracao;

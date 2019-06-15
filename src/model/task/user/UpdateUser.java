@@ -1,4 +1,4 @@
-package model.task.UserTasks;
+package model.task.user;
 
 import model.dao.DaoFactory;
 import model.dao.UserDao;
