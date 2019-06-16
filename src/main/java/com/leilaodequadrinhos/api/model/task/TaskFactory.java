@@ -1,5 +1,6 @@
 package com.leilaodequadrinhos.api.model.task;
 
+import com.leilaodequadrinhos.api.model.task.product.FindProductByID;
 import com.leilaodequadrinhos.api.model.task.user.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ public class TaskFactory {
         tasks.put("GET/findAllUsers", new FindAllUsers());
         tasks.put("GET/findUserByID", new FindUserByID());
         tasks.put("GET/findUserByEmail", new FindUserByEmail());
+        tasks.put("GET/findProductById", new FindProductByID());
     }
 
     public static Task getTask(HttpServletRequest request) {
