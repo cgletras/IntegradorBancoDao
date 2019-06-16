@@ -35,7 +35,7 @@ public class ProgramLance {
 
 	public static List<Lance> carregaLancesPorUsuario(int id_usuario) {
 		LanceDao lanceDao = DaoFactory.createLanceDao();
-		return lanceDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));		
+		return lanceDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));
 	}
 
 	public static List carregaLancesPorLeilao(int id_leilao) {
@@ -61,6 +61,6 @@ public class ProgramLance {
 				ProgramLeilao.carregaLeilaoPorId(id_leilao).getLancePadrao(), 
 				null, 
 				ProgramLeilao.carregaLeilaoPorId(id_leilao), 
-				ProgramUsuario.carregaUsuario(id_usuario)));		
+//				ProgramUsuario.carregaUsuario(id_usuario)));
 	}
 }
