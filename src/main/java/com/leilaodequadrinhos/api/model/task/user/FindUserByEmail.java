@@ -1,7 +1,7 @@
 package com.leilaodequadrinhos.api.model.task.user;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
 import com.leilaodequadrinhos.api.model.dao.UserDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
 import com.leilaodequadrinhos.api.model.entities.User;
 import com.leilaodequadrinhos.api.model.task.Task;
 
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 public class FindUserByEmail implements Task {
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-//        UserDao userDao = DaoFactory.createUsuarioDao();
-//        User user = userDao.findByEmail(request.getParameter("email"));
-//        request.setAttribute("usuario", user);
-        return "Usuário encontrado";
+    public User execute(HttpServletRequest request, HttpServletResponse response) {
+        UserDao userDao = new UserDAO();
+        User user = userDao.findByEmail(request.getParameter("email"));
+        request.setAttribute("usuario", user);
+        return user;
     }
 }

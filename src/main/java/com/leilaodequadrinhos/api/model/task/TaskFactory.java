@@ -13,7 +13,7 @@ public class TaskFactory {
     static {
         tasks.put("POST/insertUser", new InsertNewUser());
         tasks.put("POST/activateUser", new ActivateUserByID());
-        tasks.put("POST/inactivateUser", new InactivateUserByID());
+        tasks.put("POST/inactivateUser", new DeleteUserByID());
         tasks.put("POST/updateUser", new UpdateUser());
         tasks.put("GET/findAllUsers", new FindAllUsers());
         tasks.put("GET/findUserByID", new FindUserByID());
