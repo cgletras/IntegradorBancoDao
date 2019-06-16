@@ -2,7 +2,6 @@ package com.leilaodequadrinhos.api.model.dao.impl.jdbc;
 
 import com.leilaodequadrinhos.api.db.DB;
 import com.leilaodequadrinhos.api.db.DbException;
-import com.leilaodequadrinhos.api.model.dao.DAO;
 import com.leilaodequadrinhos.api.model.dao.UserDao;
 import com.leilaodequadrinhos.api.model.entities.User;
 
@@ -20,7 +19,7 @@ public class UserDAO implements UserDao {
 	Connection conn = DB.getConnection();
 
 	@Override
-	public Object findById(Long id) {
+	public User findById(Long id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
