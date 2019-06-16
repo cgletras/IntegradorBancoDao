@@ -46,7 +46,6 @@ public class ProgramUsuario {
 //
 //
 //// ok		login("cgletras@gmail.com");
-//
 //	}
 //
 //	public static void login(String email, String senha) {
