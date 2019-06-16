@@ -1,8 +1,5 @@
 package com.leilaodequadrinhos.api.model.task.product;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.ProdutoDao;
-import com.leilaodequadrinhos.api.model.dao.UserDao;
 import com.leilaodequadrinhos.api.model.entities.Produto;
 import com.leilaodequadrinhos.api.model.task.Task;
 
@@ -13,7 +10,7 @@ public class InsertProduct implements Task {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+       // DAO produtoDao = DaoFactory.createProdutoDao();
 //        UserDao userDao = DaoFactory.createUsuarioDao();
         Produto produto = new Produto();
         produto.setEditora(request.getParameter("Editora"));
@@ -27,7 +24,7 @@ public class InsertProduct implements Task {
         Integer statusID = Integer.parseInt(request.getParameter("statusID"));
         //produto.setEstado();
         //produto.setUser(userDao.);
-        produtoDao.insertProduct(produto);
+        //produtoDao.insertProduct(produto);
         return "Produto Inserido";
     }
 }

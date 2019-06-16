@@ -1,7 +1,7 @@
 package com.leilaodequadrinhos.api.model.task.user;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
 import com.leilaodequadrinhos.api.model.dao.UserDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
 import com.leilaodequadrinhos.api.model.entities.User;
 import com.leilaodequadrinhos.api.model.task.Task;
 
@@ -13,7 +13,7 @@ public class InsertNewUser implements Task {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        UserDao userDao = DaoFactory.createUsuarioDao();
+        UserDao userDao = new UserDAO();
         User user = new User();
         user.setName(request.getParameter("name"));
         user.setStatus(Boolean.getBoolean(request.getParameter("status")));
@@ -21,7 +21,7 @@ public class InsertNewUser implements Task {
         String format = "dd/MM/yyyy";
         user.setDateOfBirth(new SimpleDateFormat(format).parse(request.getParameter("dateOfBirth")));
         user.setPassword(request.getParameter("password"));
-//        userDao.insert(user);
+        userDao.insert(user);
         return "Usuário cadastrado";
     }
 }
