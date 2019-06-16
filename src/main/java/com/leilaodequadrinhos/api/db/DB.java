@@ -2,6 +2,7 @@ package com.leilaodequadrinhos.api.db;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
@@ -39,9 +40,12 @@ public class DB {
 	}
 
 	private static Properties loadProperties() {
-		try (FileInputStream fs = new FileInputStream("/extra0/db.properties")) {
+
+
+		try (InputStream is = DB.class.getResourceAsStream("/db.properties")) {
+			System.out.println(DB.class.getResource("/db.properties"));
 			Properties props = new Properties();
-			props.load(fs);
+			props.load(is);
 			return props;
 		} catch (IOException e) {
 			throw new DbException(e.getMessage());
