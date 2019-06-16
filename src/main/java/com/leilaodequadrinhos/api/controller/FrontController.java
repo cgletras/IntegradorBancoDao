@@ -2,7 +2,7 @@ package com.leilaodequadrinhos.api.controller;
 
 import com.leilaodequadrinhos.api.model.task.Task;
 import com.leilaodequadrinhos.api.model.task.TaskFactory;
-import com.leilaodequadrinhos.api.util.*;
+import com.leilaodequadrinhos.api.util.Json;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 @WebServlet("/controller/*")
 public class FrontController extends HttpServlet {
 
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
 
@@ -32,9 +32,28 @@ public class FrontController extends HttpServlet {
 			throw new ServletException("Erro ao executar tarefa.", e);
 		}
 
-
-
-
-
     }
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request  servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+
 }

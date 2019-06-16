@@ -196,9 +196,9 @@ private Connection conn;
 //				User user = userDao.findById(rs.getInt("id_usuario"));
 //				obj.setUser(user);
 								
-				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
-				obj.setProduto(produto);
+//				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+//				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
+//				obj.setProduto(produto);
 								
 				list.add(obj);
 			}
@@ -247,9 +247,9 @@ private Connection conn;
 //				User usuario = userDao.findById(rs.getInt("id_usuario"));
 //				leilao.setUser(usuario);
 								
-				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
-				leilao.setProduto(produto);
+//				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+//				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
+//				leilao.setProduto(produto);
 								
 				list.add(leilao);
 			}

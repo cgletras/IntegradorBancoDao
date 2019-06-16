@@ -1,7 +1,6 @@
 package com.leilaodequadrinhos.api.model.task.user;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.UserDao;
+import com.leilaodequadrinhos.api.model.entities.Produto;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
