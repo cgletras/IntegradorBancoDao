@@ -6,7 +6,7 @@ import com.leilaodequadrinhos.api.model.entities.User;
 
 import java.util.List;
 
-public interface ProdutoDao {
+public interface ProdutoDao extends DAO {
 	
 	void insertProduct(Produto produto);
 	void updateProduct(Produto produto);
