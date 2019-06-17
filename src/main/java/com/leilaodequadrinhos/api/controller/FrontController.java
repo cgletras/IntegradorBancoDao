@@ -1,5 +1,6 @@
 package com.leilaodequadrinhos.api.controller;
 
+import com.leilaodequadrinhos.api.db.DbException;
 import com.leilaodequadrinhos.api.model.task.Task;
 import com.leilaodequadrinhos.api.model.task.TaskFactory;
 import com.leilaodequadrinhos.api.util.Json;
@@ -28,7 +29,11 @@ public class FrontController extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println(jResponse);
 
-		} catch (Exception e) {
+		} catch (DbException e) {
+            System.out.println(e.getStackTrace().toString());
+            PrintWriter out = response.getWriter();
+            out.println(e.getMessage());
+        } catch (Exception e) {
 			throw new ServletException("Erro ao executar tarefa.", e);
 		}
 

@@ -200,7 +200,7 @@ public class UserDAO implements UserDao {
 
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getEmail());
-			st.setString(3, obj.getEmail());
+			st.setString(3, obj.getPassword());
 			st.setDate(4, new java.sql.Date(obj.getDateOfBirth().getTime()));
 			st.setBoolean(5, obj.isStatus());
 			
