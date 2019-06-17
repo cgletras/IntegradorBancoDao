@@ -43,7 +43,6 @@ public class DB {
 
 
 		try (InputStream is = DB.class.getResourceAsStream("/db.properties")) {
-			System.out.println(DB.class.getResource("/db.properties"));
 			Properties props = new Properties();
 			props.load(is);
 			return props;

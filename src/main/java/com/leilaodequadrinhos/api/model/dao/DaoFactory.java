@@ -36,9 +36,9 @@ public class DaoFactory {
         return new PersonagemDAO(DB.getConnection());
     }
 
-    public static ProdutoDao createProdutoDao() {
-        return new ProdutoDAO(DB.getConnection());
-    }
+//    public static ProdutoDao createProdutoDao() {
+//        return new ProdutoDAO(DB.getConnection());
+//    }
 
 //    public static UserDao createUsuarioDao() {
 //        return new UserDAO(DB.getConnection());
