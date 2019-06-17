@@ -1,11 +1,7 @@
 package com.leilaodequadrinhos.api.model.task.user;
 
-<<<<<<< HEAD:src/main/java/com/leilaodequadrinhos/api/model/task/user/DeleteUserByID.java
 import com.leilaodequadrinhos.api.model.dao.UserDao;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
-=======
-import com.leilaodequadrinhos.api.model.entities.Produto;
->>>>>>> ajustes_produto:src/main/java/com/leilaodequadrinhos/api/model/task/user/InactivateUserByID.java
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
