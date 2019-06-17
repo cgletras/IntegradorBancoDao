@@ -18,9 +18,10 @@ public class DB {
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
-				Properties props = loadProperties();
-				String url = props.getProperty("dburl");
-				conn = DriverManager.getConnection(url, props);
+//				Properties props = loadProperties();
+//				String url = props.getProperty("dburl");
+				String url = "jdbc:mysql://cluster01.c1pou0akhdto.us-east-1.rds.amazonaws.com:3306/leilao_quadrinhos";
+				conn = DriverManager.getConnection(url, "root", "iftm1234");
 			} catch (SQLException e) {
 				throw new DbException(e.getMessage());
 			}
