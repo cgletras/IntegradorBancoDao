@@ -19,7 +19,7 @@ public class InsertNewUser implements Task {
         UserDao userDao = new UserDAO();
         User user = new User();
         user.setName(request.getParameter("name"));
-        user.setStatus(Boolean.getBoolean(request.getParameter("status")));
+        user.setStatus(true);
         user.setEmail(request.getParameter("email"));
         String format = "dd/MM/yyyy";
         user.setDateOfBirth(new SimpleDateFormat(format).parse(request.getParameter("dateOfBirth")));

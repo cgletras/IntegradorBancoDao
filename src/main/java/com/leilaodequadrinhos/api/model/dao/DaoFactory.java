@@ -20,9 +20,9 @@ public class DaoFactory {
         return new EstadoLeilaoDAO(DB.getConnection());
     }
 
-    public static EstadoProdutoDao createEstadoProdutoDao() {
-        return new EstadoProdutoDAO(DB.getConnection());
-    }
+//    public static EstadoProdutoDao createEstadoProdutoDao() {
+//        return new EstadoProdutoDAO(DB.getConnection());
+//    }
 
     public static LanceDao createLanceDao() {
         return new LanceDAO(DB.getConnection());
