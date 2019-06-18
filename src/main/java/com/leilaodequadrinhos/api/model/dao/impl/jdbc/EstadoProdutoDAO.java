@@ -16,11 +16,7 @@ import java.util.Map;
 
 public class EstadoProdutoDAO implements EstadoProdutoDao {
 
-private Connection conn;
-	
-	public EstadoProdutoDAO(Connection conn) {
-		this.conn = conn;
-	}
+	Connection conn = DB.getConnection();
 
 	@Override
 	public List<EstadoProduto> findAll() {
