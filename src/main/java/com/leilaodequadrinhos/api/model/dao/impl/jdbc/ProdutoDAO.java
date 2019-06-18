@@ -64,11 +64,13 @@ public class ProdutoDAO implements ProdutoDao {
         }
     }
 
+    // TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que nãi esta no scope atual.
     @Override
     public List findAll() {
         return null; // Não é necessario um metodo pra listar todos os produtos no site. A lista nesse escopo é por usuario e esta implementada em outra função
     }
 
+    // TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que nãi esta no scope atual.
     @Override
     public Long count() {
         return null;
@@ -218,7 +220,7 @@ public class ProdutoDAO implements ProdutoDao {
                 obj.setPeso(rs.getInt("peso"));
                 obj.setCapaImagem(rs.getString("capa_imagem"));
 
-                EstadoProdutoDao estadoProdutoDao = DaoFactory.createEstadoProdutoDao();
+                EstadoProdutoDao estadoProdutoDao = new EstadoProdutoDAO();
                 EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getInt("id_estado_produto"));
                 obj.setEstado(estadoProduto);
 
