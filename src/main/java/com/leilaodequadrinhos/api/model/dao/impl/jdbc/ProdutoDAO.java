@@ -45,7 +45,7 @@ public class ProdutoDAO implements ProdutoDao {
                 obj.setPeso(rs.getInt("peso"));
                 obj.setCapaImagem(rs.getString("capa_imagem"));
 
-                EstadoProdutoDao estadoProdutoDao = DaoFactory.createEstadoProdutoDao();
+                EstadoProdutoDao estadoProdutoDao = new EstadoProdutoDAO();
                 EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getInt("id_estado_produto"));
                 obj.setEstado(estadoProduto);
 
