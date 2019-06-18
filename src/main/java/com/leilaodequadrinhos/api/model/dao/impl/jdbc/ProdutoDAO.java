@@ -75,11 +75,6 @@ public class ProdutoDAO implements ProdutoDao {
     }
 
     @Override
-    public void delete(Object entity) {
-
-    }
-
-    @Override
     public void deleteById(Long id) {
         PreparedStatement st = null;
         try {
