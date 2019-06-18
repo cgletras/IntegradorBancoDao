@@ -118,30 +118,6 @@ public class UserDAO implements UserDao {
 	}
 
 	@Override
-	public void delete(Object entity) {
-		PreparedStatement st = null;
-		try {
-			st = conn.prepareStatement(
-					"UPDATE Usuario " + 
-					"SET ativo= ? " + 
-					"WHERE id_usuario= ?");
-			
-			User user = (User) entity;
-			
-			st.setBoolean(1, false);
-			st.setInt(2, user.getUserID());
-								
-			st.executeUpdate();
-		}
-		catch (SQLException e) {
-			throw new DbException(e.getMessage());
-		}
-		finally {
-			DB.closeStatement(st);
-		}
-	}
-
-	@Override
 	public void deleteById(Long id) {
 		PreparedStatement st = null;
 		try {

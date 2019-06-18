@@ -71,11 +71,6 @@ public class ProdutoDAO implements DAO {
     }
 
     @Override
-    public void delete(Object entity) {
-
-    }
-
-    @Override
     public void deleteById(Long id) {
 
     }
