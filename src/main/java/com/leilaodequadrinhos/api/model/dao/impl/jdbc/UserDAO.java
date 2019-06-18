@@ -122,15 +122,15 @@ public class UserDAO implements UserDao {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"UPDATE Usuario " + 
-					"SET ativo= ? " + 
+					"UPDATE Usuario " +
+					"SET ativo= ? " +
 					"WHERE id_usuario= ?");
-			
+
 			User user = (User) entity;
-			
+
 			st.setBoolean(1, false);
 			st.setInt(2, user.getUserID());
-								
+
 			st.executeUpdate();
 		}
 		catch (SQLException e) {
@@ -191,21 +191,21 @@ public class UserDAO implements UserDao {
 	}
 
 	@Override
-	public void insert(User obj) {
+	public void insert(Object entity) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO Usuario (nome, email, senha, data_nascimento, ativo) " + "VALUES " + "(?, ?, ?, ?, ?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
-
+			User obj = (User) entity;
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getEmail());
 			st.setString(3, obj.getPassword());
 			st.setDate(4, new java.sql.Date(obj.getDateOfBirth().getTime()));
 			st.setBoolean(5, obj.isStatus());
-			
+
 			int rowsAffected = st.executeUpdate();
-			
+
 			if (rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
 				if (rs.next()) {
@@ -213,18 +213,17 @@ public class UserDAO implements UserDao {
 					obj.setUserID(id);
 				}
 				DB.closeResultSet(rs);
-			} 
+			}
 			else {
 				throw new DbException("Unexpected error! No rows affected!");
 			}
-		} 
+		}
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
-		} 
+		}
 		finally {
 			DB.closeStatement(st);
 		}
-		
 	}
 
 	@Override
