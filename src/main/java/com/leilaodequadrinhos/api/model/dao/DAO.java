@@ -10,4 +10,5 @@ public interface DAO<T> {
     void delete(T entity);
     void deleteById(Long id);
     void update(T entity);
+    void insert(T entity);
 }

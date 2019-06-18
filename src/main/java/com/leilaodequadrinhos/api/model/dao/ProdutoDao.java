@@ -7,10 +7,7 @@ import com.leilaodequadrinhos.api.model.entities.User;
 import java.util.List;
 
 public interface ProdutoDao extends DAO {
-	
-	void insertProduct(Produto produto);
-	void updateProduct(Produto produto);
-	Produto findById(Integer id);
-	List<Produto> findAllByUser(User user);
+
+	List<Produto> findAllByUser(Long UserId);
 	void changeStatusProduct(Integer id, EstadoProduto estado);
 }
