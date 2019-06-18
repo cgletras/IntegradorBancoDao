@@ -35,7 +35,7 @@ public class FrontController extends HttpServlet {
             out.println(e.getMessage());
         } catch (Exception e) {
 			throw new ServletException("Erro ao executar tarefa.", e);
-		}q
+		}
 
     }
 
