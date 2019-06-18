@@ -12,14 +12,14 @@ public class TaskFactory {
     private static final Map<String, Task> tasks = new HashMap<>();
 
     static {
-        tasks.put("POST/insertUser", new InsertNewUser());
-        tasks.put("POST/activateUser", new ActivateUserByID());
-        tasks.put("POST/inactivateUser", new DeleteUserByID());
-        tasks.put("POST/updateUser", new UpdateUser());
-        tasks.put("GET/findAllUsers", new FindAllUsers());
-        tasks.put("GET/findUserByID", new FindUserByID());
-        tasks.put("GET/findUserByEmail", new FindUserByEmail());
-        tasks.put("GET/findProductById", new FindProductByID());
+        tasks.put("POST/insert-user", new InsertNewUser());
+        tasks.put("POST/activate-user", new ActivateUserByID());
+        tasks.put("POST/inactivate-user", new DeleteUserByID());
+        tasks.put("POST/update-user", new UpdateUser());
+        tasks.put("GET/find-all-users", new FindAllUsers());
+        tasks.put("GET/find-user-by-id", new FindUserByID());
+        tasks.put("GET/find-user-by-email", new FindUserByEmail());
+        tasks.put("GET/find-product-by-id", new FindProductByID());
     }
 
     public static Task getTask(HttpServletRequest request) {
