@@ -35,6 +35,8 @@ public class UserDAO implements UserDao {
 				obj.setUserID(rs.getInt("id_usuario"));
 				obj.setName(rs.getString("nome"));
 				obj.setEmail(rs.getString("email"));
+				obj.setState(rs.getString("estado"));
+				obj.setCity(rs.getString("cidade"));
 				obj.setPassword(rs.getString("senha"));
 				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
 				obj.setStatus(rs.getBoolean("ativo"));
@@ -58,7 +60,7 @@ public class UserDAO implements UserDao {
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT id_usuario, nome, email, senha, data_nascimento, ativo "
+					"SELECT id_usuario, nome, email, estado, cidade, senha, data_nascimento, ativo "
 							+ "FROM Usuario "
 							+ "ORDER BY nome");
 
@@ -72,6 +74,8 @@ public class UserDAO implements UserDao {
 				obj.setUserID(rs.getInt("id_usuario"));
 				obj.setName(rs.getString("nome"));
 				obj.setEmail(rs.getString("email"));
+				obj.setState(rs.getString("estado"));
+				obj.setCity(rs.getString("cidade"));
 				obj.setPassword(rs.getString("senha"));
 				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
 				obj.setStatus(rs.getBoolean("ativo"));
@@ -145,16 +149,18 @@ public class UserDAO implements UserDao {
 		try {
 			st = conn.prepareStatement(
 					"UPDATE Usuario " + 
-					"SET nome= ?, email= ?, senha= ?, data_nascimento= ?, ativo= ? " + 
+					"SET nome= ?, email= ?, senha= ?, estado=?, cidade=?, data_nascimento= ?, ativo= ? " +
 					"WHERE id_usuario= ?");
 			
 			User obj = (User) entity;
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getEmail());
 			st.setString(3, obj.getPassword());
-			st.setDate(4, new java.sql.Date(obj.getDateOfBirth().getTime()));
-			st.setBoolean(5, obj.isStatus());
-			st.setInt(6, obj.getUserID());
+			st.setString(4, obj.getState());
+			st.setString(5, obj.getCity());
+			st.setDate(6, new java.sql.Date(obj.getDateOfBirth().getTime()));
+			st.setBoolean(7, obj.isStatus());
+			st.setInt(8, obj.getUserID());
 						
 			st.executeUpdate();
 		}
@@ -171,14 +177,16 @@ public class UserDAO implements UserDao {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"INSERT INTO Usuario (nome, email, senha, data_nascimento, ativo) " + "VALUES " + "(?, ?, ?, ?, ?)",
+					"INSERT INTO Usuario (nome, email, senha, estado, cidade, data_nascimento, ativo) " + "VALUES " + "(?, ?, ?, ?, ?, ?, ?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 			User obj = (User) entity;
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getEmail());
 			st.setString(3, obj.getPassword());
-			st.setDate(4, new java.sql.Date(obj.getDateOfBirth().getTime()));
-			st.setBoolean(5, obj.isStatus());
+			st.setString(4, obj.getState());
+			st.setString(5, obj.getCity());
+			st.setDate(6, new java.sql.Date(obj.getDateOfBirth().getTime()));
+			st.setBoolean(7, obj.isStatus());
 
 			int rowsAffected = st.executeUpdate();
 
@@ -242,6 +250,8 @@ public class UserDAO implements UserDao {
 				obj.setName(rs.getString("nome"));
 				obj.setEmail(rs.getString("email"));
 				obj.setPassword(rs.getString("senha"));
+				obj.setState(rs.getString("estado"));
+				obj.setCity(rs.getString("cidade"));
 				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
 				obj.setStatus(rs.getBoolean("ativo"));
 				

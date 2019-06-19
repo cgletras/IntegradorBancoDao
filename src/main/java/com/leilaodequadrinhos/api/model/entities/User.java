@@ -8,7 +8,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer userID;
-	private String name, email, password;
+	private String name, email, password, city, state;
 	private Date dateOfBirth;
 	private boolean status;
 	
@@ -16,14 +16,32 @@ public class User implements Serializable{
 		super();
 	}
 
-	public User(Integer userID, String name, String email, String password, Date dateOfBirth, boolean status) {
+	public User(Integer userID, String name, String email, String password, String city, String state, Date dateOfBirth, boolean status) {
 		super();
 		this.userID = userID;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.city = city;
+		this.state = state;
 		this.dateOfBirth = dateOfBirth;
 		this.status = status;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public Integer getUserID() {
@@ -101,11 +119,17 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", name=" + name + ", email=" + email + ", password=" + password
-				+ ", dateOfBirth=" + dateOfBirth + ", status=" + status + "]";
+		return "User{" +
+				"userID=" + userID +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", city='" + city + '\'' +
+				", state='" + state + '\'' +
+				", dateOfBirth=" + dateOfBirth +
+				", status=" + status +
+				'}';
 	}
-	
-	
 }
 
 
