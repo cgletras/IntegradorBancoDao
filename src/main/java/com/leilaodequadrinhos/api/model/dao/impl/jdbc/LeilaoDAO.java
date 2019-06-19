@@ -45,7 +45,7 @@ public class LeilaoDAO implements LeilaoDao {
 			if (rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
 				if (rs.next()) {
-					int id = rs.getInt(1);
+					Long id = rs.getLong(1);
 					obj.setIdLeilao(id);
 				}
 				DB.closeResultSet(rs);
@@ -80,7 +80,7 @@ public class LeilaoDAO implements LeilaoDao {
 			st.setInt(6, obj.getEstado().getIdEstadoLeilao());
 			st.setInt(7, obj.getUser().getUserID());
 			st.setInt(8, obj.getProduto().getIdProduto());
-			st.setInt(9, obj.getIdLeilao());	
+			st.setLong(9, obj.getIdLeilao());
 			
 			st.executeUpdate();
 			System.out.println("Leilao atualizado com sucesso");
@@ -103,7 +103,7 @@ public class LeilaoDAO implements LeilaoDao {
 					"WHERE id_leilao= ?");
 
 			st.setDouble(1, obj.getValorAtual()+obj.getLancePadrao());
-			st.setInt(2, obj.getIdLeilao());
+			st.setLong(2, obj.getIdLeilao());
 									
 			st.executeUpdate();
 		}
@@ -130,7 +130,7 @@ public class LeilaoDAO implements LeilaoDao {
 			if (rs.next()) {
 				Leilao obj = new Leilao();
 							
-				obj.setIdLeilao(rs.getInt("id_leilao"));
+				obj.setIdLeilao(rs.getLong("id_leilao"));
 				obj.setDataInicio(new java.sql.Date(rs.getDate("data_inicio").getTime()));
 				obj.setDuracao(rs.getInt("duracao"));
 				obj.setValorInicial(rs.getDouble("valor_inicial"));
@@ -179,7 +179,7 @@ public class LeilaoDAO implements LeilaoDao {
 			while (rs.next()) {
 				Leilao obj = new Leilao();
 							
-				obj.setIdLeilao(rs.getInt("id_leilao"));
+				obj.setIdLeilao(rs.getLong("id_leilao"));
 				obj.setDataInicio(new java.sql.Date(rs.getDate("data_inicio").getTime()));
 				obj.setDuracao(rs.getInt("duracao"));
 				obj.setValorInicial(rs.getDouble("valor_inicial"));
@@ -257,14 +257,14 @@ public class LeilaoDAO implements LeilaoDao {
 			while (rs.next()) {
 				Leilao leilao = new Leilao();
 							
-				leilao.setIdLeilao(rs.getInt("id_leilao"));
+				leilao.setIdLeilao(rs.getLong("id_leilao"));
 				leilao.setDataInicio(new java.sql.Date(rs.getDate("data_inicio").getTime()));
 				leilao.setDuracao(rs.getInt("duracao"));
 				leilao.setValorInicial(rs.getDouble("valor_inicial"));
 				leilao.setValorAtual(rs.getDouble("valor_atual"));
 				leilao.setLancePadrao(rs.getDouble("lance_padrao"));
 				
-				EstadoLeilaoDao estadoleilaoDao = DaoFactory.createEstadoLeilaoDao();
+				EstadoLeilaoDao estadoleilaoDao = new EstadoLeilaoDAO();
 				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
 				leilao.setEstado(estadoLeilao);
 
