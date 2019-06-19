@@ -15,6 +15,7 @@ public class UpdateUser implements Task {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         DAO userDao = new UserDAO();
         User user = new User();
+        user.setUserID(Integer.parseInt(request.getParameter("id")));
         user.setName(request.getParameter("name"));
         user.setStatus(Boolean.getBoolean(request.getParameter("status")));
         user.setEmail(request.getParameter("email"));
