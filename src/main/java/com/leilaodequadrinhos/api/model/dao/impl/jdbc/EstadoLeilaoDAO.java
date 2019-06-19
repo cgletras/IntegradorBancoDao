@@ -16,11 +16,7 @@ import java.util.Map;
 
 public class EstadoLeilaoDAO implements EstadoLeilaoDao {
 
-	private Connection conn;
-	
-	public EstadoLeilaoDAO(Connection conn) {
-		this.conn = conn;
-	}
+	Connection conn = DB.getConnection();
 	
 	@Override
 	public EstadoLeilao findById(Integer id) {
