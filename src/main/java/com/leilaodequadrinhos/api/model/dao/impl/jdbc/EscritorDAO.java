@@ -17,14 +17,10 @@ import java.util.Map;
 
 public class EscritorDAO implements EscritorDao {
 
-private Connection conn;
-	
-	public EscritorDAO(Connection conn) {
-		this.conn = conn;
-	}
+	Connection conn = DB.getConnection();
 
 	@Override
-	public Escritor findById(Integer id) {
+	public Object findById(Long id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -32,7 +28,7 @@ private Connection conn;
 					"SELECT * FROM Escritor "
 					+ "WHERE id_escritor = ?");
 			
-			st.setInt(1, id);
+			st.setLong(1, id);
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
@@ -89,13 +85,14 @@ private Connection conn;
 	}
 
 	@Override
-	public void insertEscritor(Escritor obj) {
+	public void insert(Object entity) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO Escritor (nome) " + "VALUES " + "(?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 
+			Escritor obj = (Escritor) entity;
 			st.setString(1, obj.getNome());
 			
 			int rowsAffected = st.executeUpdate();
@@ -121,7 +118,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Escritor> findByAll() {
+	public List findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -178,6 +175,41 @@ private Connection conn;
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		} 
+		finally {
+			DB.closeStatement(st);
+		}
+	}
+
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que nãi esta no scope atual.
+	@Override
+	public Long count() {
+		return null;
+	}
+
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que nãi esta no scope atual.
+	@Override
+	public void deleteById(Long id) {
+	}
+
+	@Override
+	public void update(Object entity) {
+
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Escritor " +
+							"SET nome= ? " +
+							"WHERE id_usuario= ?");
+
+			Escritor obj = (Escritor) entity;
+			st.setString(1, obj.getNome());
+			st.setInt(2, obj.getIdEscritor());
+
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
 		finally {
 			DB.closeStatement(st);
 		}

@@ -5,11 +5,8 @@ import com.leilaodequadrinhos.api.model.entities.Produto;
 
 import java.util.List;
 
-public interface EscritorDao {
+public interface EscritorDao extends DAO {
 
-	Escritor findById(Integer id);
 	List<Escritor> findByProduto(Produto obj);
-	List<Escritor> findByAll();
-	void insertEscritor(Escritor obj);
 	void relacionarEscritorProduto(Escritor escritor, Produto produto);
 }
