@@ -24,15 +24,16 @@ private Connection conn;
 	public LeilaoDAO(Connection conn) {
 		this.conn = conn;
 	}
-	
+
 	@Override
-	public void insert(Leilao obj) {
+	public void insert(Object entity) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO Leilao (data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, id_estado_leilao, id_usuario, id_produto) " + "VALUES " + "(?, ?, ?, ?, ?, ?, ?, ?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 
+			Leilao obj = (Leilao) entity;
 			st.setDate(1, new java.sql.Date(obj.getDataInicio().getTime()));
 			st.setInt(2, obj.getDuracao());
 			st.setDouble(3, obj.getValorInicial());
@@ -66,7 +67,7 @@ private Connection conn;
 	}
 
 	@Override
-	public void update(Leilao obj) {
+	public void update(Object entity) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -74,6 +75,7 @@ private Connection conn;
 					"SET data_inicio= ?, duracao= ?, valor_inicial= ?, valor_atual= ?, lance_padrao= ?, id_estado_leilao= ?, id_usuario= ?, id_produto= ? " + 
 					"WHERE id_leilao= ?");
 
+			Leilao obj = (Leilao) entity;
 			st.setDate(1, new java.sql.Date(obj.getDataInicio().getTime()));
 			st.setInt(2, obj.getDuracao());
 			st.setDouble(3, obj.getValorInicial());
@@ -118,7 +120,7 @@ private Connection conn;
 	}
 
 	@Override
-	public Leilao findById(Integer id) {
+	public Object findById(Long id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -126,7 +128,7 @@ private Connection conn;
 					"SELECT * FROM Leilao "
 					+ "WHERE id_leilao = ?");
 			
-			st.setInt(1, id);
+			st.setLong(1, id);
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
@@ -138,17 +140,17 @@ private Connection conn;
 				obj.setValorInicial(rs.getDouble("valor_inicial"));
 				obj.setValorAtual(rs.getDouble("valor_atual"));
 				obj.setLancePadrao(rs.getDouble("lance_padrao"));
-				
-				EstadoLeilaoDao estadoleilaoDao = DaoFactory.createEstadoLeilaoDao();
+
+				EstadoLeilaoDao estadoleilaoDao = new EstadoLeilaoDAO();
 				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
 				obj.setEstado(estadoLeilao);
 				
-//				UserDao userDao = DaoFactory.createUsuarioDao();
-//				User user = userDao.findById(rs.getInt("id_usuario"));
-//				obj.setUser(user);
-								
-				Produto produto = new Produto();
-				produto.setIdProduto(rs.getInt("id_produto"));
+				DAO dao = new UserDAO();
+				User user = (User) dao.findById(rs.getLong("id_usuario"));
+				obj.setUser(user);
+
+				DAO dao2 = new ProdutoDAO();
+				Produto produto = (Produto) dao2.findById(rs.getLong("id_produto"));
 				obj.setProduto(produto);
 				
 				return obj;
@@ -187,18 +189,18 @@ private Connection conn;
 				obj.setValorInicial(rs.getDouble("valor_inicial"));
 				obj.setValorAtual(rs.getDouble("valor_atual"));
 				obj.setLancePadrao(rs.getDouble("lance_padrao"));
-				
-				EstadoLeilaoDao estadoleilaoDao = DaoFactory.createEstadoLeilaoDao();
+
+				EstadoLeilaoDao estadoleilaoDao = new EstadoLeilaoDAO();
 				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
 				obj.setEstado(estadoLeilao);
-				
-//				UserDao userDao = DaoFactory.createUsuarioDao();
-//				User user = userDao.findById(rs.getInt("id_usuario"));
-//				obj.setUser(user);
-								
-//				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-//				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
-//				obj.setProduto(produto);
+
+				DAO dao = new UserDAO();
+				User user = (User) dao.findById(rs.getLong("id_usuario"));
+				obj.setUser(user);
+
+				DAO dao2 = new ProdutoDAO();
+				Produto produto = (Produto) dao2.findById(rs.getLong("id_produto"));
+				obj.setProduto(produto);
 								
 				list.add(obj);
 			}
@@ -210,6 +212,33 @@ private Connection conn;
 		finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
+		}
+	}
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que nãi esta no scope atual.
+	@Override
+	public Long count() {
+		return null;
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Leilao " +
+							"SET id_estado_leilao= ? " +
+							"WHERE id_leilao= ?");
+
+			st.setInt(1, 2);
+			st.setLong(2, id);;
+
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
 		}
 	}
 
@@ -242,14 +271,14 @@ private Connection conn;
 				EstadoLeilaoDao estadoleilaoDao = DaoFactory.createEstadoLeilaoDao();
 				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
 				leilao.setEstado(estadoLeilao);
-				
-//				UserDao userDao = DaoFactory.createUsuarioDao();
-//				User usuario = userDao.findById(rs.getInt("id_usuario"));
-//				leilao.setUser(usuario);
-								
-//				ProdutoDao produtoDao = DaoFactory.createProdutoDao();
-//				Produto produto = produtoDao.findById(rs.getInt("id_produto"));
-//				leilao.setProduto(produto);
+
+				DAO dao = new UserDAO();
+				user = (User) dao.findById(rs.getLong("id_usuario"));
+				leilao.setUser(user);
+
+				DAO dao2 = new ProdutoDAO();
+				Produto produto = (Produto) dao2.findById(rs.getLong("id_produto"));
+				leilao.setProduto(produto);
 								
 				list.add(leilao);
 			}
@@ -274,7 +303,7 @@ private Connection conn;
 					"WHERE id_leilao= ?");
 			
 			st.setInt(1, estado.getIdEstadoLeilao());
-			st.setInt(2, id);;
+			st.setInt(2, id);
 									
 			st.executeUpdate();
 		}
