@@ -3,7 +3,6 @@ package com.leilaodequadrinhos.api.model.dao.impl.jdbc;
 import com.leilaodequadrinhos.api.db.DB;
 import com.leilaodequadrinhos.api.db.DbException;
 import com.leilaodequadrinhos.api.model.dao.DAO;
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
 import com.leilaodequadrinhos.api.model.dao.EstadoProdutoDao;
 import com.leilaodequadrinhos.api.model.dao.ProdutoDao;
 import com.leilaodequadrinhos.api.model.entities.EstadoProduto;

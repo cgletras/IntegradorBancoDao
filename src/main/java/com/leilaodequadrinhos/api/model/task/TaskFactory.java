@@ -12,13 +12,13 @@ public class TaskFactory {
     private static final Map<String, Task> tasks = new HashMap<>();
 
     static {
-        tasks.put("POST/insert-user", new InsertNewUser());
         tasks.put("POST/activate-user", new ActivateUserByID());
-        tasks.put("POST/inactivate-user", new DeleteUserByID());
-        tasks.put("POST/update-user", new UpdateUser());
+        tasks.put("POST/delete-user-id", new DeleteUserByID());
         tasks.put("GET/find-all-users", new FindAllUsers());
-        tasks.put("GET/find-user-by-id", new FindUserByID());
-        tasks.put("GET/find-user-by-email", new FindUserByEmail());
+        tasks.put("GET/find-user-email", new FindUserByEmail());
+        tasks.put("POST/insert-user", new InsertNewUser());
+        tasks.put("POST/update-user", new UpdateUser());
+        tasks.put("POST/login", new UserLogin());
         tasks.put("GET/find-product-by-id", new FindProductByID());
     }
 
