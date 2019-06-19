@@ -19,6 +19,8 @@ public class UpdateUser implements Task {
         user.setName(request.getParameter("name"));
         user.setStatus(Boolean.getBoolean(request.getParameter("status")));
         user.setEmail(request.getParameter("email"));
+        user.setState(request.getParameter("state"));
+        user.setCity(request.getParameter("city"));
         String format = "dd/MM/yyyy";
         user.setDateOfBirth(new SimpleDateFormat(format).parse(request.getParameter("dateOfBirth")));
         user.setPassword(request.getParameter("password"));
