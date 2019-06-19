@@ -2,6 +2,8 @@ package com.leilaodequadrinhos.api.model.task;
 
 import com.leilaodequadrinhos.api.model.task.product.FindProductByID;
 import com.leilaodequadrinhos.api.model.task.user.*;
+import com.leilaodequadrinhos.api.model.task.writer.FindWriterById;
+import com.leilaodequadrinhos.api.model.task.writer.FindWriterByProduct;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -21,6 +23,9 @@ public class TaskFactory {
         tasks.put("POST/update-user", new UpdateUser());
         tasks.put("POST/login", new UserLogin());
         tasks.put("GET/find-product-by-id", new FindProductByID());
+
+        tasks.put("GET/find-writer-by-id", new FindWriterById());
+        tasks.put("GET/find-writer-by-product", new FindWriterByProduct());
     }
 
     public static Task getTask(HttpServletRequest request) {
