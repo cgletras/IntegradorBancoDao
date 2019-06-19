@@ -19,19 +19,19 @@ public class ProgramEscritor {
 		
 		//	relacionarEscritorAProduto(4, 11);
 		
-		// listarEscritoresPorProduto(id_produto)) {
+//		 listarEscritoresPorProduto(id_produto)) {
 			
 	}
 
-	public static List<Escritor> listarEscritoresPorProduto(int id_produto) {
-		EscritorDao escritorDao = DaoFactory.createEscritorDao();
-		return escritorDao.findByProduto(ProgramProduto.carregarProdutoByID(id_produto));
-	}
+//	public static List<Escritor> listarEscritoresPorProduto(int id_produto) {
+//		EscritorDao escritorDao = DaoFactory.createEscritorDao();
+//		return escritorDao.findByProduto(ProgramProduto.carregarProdutoByID(id_produto));
+//	}
 
-	public static Escritor carregarEscritorPorID(int id_escritor) {
-		EscritorDao escritorDao = DaoFactory.createEscritorDao();
-		return escritorDao.findById(id_escritor);
-	}
+//	public static Escritor carregarEscritorPorID(int id_escritor) {
+//		EscritorDao escritorDao = DaoFactory.createEscritorDao();
+//		return escritorDao.findById(id_escritor);
+//	}
 
 	public static void relacionarEscritorAProduto(int id_escritor, int id_produto) {
 		EscritorDao escritorDao = DaoFactory.createEscritorDao();
