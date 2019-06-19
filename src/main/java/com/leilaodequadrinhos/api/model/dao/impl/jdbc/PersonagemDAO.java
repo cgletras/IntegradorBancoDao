@@ -17,14 +17,10 @@ import java.util.Map;
 
 public class PersonagemDAO implements PersonagemDao {
 
-private Connection conn;
-	
-	public PersonagemDAO(Connection conn) {
-		this.conn = conn;
-	}
+	Connection conn = DB.getConnection();
 
 	@Override
-	public Personagem findById(Integer id) {
+	public Object findById(Long id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -32,7 +28,7 @@ private Connection conn;
 					"SELECT * FROM Personagem "
 					+ "WHERE id_personagem = ?");
 			
-			st.setInt(1, id);
+			st.setLong(1, id);
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
@@ -53,7 +49,7 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Personagem> findByProduto(Produto produto) {
+	public List<Personagem> findAllByProduto(Produto produto) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -89,7 +85,8 @@ private Connection conn;
 	}
 
 	@Override
-	public List<Personagem> findByAll() {
+	public List findAll() {
+
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -122,13 +119,14 @@ private Connection conn;
 	}
 
 	@Override
-	public void insertPersonagem(Personagem obj) {
+	public void insert(Object entity) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
 				"INSERT INTO Personagem (nome) " + "VALUES " + "(?)",
 				java.sql.Statement.RETURN_GENERATED_KEYS);
 
+		Personagem obj = (Personagem) entity;
 		st.setString(1, obj.getNome());
 		
 		int rowsAffected = st.executeUpdate();
@@ -184,4 +182,39 @@ private Connection conn;
 		}
 		
 	}
+
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que nãi esta no scope atual.
+	@Override
+	public Long count() {
+		return null;
+	}
+
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que nãi esta no scope atual.
+	@Override
+	public void deleteById(Long id) {
+	}
+
+	@Override
+	public void update(Object entity) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Personagem " +
+							"SET nome= ? " +
+							"WHERE id_personagem= ?");
+
+			Personagem obj = (Personagem) entity;
+			st.setString(1, obj.getNome());
+			st.setInt(2, obj.getIdPersonagem());
+
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+	}
+
 }
