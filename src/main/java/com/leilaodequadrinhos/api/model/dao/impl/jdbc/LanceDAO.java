@@ -3,10 +3,7 @@ package com.leilaodequadrinhos.api.model.dao.impl.jdbc;
 import com.leilaodequadrinhos.api.db.DB;
 import com.leilaodequadrinhos.api.db.DbException;
 import com.leilaodequadrinhos.api.db.DbIntegrityException;
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.LanceDao;
-import com.leilaodequadrinhos.api.model.dao.LeilaoDao;
-import com.leilaodequadrinhos.api.model.dao.UserDao;
+import com.leilaodequadrinhos.api.model.dao.*;
 import com.leilaodequadrinhos.api.model.entities.Lance;
 import com.leilaodequadrinhos.api.model.entities.Leilao;
 import com.leilaodequadrinhos.api.model.entities.User;
@@ -22,14 +19,10 @@ import java.util.Map;
 
 public class LanceDAO implements LanceDao {
 
-	private Connection conn;
-
-	public LanceDAO(Connection conn) {
-		this.conn = conn;
-	}
+	Connection conn = DB.getConnection();
 
 	@Override
-	public void insert(Lance obj) {
+	public void insert(Object entity) {
 		
 		PreparedStatement st = null;
 		try {
@@ -39,9 +32,9 @@ public class LanceDAO implements LanceDao {
 					"INSERT INTO Lance (valor_lance, id_leilao, id_usuario) " + "VALUES " + "(?, ?, ?)",
 					java.sql.Statement.RETURN_GENERATED_KEYS);
 
+			Lance  obj = (Lance) entity;
 			st.setDouble(1, obj.getValorLance());
-		//	st.setDate(2, new java.sql.Date(obj.getDataLance().getTime()));
-			st.setInt(2, obj.getLeilao().getIdLeilao());
+			st.setLong(2, obj.getLeilao().getIdLeilao());
 			st.setInt(3, obj.getUser().getUserID());
 			int rowsAffected = st.executeUpdate();
 			if (rowsAffected > 0) {
@@ -57,8 +50,8 @@ public class LanceDAO implements LanceDao {
 			}
 			
 			// incrementa valor atual leilao
-			LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-			Leilao leilao = leilaoDao.findById(obj.getLeilao().getIdLeilao());
+			LeilaoDao leilaoDao = new LeilaoDAO();
+			Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
 			leilaoDao.updateValorAtual(leilao);
 			// --
 			
@@ -78,7 +71,7 @@ public class LanceDAO implements LanceDao {
 	}
 
 	@Override
-	public Lance findById(Integer id) {
+	public Object findById(Long id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -86,7 +79,7 @@ public class LanceDAO implements LanceDao {
 					"SELECT * FROM Lance "
 					+ "WHERE id_lance = ?");
 			
-			st.setInt(1, id);
+			st.setLong(1, id);
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
@@ -95,13 +88,13 @@ public class LanceDAO implements LanceDao {
 				obj.setValorLance(rs.getDouble("valor_lance"));
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
-				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
-				obj.setLeilao(leilao);
+				LeilaoDao leilaoDao = new LeilaoDAO();
+				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
+				leilaoDao.updateValorAtual(leilao);
 				//
-//				UserDao userDao = DaoFactory.createUsuarioDao();
-//				User user = userDao.findById(rs.getInt("id_usuario"));
-//				obj.setUser(user);
+				DAO dao = new UserDAO();
+				User user = (User) dao.findById(rs.getLong("id_usuario"));
+				obj.setUser(user);
 				
 				return obj;
 			}
@@ -137,13 +130,13 @@ public class LanceDAO implements LanceDao {
 				obj.setValorLance(rs.getDouble("valor_lance"));
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
-				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
-				obj.setLeilao(leilao);
+				LeilaoDao leilaoDao = new LeilaoDAO();
+				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
+				leilaoDao.updateValorAtual(leilao);
 				//
-//				UserDao userDao = DaoFactory.createUsuarioDao();
-//				User user = userDao.findById(rs.getInt("id_usuario"));
-//				obj.setUser(user);
+				DAO dao = new UserDAO();
+				User user = (User) dao.findById(rs.getLong("id_usuario"));
+				obj.setUser(user);
 						
 				list.add(obj);
 			}
@@ -158,8 +151,26 @@ public class LanceDAO implements LanceDao {
 		}
 	}
 
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que não esta no scope atual.
 	@Override
-	public List<Lance> findByUser(User userId) {
+	public Long count() {
+		return null;
+	}
+
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que não esta no scope atual.
+	@Override
+	public void deleteById(Long id) {
+
+	}
+
+	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que não esta no scope atual.
+	@Override
+	public void update(Object entity) {
+
+	}
+
+	@Override
+	public List<Lance> findBidByUser(Long id_user) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -169,7 +180,7 @@ public class LanceDAO implements LanceDao {
 					+ "WHERE id_usuario = ? "
 					+ "ORDER BY id_lance");
 			
-			st.setInt(1, userId.getUserID());
+			st.setLong(1, id_user);
 			rs = st.executeQuery();
 			
 			List<Lance> list = new ArrayList<>();
@@ -181,13 +192,13 @@ public class LanceDAO implements LanceDao {
 				obj.setValorLance(rs.getDouble("valor_lance"));
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
-				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
-				obj.setLeilao(leilao);
+				LeilaoDao leilaoDao = new LeilaoDAO();
+				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
+				leilaoDao.updateValorAtual(leilao);
 				//
-//				UserDao userDao = DaoFactory.createUsuarioDao();
-//				User user = userDao.findById(rs.getInt("id_usuario"));
-//				obj.setUser(user);
+				DAO dao = new UserDAO();
+				User user = (User) dao.findById(rs.getLong("id_usuario"));
+				obj.setUser(user);
 						
 				list.add(obj);
 			}
@@ -203,7 +214,7 @@ public class LanceDAO implements LanceDao {
 	}
 
 	@Override
-	public List<Lance> findByLeilao(Leilao leilaoId) {
+	public List<Lance> findBidLeilao(Long id_leilao) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -213,7 +224,7 @@ public class LanceDAO implements LanceDao {
 					+ "WHERE id_leilao = ? "
 					+ "ORDER BY id_lance");
 			
-			st.setInt(1, leilaoId.getIdLeilao());
+			st.setLong(1, id_leilao);
 			rs = st.executeQuery();
 			
 			List<Lance> list = new ArrayList<>();
@@ -225,13 +236,13 @@ public class LanceDAO implements LanceDao {
 				obj.setValorLance(rs.getDouble("valor_lance"));
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
-				LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-				Leilao leilao = leilaoDao.findById(rs.getInt("id_leilao"));
-				obj.setLeilao(leilao);
+				LeilaoDao leilaoDao = new LeilaoDAO();
+				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
+				leilaoDao.updateValorAtual(leilao);
 				//
-//				UserDao userDao = DaoFactory.createUsuarioDao();
-//				User user = userDao.findById(rs.getInt("id_usuario"));
-//				obj.setUser(user);
+				DAO dao = new UserDAO();
+				User user = (User) dao.findById(rs.getLong("id_usuario"));
+				obj.setUser(user);
 						
 				list.add(obj);
 			}
@@ -243,32 +254,6 @@ public class LanceDAO implements LanceDao {
 		finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
-		}
-	}
-
-	@Override
-	public void deleteLanceById(Integer id_lance) {
-		Connection conn = null;
-		PreparedStatement st = null;
-
-		try {
-			conn = DB.getConnection();
-
-			st = conn.prepareStatement(
-					"DELETE FROM Lance "
-					+"WHERE "
-					+"id_lance = ?");
-			st.setInt(1, id_lance);
-			
-
-			int rowsAffected = st.executeUpdate();
-			System.out.println("Linhas afetadas" + rowsAffected);
-
-		} catch (SQLException e) {
-			throw new DbIntegrityException(e.getMessage());
-		} finally {
-			DB.closeStatement(st);
-			DB.closeConnection();
 		}
 	}
 }

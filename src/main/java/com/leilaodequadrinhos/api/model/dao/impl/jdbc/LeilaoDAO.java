@@ -19,11 +19,7 @@ import java.util.Map;
 
 public class LeilaoDAO implements LeilaoDao {
 
-private Connection conn;
-	
-	public LeilaoDAO(Connection conn) {
-		this.conn = conn;
-	}
+	Connection conn = DB.getConnection();
 
 	@Override
 	public void insert(Object entity) {

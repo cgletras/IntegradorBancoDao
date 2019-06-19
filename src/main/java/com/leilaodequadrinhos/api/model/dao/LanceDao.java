@@ -6,12 +6,8 @@ import com.leilaodequadrinhos.api.model.entities.User;
 
 import java.util.List;
 
-public interface LanceDao {
+public interface LanceDao extends DAO {
 
-	void insert(Lance obj);
-	Lance findById(Integer id);
-	List<Lance> findAll();
-	List<Lance> findByUser(User obj);
-	List<Lance> findByLeilao(Leilao obj);
-	void deleteLanceById(Integer id_lance);
+	List<Lance> findBidByUser(Long id_user);
+	List<Lance> findBidLeilao(Long id_leilao);
 }

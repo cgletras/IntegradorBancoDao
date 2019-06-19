@@ -2,12 +2,14 @@ package com.leilaodequadrinhos.api.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Leilao  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	private int idLeilao, duracao;
+	private int duracao;
+	private Long idLeilao;
 	private Date dataInicio;
 	private double valorInicial, valorAtual, lancePadrao;
 	
@@ -18,7 +20,7 @@ public class Leilao  implements Serializable{
 	public Leilao() {
 	}
 
-	public Leilao(int idLeilao, int duracao, Date dataInicio, double valorInicial, double valorAtual,
+	public Leilao(Long idLeilao, int duracao, Date dataInicio, double valorInicial, double valorAtual,
 				  double lancePadrao, EstadoLeilao estado, Produto produto, User user) {
 		super();
 		this.idLeilao = idLeilao;
@@ -56,11 +58,11 @@ public class Leilao  implements Serializable{
 		this.user = user;
 	}
 
-	public int getIdLeilao() {
+	public Long getIdLeilao() {
 		return idLeilao;
 	}
 
-	public void setIdLeilao(int idLeilao) {
+	public void setIdLeilao(Long idLeilao) {
 		this.idLeilao = idLeilao;
 	}
 
@@ -108,26 +110,18 @@ public class Leilao  implements Serializable{
 		return serialVersionUID;
 	}
 
+
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idLeilao;
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Leilao leilao = (Leilao) o;
+		return idLeilao.equals(leilao.idLeilao);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Leilao other = (Leilao) obj;
-		if (idLeilao != other.idLeilao)
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(idLeilao);
 	}
 
 	@Override
