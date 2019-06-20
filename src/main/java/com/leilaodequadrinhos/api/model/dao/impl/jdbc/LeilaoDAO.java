@@ -99,10 +99,10 @@ public class LeilaoDAO implements LeilaoDao {
 		try {
 			st = conn.prepareStatement(
 					"UPDATE Leilao " + 
-					"SET valor_atual= ? " + 
+					"SET valor_atual= (valor_atual + ?) " +
 					"WHERE id_leilao= ?");
 
-			st.setDouble(1, obj.getValorAtual()+obj.getLancePadrao());
+			st.setDouble(1, obj.getLancePadrao());
 			st.setLong(2, obj.getIdLeilao());
 									
 			st.executeUpdate();
