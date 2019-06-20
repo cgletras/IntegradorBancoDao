@@ -45,7 +45,7 @@ public class ProdutoDAO implements ProdutoDao {
                 obj.setCapaImagem(rs.getString("capa_imagem"));
 
                 EstadoProdutoDao estadoProdutoDao = new EstadoProdutoDAO();
-                EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getInt("id_estado_produto"));
+                EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getLong("id_estado_produto"));
                 obj.setEstado(estadoProduto);
 
 				DAO dao = new UserDAO();
@@ -220,7 +220,7 @@ public class ProdutoDAO implements ProdutoDao {
                 obj.setCapaImagem(rs.getString("capa_imagem"));
 
                 EstadoProdutoDao estadoProdutoDao = new EstadoProdutoDAO();
-                EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getInt("id_estado_produto"));
+                EstadoProduto estadoProduto = estadoProdutoDao.findById(rs.getLong("id_estado_produto"));
                 obj.setEstado(estadoProduto);
 
                 DAO dao = new UserDAO();

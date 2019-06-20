@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface EstadoProdutoDao {
 
-	EstadoProduto findById(Integer id);
+	EstadoProduto findById(Long id);
 	List<EstadoProduto> findAll();
 }

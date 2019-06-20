@@ -32,15 +32,15 @@ public class ProgramEscritor {
 //		EscritorDao escritorDao = DaoFactory.createEscritorDao();
 //		return escritorDao.findById(id_escritor);
 //	}
-
-	public static void relacionarEscritorAProduto(int id_escritor, int id_produto) {
-		EscritorDao escritorDao = DaoFactory.createEscritorDao();
-		escritorDao.relacionarEscritorProduto(carregarEscritorPorID(id_escritor), ProgramProduto.carregarProdutoByID(id_produto));
-	}
-
-	public static List<Escritor> listarEscritores() {
-		EscritorDao escritorDao = DaoFactory.createEscritorDao();
-		return escritorDao.findByAll();
+//
+//	public static void relacionarEscritorAProduto(int id_escritor, int id_produto) {
+//		EscritorDao escritorDao = DaoFactory.createEscritorDao();
+//		escritorDao.relacionarEscritorProduto(carregarEscritorPorID(id_escritor), ProgramProduto.carregarProdutoByID(id_produto));
+//	}
+//
+//	public static List<Escritor> listarEscritores() {
+//		EscritorDao escritorDao = DaoFactory.createEscritorDao();
+//		return escritorDao.findByAll();
 	}
 
 //	public static void inserirEscritor() {
