@@ -12,7 +12,7 @@ import com.leilaodequadrinhos.api.model.task.Task;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UpdateProductTasks extends CommonProductTasks implements Task {
+public class InsertProduct extends CommonProductTasks implements Task  {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -20,7 +20,9 @@ public class UpdateProductTasks extends CommonProductTasks implements Task {
         EstadoProdutoDao estadoProdutoDao = new EstadoProdutoDAO();
         UserDao userDao = new UserDAO();
         Produto produto = getProduct(request, estadoProdutoDao, userDao);
-        produtoDao.update(produto);
-        return "Produto atualizado";
+        produtoDao.insert(produto);
+        return "Produto Inserido";
     }
+
+
 }

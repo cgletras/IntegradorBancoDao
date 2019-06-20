@@ -7,9 +7,9 @@ import com.leilaodequadrinhos.api.model.task.auction.UpdateCurrentAuctionPrice;
 import com.leilaodequadrinhos.api.model.task.character.*;
 import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAllAuctionStatus;
 import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAuctionStatusById;
+import com.leilaodequadrinhos.api.model.task.product.*;
 import com.leilaodequadrinhos.api.model.task.productStatus.FindProductStatusById;
 import com.leilaodequadrinhos.api.model.task.productStatus.FindAllProductStatus;
-import com.leilaodequadrinhos.api.model.task.product.FindProductByID;
 import com.leilaodequadrinhos.api.model.task.user.*;
 import com.leilaodequadrinhos.api.model.task.writer.*;
 
@@ -54,8 +54,14 @@ public class TaskFactory {
         tasks.put("GET/find-all-auction-status", new FindAllAuctionStatus());
         tasks.put("GET/find-auction-status-by-id", new FindAuctionStatusById());
 
+        tasks.put("POST/change-product-status", new ChangeProductStatus());
+        tasks.put("GET/count-product", new CountProduct());
+        tasks.put("POST/delete-product", new DeleteProductByID());
+        tasks.put("GET/find-all-products", new FindAllProducts());
         tasks.put("GET/find-product-by-id", new FindProductByID());
-
+        tasks.put("GET/find-product-by-user", new FindProductsByUser());
+        tasks.put("POST/insert-product", new InsertProduct());
+        tasks.put("POST/update-product", new UpdateProduct());
     }
 
     public static Task getTask(HttpServletRequest request) {
