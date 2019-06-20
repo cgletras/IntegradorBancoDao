@@ -262,8 +262,8 @@ public class LanceDAO implements LanceDao {
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT COUNT(id_lance) "
-							+ "FROM Leilao "
+					"SELECT COUNT(id_lance) count "
+							+ "FROM Lance "
 							+ "WHERE id_leilao = ? ");
 
 			st.setLong(1, id_leilao);
