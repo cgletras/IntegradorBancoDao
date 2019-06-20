@@ -2,6 +2,7 @@ package com.leilaodequadrinhos.api.model.task.bid;
 
 import com.leilaodequadrinhos.api.model.dao.LanceDao;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.LanceDAO;
+import com.leilaodequadrinhos.api.model.entities.Lance;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ public class FindAllBids implements Task {
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         LanceDao lanceDao = new LanceDAO();
-        List lances = lanceDao.findAll();
+        List<Lance> lances = lanceDao.findAll();
         request.setAttribute("lances", lances);
         return lances;
     }
