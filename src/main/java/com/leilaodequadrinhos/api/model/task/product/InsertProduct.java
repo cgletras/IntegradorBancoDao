@@ -12,7 +12,7 @@ import com.leilaodequadrinhos.api.model.task.Task;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class InsertProduct extends CommonProductTasks implements Task  {
+public class InsertProduct extends BaseProductTask implements Task  {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
