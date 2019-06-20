@@ -12,15 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RelateWriterToProduct implements Task {
+
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         EscritorDao escritorDao = new EscritorDAO();
         ProdutoDao produtoDao = new ProdutoDAO();
         Long idEscritor = Long.parseLong(request.getParameter("writerID"));
         Long idProduto = Long.parseLong(request.getParameter("productID"));
-
         escritorDao.relacionarEscritorProduto((Escritor) escritorDao.findById(idEscritor), (Produto) produtoDao.findById(idProduto));
-
         return "Escritor relacionado ao quadrinho";
     }
 }

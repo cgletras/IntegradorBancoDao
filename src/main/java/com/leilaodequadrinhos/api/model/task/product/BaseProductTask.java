@@ -7,7 +7,7 @@ import com.leilaodequadrinhos.api.model.entities.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-abstract class CommonProductTasks {
+abstract class BaseProductTask {
 
     protected Produto getProduct(HttpServletRequest request, EstadoProdutoDao estadoProdutoDao, UserDao userDao) {
         Produto produto = new Produto();
