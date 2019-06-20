@@ -18,7 +18,7 @@ public class InsertBid extends BaseBid implements Task {
         LanceDao lanceDao = new LanceDAO();
         UserDAO userDao = new UserDAO();
         LeilaoDao leilaoDAO = new LeilaoDAO();
-        Lance lance = getLance(request,userDao,leilaoDAO);
+        Lance lance = getLance(request, userDao, leilaoDAO);
         lanceDao.insert(lance);
         return "Lance inserido com sucesso";
     }
