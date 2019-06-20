@@ -15,7 +15,7 @@ public class FindBidsByUser implements Task {
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         LanceDao lanceDao = new LanceDAO();
         List<Lance> lances = lanceDao.findBidByUser(Long.parseLong("userID"));
-        request.setAttribute("lances",lances);
+        request.setAttribute("lances", lances);
         return lances;
     }
 }

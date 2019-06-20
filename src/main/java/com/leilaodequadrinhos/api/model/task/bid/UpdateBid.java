@@ -18,7 +18,7 @@ public class UpdateBid extends BaseBid implements Task {
         LanceDao lanceDao = new LanceDAO();
         UserDAO userDao = new UserDAO();
         LeilaoDao leilaoDAO = new LeilaoDAO();
-        Lance lance = getLance(request,userDao,leilaoDAO);
+        Lance lance = getLance(request, userDao, leilaoDAO);
         lance.setIdLance(Integer.parseInt(request.getParameter("bidID")));
         lanceDao.insert(lance);
         return "Lance atualizado com sucesso";
