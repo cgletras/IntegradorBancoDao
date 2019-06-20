@@ -43,10 +43,10 @@ public class ProgramEscritor {
 		return escritorDao.findByAll();
 	}
 
-	public static void inserirEscritor() {
-		EscritorDao escritorDao = DaoFactory.createEscritorDao();
-		escritorDao.insertEscritor(new Escritor(null, "Neil Gaiman"));
-	}
+//	public static void inserirEscritor() {
+//		EscritorDao escritorDao = DaoFactory.createEscritorDao();
+//		escritorDao.insertEscritor(new Escritor(null, "Neil Gaiman"));
+//	}
 
 	
 }
