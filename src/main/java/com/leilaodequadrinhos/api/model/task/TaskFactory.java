@@ -1,6 +1,7 @@
 package com.leilaodequadrinhos.api.model.task;
 
 import com.leilaodequadrinhos.api.model.task.auction.InsertNewAuction;
+import com.leilaodequadrinhos.api.model.task.auction.UpdateAuction;
 import com.leilaodequadrinhos.api.model.task.character.*;
 import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAllAuctionStatus;
 import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAuctionStatusById;
@@ -36,6 +37,7 @@ public class TaskFactory {
         tasks.put("POST/relate-writer-to-product", new RelateWriterToProduct());
 
         tasks.put("POST/insert-new-auction", new InsertNewAuction());
+        tasks.put("POST/update-auction", new UpdateAuction());
 
         tasks.put("GET/find-character-by-id", new FindCharacterById());
         tasks.put("GET/find-characters-by-product", new FindCharactersByProduct());
