@@ -1,5 +1,6 @@
 package com.leilaodequadrinhos.api.model.task;
 
+import com.leilaodequadrinhos.api.model.task.character.*;
 import com.leilaodequadrinhos.api.model.task.estadoLeilao.FindAllAuctionStatus;
 import com.leilaodequadrinhos.api.model.task.estadoLeilao.FindAuctionStatusById;
 import com.leilaodequadrinhos.api.model.task.estadoProduto.FindProductStatusById;
@@ -28,10 +29,16 @@ public class TaskFactory {
         tasks.put("GET/find-product-by-id", new FindProductByID());
 
         tasks.put("GET/find-writer-by-id", new FindWriterById());
-        tasks.put("GET/find-writer-by-product", new FindWriterByProduct());
+        tasks.put("GET/find-writers-by-product", new FindWriterByProduct());
         tasks.put("POST/insert-writer", new InsertWriter());
         tasks.put("GET/find-all-writers", new FindAllWriters());
         tasks.put("POST/relate-writer-to-product", new RelateWriterToProduct());
+
+        tasks.put("GET/find-character-by-id", new FindCharacterById());
+        tasks.put("GET/find-characters-by-product", new FindCharactersByProduct());
+        tasks.put("POST/insert-character", new InsertCharacter());
+        tasks.put("GET/find-all-characters", new FindAllCharacters());
+        tasks.put("POST/relate-character-to-product", new RelateCharacterToProduct());
 
         tasks.put("GET/find-all-product-status", new FindAllProductStatus());
         tasks.put("GET/find-product-status-by-id", new FindProductStatusById());
