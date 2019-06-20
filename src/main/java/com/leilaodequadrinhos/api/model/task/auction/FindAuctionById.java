@@ -12,12 +12,10 @@ public class FindAuctionById implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         LeilaoDao leilaoDao = new LeilaoDAO();
         Long id = Long.parseLong(request.getParameter("auctionID"));
         Leilao leilao = (Leilao) leilaoDao.findById(id);
         request.setAttribute("leilao", leilao);
-
         return leilao;
     }
 }

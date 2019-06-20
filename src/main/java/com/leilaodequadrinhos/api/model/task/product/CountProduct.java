@@ -13,7 +13,7 @@ public class CountProduct implements Task {
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ProdutoDao produtoDao = new ProdutoDAO();
         Long productCount = produtoDao.count();
-        request.setAttribute("QuantidadeProdutos",productCount);
+        request.setAttribute("QuantidadeProdutos", productCount);
         return productCount;
     }
 }
