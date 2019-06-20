@@ -9,18 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 
 abstract class BaseProductTask {
 
-    protected Produto getProduct(HttpServletRequest request, EstadoProdutoDao estadoProdutoDao, UserDao userDao) {
+    protected Produto getProduct(HttpServletRequest request,UserDao userDao) {
         Produto produto = new Produto();
         produto.setEditora(request.getParameter("publishingCompany"));
         produto.setTitulo(request.getParameter("title"));
         produto.setFormatoDoQuadrinho(request.getParameter("format"));
         int pages = Integer.parseInt(request.getParameter("pagesNumber"));
         produto.setNumeroPaginas(pages);
-        int weight = Integer.parseInt(request.getParameter("size"));
+        int weight = Integer.parseInt(request.getParameter("weight"));
         produto.setPeso(weight);
         produto.setCapaImagem(request.getParameter("coverImage"));
-        Long statusID = Long.parseLong(request.getParameter("statusID"));
-        produto.setEstado(estadoProdutoDao.findById(statusID));
         Long userID = Long.parseLong(request.getParameter("userID"));
         produto.setUser((User) userDao.findById(userID));
         return produto;

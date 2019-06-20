@@ -14,12 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class InsertProduct extends BaseProductTask implements Task {
 
+    private static final long ACTIVE = 1;
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         ProdutoDao produtoDao = new ProdutoDAO();
         EstadoProdutoDao estadoProdutoDao = new EstadoProdutoDAO();
         UserDao userDao = new UserDAO();
-        Produto produto = getProduct(request, estadoProdutoDao, userDao);
+        Produto produto = getProduct(request, userDao);
+        produto.setEstado(estadoProdutoDao.findById(ACTIVE));
         produtoDao.insert(produto);
         return "Produto Inserido";
     }
