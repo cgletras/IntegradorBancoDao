@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-abstract class CommonUserTasks {
+abstract class BaseUserTask {
 
     protected User getUser(HttpServletRequest request) throws ParseException {
         User user = new User();

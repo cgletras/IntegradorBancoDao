@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-abstract class CommonAucionTasks {
+abstract class BaseAucionTask {
 
     protected Leilao getLeilao(HttpServletRequest request, EstadoLeilaoDao estadoLeilaoDao, ProdutoDAO produtoDao, UserDAO userDao) throws ParseException {
         Long idPersonagem = Long.parseLong(request.getParameter("characterID"));
