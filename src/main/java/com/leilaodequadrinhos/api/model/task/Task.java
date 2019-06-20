@@ -1,7 +1,5 @@
 package com.leilaodequadrinhos.api.model.task;
 
-import com.leilaodequadrinhos.api.model.entities.Produto;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
