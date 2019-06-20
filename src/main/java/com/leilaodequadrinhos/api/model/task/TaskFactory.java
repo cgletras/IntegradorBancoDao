@@ -30,7 +30,6 @@ public class TaskFactory {
         tasks.put("POST/insert-user", new InsertNewUser());
         tasks.put("POST/update-user", new UpdateUser());
         tasks.put("POST/login", new UserLogin());
-        tasks.put("GET/find-product-by-id", new FindProductByID());
 
         tasks.put("GET/find-writer-by-id", new FindWriterById());
         tasks.put("GET/find-writers-by-product", new FindWriterByProduct());
@@ -54,6 +53,9 @@ public class TaskFactory {
 
         tasks.put("GET/find-all-auction-status", new FindAllAuctionStatus());
         tasks.put("GET/find-auction-status-by-id", new FindAuctionStatusById());
+
+        tasks.put("GET/find-product-by-id", new FindProductByID());
+
     }
 
     public static Task getTask(HttpServletRequest request) {
