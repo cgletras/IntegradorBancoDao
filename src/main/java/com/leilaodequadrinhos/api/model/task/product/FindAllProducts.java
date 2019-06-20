@@ -15,7 +15,7 @@ public class FindAllProducts implements Task {
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ProdutoDao produtoDao = new ProdutoDAO();
         List<Produto> produtos = produtoDao.findAll();
-        request.setAttribute("produtos",produtos);
+        request.setAttribute("produtos", produtos);
         return produtos;
     }
 }

@@ -12,19 +12,19 @@ import java.text.SimpleDateFormat;
 abstract class BaseAucionTask {
 
     protected Leilao getLeilao(HttpServletRequest request, EstadoLeilaoDao estadoLeilaoDao, ProdutoDAO produtoDao, UserDAO userDao) throws ParseException {
-        Long idPersonagem = Long.parseLong(request.getParameter("characterID"));
-        Long idProduto = Long.parseLong(request.getParameter("productID"));
-        Long idEstadoLeilao = Long.parseLong(request.getParameter("auctionStatusID"));
+        Long characterID = Long.parseLong(request.getParameter("characterID"));
+        Long productID = Long.parseLong(request.getParameter("productID"));
+        Long auctionStatusID = Long.parseLong(request.getParameter("auctionStatusID"));
         Leilao leilao = new Leilao();
         leilao.setDuracao(Integer.parseInt(request.getParameter("duration")));
         String format = "dd/MM/yyyy";
-        leilao.setDataInicio(new SimpleDateFormat(format).parse(request.getParameter("StartDate")));
-        leilao.setValorInicial(Float.parseFloat(request.getParameter("BasePrice")));
+        leilao.setDataInicio(new SimpleDateFormat(format).parse(request.getParameter("startDate")));
+        leilao.setValorInicial(Float.parseFloat(request.getParameter("basePrice")));
         leilao.setValorAtual(leilao.getValorInicial());
-        leilao.setLancePadrao(Float.parseFloat(request.getParameter("BaseBid")));
-        leilao.setEstado(estadoLeilaoDao.findById(idEstadoLeilao));
-        leilao.setProduto(produtoDao.findById(idProduto));
-        leilao.setUser(userDao.findById(idPersonagem));
+        leilao.setLancePadrao(Float.parseFloat(request.getParameter("baseBid")));
+        leilao.setEstado(estadoLeilaoDao.findById(auctionStatusID));
+        leilao.setProduto(produtoDao.findById(productID));
+        leilao.setUser(userDao.findById(characterID));
         return leilao;
     }
 }
