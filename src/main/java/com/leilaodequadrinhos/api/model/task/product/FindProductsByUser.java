@@ -16,7 +16,7 @@ public class FindProductsByUser implements Task {
         ProdutoDao produtoDao = new ProdutoDAO();
         Long userID = Long.parseLong(request.getParameter("userID"));
         List<Produto> produtos = produtoDao.findAllByUser(userID);
-        request.setAttribute("produtos",produtos);
+        request.setAttribute("produtos", produtos);
         return produtos;
     }
 }
