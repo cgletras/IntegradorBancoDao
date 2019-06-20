@@ -89,8 +89,8 @@ public class LanceDAO implements LanceDao {
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
 				LeilaoDao leilaoDao = new LeilaoDAO();
-				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
-				leilaoDao.updateValorAtual(leilao);
+				Leilao leilao = (Leilao) leilaoDao.findById(rs.getLong("id_leilao"));
+				obj.setLeilao(leilao);
 				//
 				DAO dao = new UserDAO();
 				User user = (User) dao.findById(rs.getLong("id_usuario"));
@@ -131,8 +131,8 @@ public class LanceDAO implements LanceDao {
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
 				LeilaoDao leilaoDao = new LeilaoDAO();
-				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
-				leilaoDao.updateValorAtual(leilao);
+				Leilao leilao = (Leilao) leilaoDao.findById(rs.getLong("id_leilao"));
+				obj.setLeilao(leilao);
 				//
 				DAO dao = new UserDAO();
 				User user = (User) dao.findById(rs.getLong("id_usuario"));
@@ -192,8 +192,8 @@ public class LanceDAO implements LanceDao {
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
 				LeilaoDao leilaoDao = new LeilaoDAO();
-				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
-				leilaoDao.updateValorAtual(leilao);
+				Leilao leilao = (Leilao) leilaoDao.findById(rs.getLong("id_leilao"));
+				obj.setLeilao(leilao);
 				//
 				DAO dao = new UserDAO();
 				User user = (User) dao.findById(rs.getLong("id_usuario"));
@@ -236,8 +236,8 @@ public class LanceDAO implements LanceDao {
 				obj.setDataLance(new java.sql.Date(rs.getDate("data_lance").getTime()));
 				//
 				LeilaoDao leilaoDao = new LeilaoDAO();
-				Leilao leilao = (Leilao) leilaoDao.findById(obj.getLeilao().getIdLeilao());
-				leilaoDao.updateValorAtual(leilao);
+				Leilao leilao = (Leilao) leilaoDao.findById(rs.getLong("id_leilao"));
+				obj.setLeilao(leilao);
 				//
 				DAO dao = new UserDAO();
 				User user = (User) dao.findById(rs.getLong("id_usuario"));
