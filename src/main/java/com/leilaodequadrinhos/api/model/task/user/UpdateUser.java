@@ -14,6 +14,8 @@ public class UpdateUser extends BaseUserTask implements Task {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         DAO userDao = new UserDAO();
         User user = getUser(request);
+        user.setUserID(Integer.parseInt(request.getParameter("userID")));
+        user.setStatus(Boolean.parseBoolean(request.getParameter("status")));
         userDao.update(user);
         return "Usuário atualizado";
     }
