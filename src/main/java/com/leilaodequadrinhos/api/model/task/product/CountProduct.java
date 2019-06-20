@@ -7,13 +7,13 @@ import com.leilaodequadrinhos.api.model.task.Task;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DeleteProductByID implements Task {
+public class CountProduct implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ProdutoDao produtoDao = new ProdutoDAO();
-        Long productID = Long.parseLong(request.getParameter("productID"));
-        produtoDao.deleteById(productID);
-        return "Produto excluído";
+        Long productCount = produtoDao.count();
+        request.setAttribute("QuantidadeProdutos",productCount);
+        return productCount;
     }
 }
