@@ -4,6 +4,7 @@ import com.leilaodequadrinhos.api.db.DB;
 import com.leilaodequadrinhos.api.db.DbException;
 import com.leilaodequadrinhos.api.model.dao.EstadoProdutoDao;
 import com.leilaodequadrinhos.api.model.entities.EstadoProduto;
+import com.leilaodequadrinhos.api.model.entities.Leilao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class EstadoProdutoDAO implements EstadoProdutoDao {
 	Connection conn = DB.getConnection();
 
 	@Override
-	public List<EstadoProduto> findAll() {
+	public List findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
