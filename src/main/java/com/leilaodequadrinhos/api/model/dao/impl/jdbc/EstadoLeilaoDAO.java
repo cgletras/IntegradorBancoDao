@@ -19,7 +19,7 @@ public class EstadoLeilaoDAO implements EstadoLeilaoDao {
 	Connection conn = DB.getConnection();
 	
 	@Override
-	public EstadoLeilao findById(Integer id) {
+	public EstadoLeilao findById(Long id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -27,7 +27,7 @@ public class EstadoLeilaoDAO implements EstadoLeilaoDao {
 					"SELECT * FROM Estado_leilao "
 					+ "WHERE id_estado_leilao = ?");
 			
-			st.setInt(1, id);
+			st.setLong(1, id);
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
