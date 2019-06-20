@@ -15,6 +15,7 @@ public class FindProductByID implements Task {
         DAO dao = new ProdutoDAO();
         Long id = Long.parseLong(request.getParameter("productID"));
         Produto produto = (Produto) dao.findById(id);
+        request.setAttribute("produto", produto);
         return produto;
     }
 }

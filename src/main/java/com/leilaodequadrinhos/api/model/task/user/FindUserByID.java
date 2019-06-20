@@ -1,6 +1,5 @@
 package com.leilaodequadrinhos.api.model.task.user;
 
-
 import com.leilaodequadrinhos.api.model.dao.DAO;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
 import com.leilaodequadrinhos.api.model.entities.User;

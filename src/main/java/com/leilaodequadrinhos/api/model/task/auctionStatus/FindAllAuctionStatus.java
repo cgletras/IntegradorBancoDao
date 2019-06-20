@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class FindAllAuctionStatus implements Task {
+
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         EstadoLeilaoDao estadoLeilaoDao = new EstadoLeilaoDAO();
