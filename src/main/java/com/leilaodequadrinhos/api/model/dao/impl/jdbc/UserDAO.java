@@ -37,7 +37,7 @@ public class UserDAO implements UserDao {
 				obj.setEmail(rs.getString("email"));
 				obj.setState(rs.getString("estado"));
 				obj.setCity(rs.getString("cidade"));
-				obj.setPassword(rs.getString("senha"));
+				obj.setPassword(null);
 				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
 				obj.setStatus(rs.getBoolean("ativo"));
 				
@@ -76,7 +76,7 @@ public class UserDAO implements UserDao {
 				obj.setEmail(rs.getString("email"));
 				obj.setState(rs.getString("estado"));
 				obj.setCity(rs.getString("cidade"));
-				obj.setPassword(rs.getString("senha"));
+				obj.setPassword(null);
 				obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
 				obj.setStatus(rs.getBoolean("ativo"));
 
