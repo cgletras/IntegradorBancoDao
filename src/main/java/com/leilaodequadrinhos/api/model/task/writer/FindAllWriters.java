@@ -7,15 +7,15 @@ import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FindWriterById implements Task {
+public class FindAllWriters implements Task {
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        Long id = Long.parseLong(request.getParameter("writerID"));
         EscritorDao escritorDao = new EscritorDAO();
-        Escritor escritor = (Escritor) escritorDao.findById(id);
-        request.setAttribute("escritor", escritor);
-        return escritor;
+        List<Escritor> list = escritorDao.findAll();
+        request.setAttribute("escritores", list);
+        return list;
     }
 }
