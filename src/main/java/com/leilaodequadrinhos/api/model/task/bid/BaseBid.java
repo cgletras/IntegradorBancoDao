@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 
 abstract class BaseBid {
 
-    protected Lance getLance (HttpServletRequest request, UserDAO userDao, LeilaoDao leilaoDAO) throws ParseException {
+    protected Lance getLance(HttpServletRequest request, UserDAO userDao, LeilaoDao leilaoDAO) throws ParseException {
         Lance lance = new Lance();
         String format = "dd/MM/yyyy";
         lance.setDataLance(new SimpleDateFormat(format).parse(request.getParameter("dateOfBid")));
