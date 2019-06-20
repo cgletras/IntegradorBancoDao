@@ -1,6 +1,6 @@
 package com.leilaodequadrinhos.api.model.task;
 
-import com.leilaodequadrinhos.api.model.task.Bid.BidCount;
+import com.leilaodequadrinhos.api.model.task.bid.BidCount;
 import com.leilaodequadrinhos.api.model.task.auction.*;
 import com.leilaodequadrinhos.api.model.task.character.*;
 import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAllAuctionStatus;
