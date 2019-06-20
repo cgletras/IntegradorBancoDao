@@ -20,6 +20,7 @@ public class UserLogin implements Task {
         if (user == null) {
             return "Usuario ou senha incorretos";
         } else if (user.getPassword().equals(request.getParameter("password"))) {
+            user.setPassword(null);
             request.getSession().setAttribute("user", user);
             return "Logado";
         } else {
