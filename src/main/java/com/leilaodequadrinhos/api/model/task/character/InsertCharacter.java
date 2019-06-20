@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class InsertCharacter implements Task {
+
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         PersonagemDao personagemDao = new PersonagemDAO();
