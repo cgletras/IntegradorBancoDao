@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class FindCharactersByProduct implements Task {
+
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         Long id = Long.parseLong(request.getParameter("productID"));
         PersonagemDao personagemDao = new PersonagemDAO();
         ProdutoDao produtoDao = new ProdutoDAO();
-
         List<Personagem> list = personagemDao.findAllByProduto((Produto) produtoDao.findById(id));
         request.setAttribute("personagens", list);
         return list;

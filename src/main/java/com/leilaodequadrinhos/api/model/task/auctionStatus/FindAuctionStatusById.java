@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class FindAuctionStatusById implements Task {
+
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         Long id = Long.parseLong(request.getParameter("statusID"));
         EstadoLeilaoDao estadoLeilaoDao = new EstadoLeilaoDAO();
         EstadoLeilao estadoLeilao = estadoLeilaoDao.findById(id);
