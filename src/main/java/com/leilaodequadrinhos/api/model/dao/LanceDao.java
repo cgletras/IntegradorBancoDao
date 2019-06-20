@@ -10,4 +10,5 @@ public interface LanceDao extends DAO {
 
 	List<Lance> findBidByUser(Long id_user);
 	List<Lance> findBidLeilao(Long id_leilao);
+	Long BidCount(Long id_leilao);
 }

@@ -151,7 +151,6 @@ public class LanceDAO implements LanceDao {
 		}
 	}
 
-	// TODO Este metodo não foi implementado pois será somente utilizado com funcionalidade utilizada na formaulação relatorio e adminsitração do site, o que não esta no scope atual.
 	@Override
 	public Long count() {
 		return null;
@@ -247,6 +246,36 @@ public class LanceDAO implements LanceDao {
 				list.add(obj);
 			}
 			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
+	@Override
+	public Long BidCount(Long id_leilao) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT COUNT(id_lance) "
+							+ "FROM Leilao "
+							+ "WHERE id_leilao = ? ");
+
+			st.setLong(1, id_leilao);
+			rs = st.executeQuery();
+
+			Long count =null;
+			Map<Integer, User> map = new HashMap<>();
+
+			while (rs.next()) {
+				count = rs.getLong("count");
+			}
+			return count;
 		}
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
