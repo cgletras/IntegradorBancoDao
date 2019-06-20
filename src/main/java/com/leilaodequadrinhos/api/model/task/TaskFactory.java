@@ -1,10 +1,11 @@
 package com.leilaodequadrinhos.api.model.task;
 
+import com.leilaodequadrinhos.api.model.task.auction.InsertNewAuction;
 import com.leilaodequadrinhos.api.model.task.character.*;
-import com.leilaodequadrinhos.api.model.task.estadoLeilao.FindAllAuctionStatus;
-import com.leilaodequadrinhos.api.model.task.estadoLeilao.FindAuctionStatusById;
-import com.leilaodequadrinhos.api.model.task.estadoProduto.FindProductStatusById;
-import com.leilaodequadrinhos.api.model.task.estadoProduto.FindAllProductStatus;
+import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAllAuctionStatus;
+import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAuctionStatusById;
+import com.leilaodequadrinhos.api.model.task.productStatus.FindProductStatusById;
+import com.leilaodequadrinhos.api.model.task.productStatus.FindAllProductStatus;
 import com.leilaodequadrinhos.api.model.task.product.FindProductByID;
 import com.leilaodequadrinhos.api.model.task.user.*;
 import com.leilaodequadrinhos.api.model.task.writer.*;
@@ -33,6 +34,8 @@ public class TaskFactory {
         tasks.put("POST/insert-writer", new InsertWriter());
         tasks.put("GET/find-all-writers", new FindAllWriters());
         tasks.put("POST/relate-writer-to-product", new RelateWriterToProduct());
+
+        tasks.put("POST/insert-new-auction", new InsertNewAuction());
 
         tasks.put("GET/find-character-by-id", new FindCharacterById());
         tasks.put("GET/find-characters-by-product", new FindCharactersByProduct());

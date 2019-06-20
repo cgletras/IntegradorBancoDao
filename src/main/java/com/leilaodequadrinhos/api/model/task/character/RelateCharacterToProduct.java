@@ -1,12 +1,9 @@
 package com.leilaodequadrinhos.api.model.task.character;
 
-import com.leilaodequadrinhos.api.model.dao.EscritorDao;
 import com.leilaodequadrinhos.api.model.dao.PersonagemDao;
 import com.leilaodequadrinhos.api.model.dao.ProdutoDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.EscritorDAO;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.PersonagemDAO;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProdutoDAO;
-import com.leilaodequadrinhos.api.model.entities.Escritor;
 import com.leilaodequadrinhos.api.model.entities.Personagem;
 import com.leilaodequadrinhos.api.model.entities.Produto;
 import com.leilaodequadrinhos.api.model.task.Task;
