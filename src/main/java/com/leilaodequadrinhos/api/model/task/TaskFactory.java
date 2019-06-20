@@ -1,6 +1,6 @@
 package com.leilaodequadrinhos.api.model.task;
 
-import com.leilaodequadrinhos.api.model.task.bid.BidCount;
+import com.leilaodequadrinhos.api.model.task.bid.*;
 import com.leilaodequadrinhos.api.model.task.auction.*;
 import com.leilaodequadrinhos.api.model.task.character.*;
 import com.leilaodequadrinhos.api.model.task.auctionStatus.FindAllAuctionStatus;
@@ -64,6 +64,13 @@ public class TaskFactory {
         tasks.put("POST/update-product", new UpdateProduct());
 
         tasks.put("GET/bid-count", new BidCount());
+        tasks.put("POST/delete-bid-by-id", new DeleteBidByID());
+        tasks.put("GET/find-all-bids", new FindAllBids());
+        tasks.put("GET/find-bid-by-auction", new FindBidsByAuction());
+        tasks.put("GET/find-bid-by-id", new FindBidByID());
+        tasks.put("GET/find-bid-by-user", new FindBidsByUser());
+        tasks.put("POST/insert-bid", new InsertBid());
+        tasks.put("POST/update-bid", new UpdateBid());
     }
 
     public static Task getTask(HttpServletRequest request) {
