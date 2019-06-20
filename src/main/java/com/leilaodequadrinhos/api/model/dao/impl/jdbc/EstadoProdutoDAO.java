@@ -52,7 +52,7 @@ public class EstadoProdutoDAO implements EstadoProdutoDao {
 	}
 
 	@Override
-	public EstadoProduto findById(Integer id) {
+	public EstadoProduto findById(Long id) {
 
 			PreparedStatement st = null;
 			ResultSet rs = null;
@@ -61,7 +61,7 @@ public class EstadoProdutoDAO implements EstadoProdutoDao {
 						"SELECT * FROM Estado_produto "
 						+ "WHERE id_estado_produto = ?");
 				
-				st.setInt(1, id);
+				st.setLong(1, id);
 				rs = st.executeQuery();
 				
 				if (rs.next()) {

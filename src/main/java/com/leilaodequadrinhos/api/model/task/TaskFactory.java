@@ -1,11 +1,11 @@
 package com.leilaodequadrinhos.api.model.task;
 
+import com.leilaodequadrinhos.api.model.task.estadoProduto.FindProductStatusById;
+import com.leilaodequadrinhos.api.model.task.estadoProduto.FindProductStatusById;
+import com.leilaodequadrinhos.api.model.task.estadoProduto.ListAllProductStatus;
 import com.leilaodequadrinhos.api.model.task.product.FindProductByID;
 import com.leilaodequadrinhos.api.model.task.user.*;
-import com.leilaodequadrinhos.api.model.task.writer.FindAllWriters;
-import com.leilaodequadrinhos.api.model.task.writer.FindWriterById;
-import com.leilaodequadrinhos.api.model.task.writer.FindWriterByProduct;
-import com.leilaodequadrinhos.api.model.task.writer.InsertWriter;
+import com.leilaodequadrinhos.api.model.task.writer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -30,6 +30,10 @@ public class TaskFactory {
         tasks.put("GET/find-writer-by-product", new FindWriterByProduct());
         tasks.put("POST/insert-writer", new InsertWriter());
         tasks.put("GET/find-all-writers", new FindAllWriters());
+        tasks.put("POST/relate-writer-to-product", new RelateWriterToProduct());
+
+        tasks.put("GET/find-all-product-status", new ListAllProductStatus());
+        tasks.put("GET/find-product-status-by-id", new FindProductStatusById());
     }
 
     public static Task getTask(HttpServletRequest request) {
