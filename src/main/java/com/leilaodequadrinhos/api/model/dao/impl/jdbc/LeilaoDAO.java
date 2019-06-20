@@ -138,7 +138,7 @@ public class LeilaoDAO implements LeilaoDao {
 				obj.setLancePadrao(rs.getDouble("lance_padrao"));
 
 				EstadoLeilaoDao estadoleilaoDao = new EstadoLeilaoDAO();
-				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
+				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getLong("id_estado_leilao"));
 				obj.setEstado(estadoLeilao);
 				
 				DAO dao = new UserDAO();
@@ -187,7 +187,7 @@ public class LeilaoDAO implements LeilaoDao {
 				obj.setLancePadrao(rs.getDouble("lance_padrao"));
 
 				EstadoLeilaoDao estadoleilaoDao = new EstadoLeilaoDAO();
-				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
+				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getLong("id_estado_leilao"));
 				obj.setEstado(estadoLeilao);
 
 				DAO dao = new UserDAO();
@@ -265,7 +265,7 @@ public class LeilaoDAO implements LeilaoDao {
 				leilao.setLancePadrao(rs.getDouble("lance_padrao"));
 				
 				EstadoLeilaoDao estadoleilaoDao = new EstadoLeilaoDAO();
-				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getInt("id_estado_leilao"));
+				EstadoLeilao estadoLeilao = estadoleilaoDao.findById(rs.getLong("id_estado_leilao"));
 				leilao.setEstado(estadoLeilao);
 
 				DAO dao = new UserDAO();

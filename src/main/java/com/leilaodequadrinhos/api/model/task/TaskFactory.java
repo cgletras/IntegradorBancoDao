@@ -1,8 +1,9 @@
 package com.leilaodequadrinhos.api.model.task;
 
+import com.leilaodequadrinhos.api.model.task.estadoLeilao.FindAllAuctionStatus;
+import com.leilaodequadrinhos.api.model.task.estadoLeilao.FindAuctionStatusById;
 import com.leilaodequadrinhos.api.model.task.estadoProduto.FindProductStatusById;
-import com.leilaodequadrinhos.api.model.task.estadoProduto.FindProductStatusById;
-import com.leilaodequadrinhos.api.model.task.estadoProduto.ListAllProductStatus;
+import com.leilaodequadrinhos.api.model.task.estadoProduto.FindAllProductStatus;
 import com.leilaodequadrinhos.api.model.task.product.FindProductByID;
 import com.leilaodequadrinhos.api.model.task.user.*;
 import com.leilaodequadrinhos.api.model.task.writer.*;
@@ -32,8 +33,11 @@ public class TaskFactory {
         tasks.put("GET/find-all-writers", new FindAllWriters());
         tasks.put("POST/relate-writer-to-product", new RelateWriterToProduct());
 
-        tasks.put("GET/find-all-product-status", new ListAllProductStatus());
+        tasks.put("GET/find-all-product-status", new FindAllProductStatus());
         tasks.put("GET/find-product-status-by-id", new FindProductStatusById());
+
+        tasks.put("GET/find-all-auction-status", new FindAllAuctionStatus());
+        tasks.put("GET/find-auction-status-by-id", new FindAuctionStatusById());
     }
 
     public static Task getTask(HttpServletRequest request) {
