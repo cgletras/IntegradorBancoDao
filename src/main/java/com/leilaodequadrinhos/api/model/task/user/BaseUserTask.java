@@ -11,7 +11,6 @@ abstract class BaseUserTask {
     protected User getUser(HttpServletRequest request) throws ParseException {
         User user = new User();
         user.setName(request.getParameter("name"));
-        user.setStatus(true);
         user.setEmail(request.getParameter("email"));
         user.setState(request.getParameter("state"));
         user.setCity(request.getParameter("city"));

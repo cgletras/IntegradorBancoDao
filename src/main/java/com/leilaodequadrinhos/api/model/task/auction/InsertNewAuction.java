@@ -12,7 +12,9 @@ import com.leilaodequadrinhos.api.model.task.Task;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class InsertNewAuction extends BaseAucionTask implements Task {
+public class InsertNewAuction extends BaseAuctionTask implements Task {
+
+    private static final long ACTIVE = 1;
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,7 +22,8 @@ public class InsertNewAuction extends BaseAucionTask implements Task {
         EstadoLeilaoDao estadoLeilaoDao = new EstadoLeilaoDAO();
         ProdutoDAO produtoDao = new ProdutoDAO();
         UserDAO userDao = new UserDAO();
-        Leilao leilao = getLeilao(request, estadoLeilaoDao, produtoDao, userDao);
+        Leilao leilao = getLeilao(request, produtoDao, userDao);
+        leilao.setEstado(estadoLeilaoDao.findById(ACTIVE));
         leilaoDao.insert(leilao);
         return "Leilao Cadastrado";
     }

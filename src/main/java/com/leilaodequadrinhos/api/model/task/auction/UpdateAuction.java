@@ -12,7 +12,7 @@ import com.leilaodequadrinhos.api.model.task.Task;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UpdateAuction extends BaseAucionTask implements Task {
+public class UpdateAuction extends BaseAuctionTask implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,7 +20,10 @@ public class UpdateAuction extends BaseAucionTask implements Task {
         EstadoLeilaoDao estadoLeilaoDao = new EstadoLeilaoDAO();
         ProdutoDAO produtoDao = new ProdutoDAO();
         UserDAO userDao = new UserDAO();
-        Leilao leilao = getLeilao(request, estadoLeilaoDao, produtoDao, userDao);
+        Leilao leilao = getLeilao(request, produtoDao, userDao);
+        Long auctionStatusID = Long.parseLong(request.getParameter("auctionStatusID"));
+        leilao.setEstado(estadoLeilaoDao.findById(auctionStatusID));
+        leilao.setIdLeilao(Long.parseLong(request.getParameter("auctionID")));
         leilaoDao.update(leilao);
         return "Leilao atualizado com sucesso";
     }
