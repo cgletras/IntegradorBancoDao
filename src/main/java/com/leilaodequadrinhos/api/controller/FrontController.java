@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebFilter("/*")
@@ -78,7 +79,7 @@ public class FrontController extends HttpServlet implements Filter {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        setAccessControlHeaders(response);
+        setAccessControlHeaders(request, response);
 
         HttpSession session = request.getSession(false);
         String loginPath = "/login";
@@ -96,11 +97,17 @@ public class FrontController extends HttpServlet implements Filter {
         }
     }
 
-    private void setAccessControlHeaders(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, cache-control");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
+    private void setAccessControlHeaders(HttpServletRequest request, HttpServletResponse response) {
+        List<String> incomingURLs = Arrays.asList(request.getServletContext().getInitParameter("incomingURLs").trim().split(";"));
+        String clientOrigin = request.getHeader("origin");
+
+        if (incomingURLs.indexOf(clientOrigin) != -1) {
+            response.setHeader("Access-Control-Allow-Origin", clientOrigin);
+            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, cache-control");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
+        }
+
     }
 
     private void verifyLogin(HttpServletRequest request, HttpServletResponse response, Map<String, Object> responseBodyObject) throws Exception {
