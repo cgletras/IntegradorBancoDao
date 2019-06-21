@@ -110,18 +110,4 @@ public class FrontController extends HttpServlet implements Filter {
 
     }
 
-    private void verifyLogin(HttpServletRequest request, HttpServletResponse response, Map<String, Object> responseBodyObject) throws Exception {
-        if (!((request.getMethod() + request.getPathInfo()).equalsIgnoreCase("POST/login")) && request.getSession().getAttribute("user") == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        } else {
-            Task task = TaskFactory.getTask(request);
-            responseBodyObject.put("data", task.execute(request, response));
-        }
-
-        responseBodyObject.put(
-                "user", request.getSession().getAttribute("user")
-        );
-    }
-
-
 }
