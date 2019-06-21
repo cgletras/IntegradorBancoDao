@@ -130,8 +130,8 @@ public class AuctionDAO implements AuctionDao {
                 obj.setCurrentValue(rs.getDouble("valor_atual"));
                 obj.setDefaultBid(rs.getDouble("lance_padrao"));
 
-                AuctionStatusDao estadoleilaoDao = new AuctionStatusDAO();
-                AuctionStatus auctionStatus = estadoleilaoDao.findById(rs.getLong("id_estado_leilao"));
+                AuctionStatusDao auctionStatusDAO = new AuctionStatusDAO();
+                AuctionStatus auctionStatus = auctionStatusDAO.findById(rs.getLong("id_estado_leilao"));
                 obj.setAuctionStatus(auctionStatus);
 
                 DAO dao = new UserDAO();
@@ -177,8 +177,8 @@ public class AuctionDAO implements AuctionDao {
                 obj.setCurrentValue(rs.getDouble("valor_atual"));
                 obj.setDefaultBid(rs.getDouble("lance_padrao"));
 
-                AuctionStatusDao estadoleilaoDao = new AuctionStatusDAO();
-                AuctionStatus auctionStatus = estadoleilaoDao.findById(rs.getLong("id_estado_leilao"));
+                AuctionStatusDao auctionStatusDAO = new AuctionStatusDAO();
+                AuctionStatus auctionStatus = auctionStatusDAO.findById(rs.getLong("id_estado_leilao"));
                 obj.setAuctionStatus(auctionStatus);
 
                 DAO dao = new UserDAO();
@@ -211,8 +211,6 @@ public class AuctionDAO implements AuctionDao {
 
             st.setInt(1, 2);
             st.setLong(2, id);
-            ;
-
             st.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -247,8 +245,8 @@ public class AuctionDAO implements AuctionDao {
                 auction.setCurrentValue(rs.getDouble("valor_atual"));
                 auction.setDefaultBid(rs.getDouble("lance_padrao"));
 
-                AuctionStatusDao estadoleilaoDao = new AuctionStatusDAO();
-                AuctionStatus auctionStatus = estadoleilaoDao.findById(rs.getLong("id_estado_leilao"));
+                AuctionStatusDao auctionStatusDAO = new AuctionStatusDAO();
+                AuctionStatus auctionStatus = auctionStatusDAO.findById(rs.getLong("id_estado_leilao"));
                 auction.setAuctionStatus(auctionStatus);
 
                 DAO dao = new UserDAO();
@@ -271,7 +269,7 @@ public class AuctionDAO implements AuctionDao {
     }
 
     @Override
-    public void changesAuctionStatus(Integer id, AuctionStatus estado) {
+    public void changesAuctionStatus(Integer id, AuctionStatus auctionStatus) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -279,7 +277,7 @@ public class AuctionDAO implements AuctionDao {
                             "SET id_estado_leilao= ? " +
                             "WHERE id_leilao= ?");
 
-            st.setInt(1, estado.getAuctionStatusID());
+            st.setInt(1, auctionStatus.getAuctionStatusID());
             st.setInt(2, id);
 
             st.executeUpdate();

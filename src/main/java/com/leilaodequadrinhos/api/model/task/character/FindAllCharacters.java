@@ -12,9 +12,9 @@ import java.util.List;
 public class FindAllCharacters implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         CharacterDao characterDao = new CharacterDAO();
-        List<Character> characters = characterDao.findAll();
+        List characters = characterDao.findAll();
         request.setAttribute("characters", characters);
         return characters;
     }

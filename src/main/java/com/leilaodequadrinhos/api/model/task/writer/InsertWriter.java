@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class InsertWriter implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         WriterDao writerDao = new WriterDAO();
         Writer writer = new Writer();
         writer.setName(request.getParameter("writerName"));

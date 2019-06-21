@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FindCharacterById implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long characterID = Long.parseLong(request.getParameter("characterID"));
         CharacterDao characterDao = new CharacterDAO();
         Character character = (Character) characterDao.findById(characterID);

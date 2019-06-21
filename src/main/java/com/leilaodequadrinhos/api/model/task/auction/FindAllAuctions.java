@@ -12,9 +12,9 @@ import java.util.List;
 public class FindAllAuctions implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         AuctionDao auctionDao = new AuctionDAO();
-        List<Auction> auctions = auctionDao.findAll();
+        List auctions = auctionDao.findAll();
         request.setAttribute("auctions", auctions);
         return auctions;
     }

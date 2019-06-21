@@ -52,11 +52,8 @@ public class AuctionStatus implements Serializable {
             return false;
         AuctionStatus other = (AuctionStatus) obj;
         if (auctionStatusID == null) {
-            if (other.auctionStatusID != null)
-                return false;
-        } else if (!auctionStatusID.equals(other.auctionStatusID))
-            return false;
-        return true;
+            return other.auctionStatusID == null;
+        } else return auctionStatusID.equals(other.auctionStatusID);
     }
 
     @Override

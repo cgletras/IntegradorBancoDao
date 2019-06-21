@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RelateWriterToProduct implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         WriterDao writerDao = new WriterDAO();
         ProductDao productDao = new ProductDAO();
         Long writerID = Long.parseLong(request.getParameter("writerID"));

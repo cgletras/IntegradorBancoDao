@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ChangeProductStatus implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         ProductDao productDao = new ProductDAO();
         ProductStatusDao productStatusDao = new ProductStatusDAO();
         Integer productID = Integer.parseInt(request.getParameter("productID"));

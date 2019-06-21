@@ -15,7 +15,7 @@ import java.util.List;
 public class FindWriterByProduct implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long id = Long.parseLong(request.getParameter("productID"));
         WriterDao writerDao = new WriterDAO();
         ProductDao productDao = new ProductDAO();

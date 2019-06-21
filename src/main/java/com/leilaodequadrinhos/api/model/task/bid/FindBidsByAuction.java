@@ -12,7 +12,7 @@ import java.util.List;
 public class FindBidsByAuction implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         BidDao bidDao = new BidDAO();
         List<Bid> bids = bidDao.findBidsByAuction(Long.parseLong(request.getParameter("auctionID")));
         request.setAttribute("bids", bids);

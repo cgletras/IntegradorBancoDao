@@ -198,7 +198,7 @@ public class BidDAO implements BidDao {
     }
 
     @Override
-    public List<Bid> findBidsByAuction(Long id_leilao) {
+    public List<Bid> findBidsByAuction(Long auctionID) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -208,7 +208,7 @@ public class BidDAO implements BidDao {
                             + "WHERE id_leilao = ? "
                             + "ORDER BY id_lance");
 
-            st.setLong(1, id_leilao);
+            st.setLong(1, auctionID);
             rs = st.executeQuery();
 
             List<Bid> list = new ArrayList<>();
@@ -221,7 +221,7 @@ public class BidDAO implements BidDao {
                 obj.setBidDate(new java.sql.Date(rs.getDate("data_lance").getTime()));
                 //
                 AuctionDao auctionDao = new AuctionDAO();
-                Auction auction = (Auction) auctionDao.findById(rs.getLong("id_leilao"));
+                Auction auction = (Auction) auctionDao.findById(rs.getLong("auctionID"));
                 obj.setAuction(auction);
                 //
                 DAO dao = new UserDAO();
@@ -240,7 +240,7 @@ public class BidDAO implements BidDao {
     }
 
     @Override
-    public Long BidCount(Long id_leilao) {
+    public Long BidCount(Long auctionID) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -249,7 +249,7 @@ public class BidDAO implements BidDao {
                             + "FROM Lance "
                             + "WHERE id_leilao = ? ");
 
-            st.setLong(1, id_leilao);
+            st.setLong(1, auctionID);
             rs = st.executeQuery();
 
             Long count = null;

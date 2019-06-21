@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class InsertCharacter implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         CharacterDao characterDao = new CharacterDAO();
         Character character = new Character();
         character.setName(request.getParameter("characterName"));

@@ -86,11 +86,8 @@ public class Bid implements Serializable {
             return false;
         Bid other = (Bid) obj;
         if (bidID == null) {
-            if (other.bidID != null)
-                return false;
-        } else if (!bidID.equals(other.bidID))
-            return false;
-        return true;
+            return other.bidID == null;
+        } else return bidID.equals(other.bidID);
     }
 
     @Override

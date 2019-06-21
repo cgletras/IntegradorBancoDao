@@ -35,7 +35,7 @@ public class Character implements Serializable {
         this.name = name;
     }
 
-    public static long getSerialversionuid() {
+    public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
@@ -57,11 +57,8 @@ public class Character implements Serializable {
             return false;
         Character other = (Character) obj;
         if (characterID == null) {
-            if (other.characterID != null)
-                return false;
-        } else if (!characterID.equals(other.characterID))
-            return false;
-        return true;
+            return other.characterID == null;
+        } else return characterID.equals(other.characterID);
     }
 
     @Override

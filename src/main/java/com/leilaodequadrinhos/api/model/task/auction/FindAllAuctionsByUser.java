@@ -15,7 +15,7 @@ import java.util.List;
 public class FindAllAuctionsByUser implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         AuctionDao auctionDao = new AuctionDAO();
         DAO userDao = new UserDAO();
         Long userID = Long.parseLong(request.getParameter("userID"));

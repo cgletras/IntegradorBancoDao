@@ -12,7 +12,7 @@ import java.util.List;
 public class FindAllAuctionStatus implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         AuctionStatusDao auctionStatusDao = new AuctionStatusDAO();
         List<AuctionStatus> listAuctionStatus = auctionStatusDao.findAll();
         request.setAttribute("auctionStatus", listAuctionStatus);

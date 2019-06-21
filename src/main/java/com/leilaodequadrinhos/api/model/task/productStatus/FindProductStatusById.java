@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class FindProductStatusById implements Task {
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long productStatusID = Long.parseLong(request.getParameter("productStatusID"));
         ProductStatusDao productStatusDao = new ProductStatusDAO();
         ProductStatus productStatus = productStatusDao.findById(productStatusID);

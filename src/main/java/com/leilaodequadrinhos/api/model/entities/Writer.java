@@ -35,7 +35,7 @@ public class Writer implements Serializable{
 		this.name = name;
 	}
 
-	public static long getSerialversionuid() {
+	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
@@ -57,11 +57,8 @@ public class Writer implements Serializable{
 			return false;
 		Writer other = (Writer) obj;
 		if (writerID == null) {
-			if (other.writerID != null)
-				return false;
-		} else if (!writerID.equals(other.writerID))
-			return false;
-		return true;
+			return other.writerID == null;
+		} else return writerID.equals(other.writerID);
 	}
 
 	@Override

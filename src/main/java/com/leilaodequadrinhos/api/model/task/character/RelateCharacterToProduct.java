@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RelateCharacterToProduct implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         CharacterDao characterDao = new CharacterDAO();
         ProductDao productDao = new ProductDAO();
         Long characterID = Long.parseLong(request.getParameter("characterID"));

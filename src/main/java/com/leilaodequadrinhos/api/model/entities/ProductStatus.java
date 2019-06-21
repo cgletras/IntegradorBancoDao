@@ -52,9 +52,7 @@ public class ProductStatus implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         ProductStatus other = (ProductStatus) obj;
-        if (productStatusID != other.productStatusID)
-            return false;
-        return true;
+        return productStatusID.equals(other.productStatusID);
     }
 
     @Override

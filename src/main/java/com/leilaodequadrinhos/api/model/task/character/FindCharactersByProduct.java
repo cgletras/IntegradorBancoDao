@@ -15,7 +15,7 @@ import java.util.List;
 public class FindCharactersByProduct implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long productID = Long.parseLong(request.getParameter("productID"));
         CharacterDao characterDao = new CharacterDAO();
         ProductDao productDao = new ProductDAO();
