@@ -14,6 +14,6 @@ public class DeleteUserByID implements Task {
         UserDao userDao = new UserDAO();
         Long id = Long.parseLong(request.getParameter("userID"));
         userDao.deleteById(id);
-        return "Usuário excluído";
+        return "Deleted user";
     }
 }

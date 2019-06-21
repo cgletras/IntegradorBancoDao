@@ -3,133 +3,131 @@ package com.leilaodequadrinhos.api.model.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	
-	private Integer userID;
-	private String name, email, password, city, state;
-	private Date dateOfBirth;
-	private boolean status;
-	
-	public User() {
-		super();
-	}
+public class User implements Serializable {
 
-	public User(Integer userID, String name, String email, String password, String city, String state, Date dateOfBirth, boolean status) {
-		super();
-		this.userID = userID;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.city = city;
-		this.state = state;
-		this.dateOfBirth = dateOfBirth;
-		this.status = status;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public String getCity() {
-		return city;
-	}
+    private Integer userID;
+    private String name, email, password, city, state;
+    private Date dateOfBirth;
+    private boolean status;
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public User() {
+        super();
+    }
 
-	public String getState() {
-		return state;
-	}
+    public User(Integer userID, String name, String email, String password, String city, String state, Date dateOfBirth, boolean status) {
+        super();
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.city = city;
+        this.state = state;
+        this.dateOfBirth = dateOfBirth;
+        this.status = status;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public Integer getUserID() {
-		return userID;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public void setUserID(Integer userID) {
-		this.userID = userID;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Integer getUserID() {
+        return userID;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public boolean isStatus() {
-		return status;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
-		return result;
-	}
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (userID == null) {
-			if (other.userID != null)
-				return false;
-		} else if (!userID.equals(other.userID))
-			return false;
-		return true;
-	}
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"userID=" + userID +
-				", name='" + name + '\'' +
-				", email='" + email + '\'' +
-				", password='" + password + '\'' +
-				", city='" + city + '\'' +
-				", state='" + state + '\'' +
-				", dateOfBirth=" + dateOfBirth +
-				", status=" + status +
-				'}';
-	}
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((userID == null) ? 0 : userID.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (userID == null) {
+            if (other.userID != null)
+                return false;
+        } else if (!userID.equals(other.userID))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", status=" + status +
+                '}';
+    }
 }
-
-

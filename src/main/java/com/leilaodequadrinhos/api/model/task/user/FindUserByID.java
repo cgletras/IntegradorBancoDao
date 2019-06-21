@@ -15,7 +15,7 @@ public class FindUserByID implements Task {
         DAO userDao = new UserDAO();
         Long id = Long.parseLong(request.getParameter("userID"));
         User user = (User) userDao.findById(id);
-        request.setAttribute("usuario", user);
+        request.setAttribute("user", user);
         return user;
     }
 }

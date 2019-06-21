@@ -1,8 +1,8 @@
 package com.leilaodequadrinhos.api.model.task.auction.status;
 
-import com.leilaodequadrinhos.api.model.dao.EstadoLeilaoDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.EstadoLeilaoDAO;
-import com.leilaodequadrinhos.api.model.entities.EstadoLeilao;
+import com.leilaodequadrinhos.api.model.dao.AuctionStatusDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.AuctionStatusDAO;
+import com.leilaodequadrinhos.api.model.entities.AuctionStatus;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +13,9 @@ public class FindAllAuctionStatus implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        EstadoLeilaoDao estadoLeilaoDao = new EstadoLeilaoDAO();
-        List<EstadoLeilao> list = estadoLeilaoDao.findAll();
-        request.setAttribute("estados-leilao", list);
-        return list;
+        AuctionStatusDao auctionStatusDao = new AuctionStatusDAO();
+        List<AuctionStatus> listAuctionStatus = auctionStatusDao.findAll();
+        request.setAttribute("auctionStatus", listAuctionStatus);
+        return listAuctionStatus;
     }
 }

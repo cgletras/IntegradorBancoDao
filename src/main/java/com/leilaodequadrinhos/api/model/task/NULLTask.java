@@ -12,6 +12,6 @@ public class NULLTask implements Task {
 
     @Override
     public String toString() {
-        return "task NULLTask";
+        return "NULL task";
     }
 }

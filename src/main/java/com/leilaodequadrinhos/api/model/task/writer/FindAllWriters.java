@@ -1,8 +1,8 @@
 package com.leilaodequadrinhos.api.model.task.writer;
 
-import com.leilaodequadrinhos.api.model.dao.EscritorDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.EscritorDAO;
-import com.leilaodequadrinhos.api.model.entities.Escritor;
+import com.leilaodequadrinhos.api.model.dao.WriterDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.WriterDAO;
+import com.leilaodequadrinhos.api.model.entities.Writer;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +13,9 @@ public class FindAllWriters implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        EscritorDao escritorDao = new EscritorDAO();
-        List<Escritor> list = escritorDao.findAll();
-        request.setAttribute("escritores", list);
-        return list;
+        WriterDao writerDao = new WriterDAO();
+        List<Writer> writers = writerDao.findAll();
+        request.setAttribute("writers", writers);
+        return writers;
     }
 }

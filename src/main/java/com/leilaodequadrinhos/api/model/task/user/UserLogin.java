@@ -13,18 +13,16 @@ public class UserLogin implements Task {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();
-
         UserDao userDao = new UserDAO();
         User user = userDao.findByEmail(request.getParameter("email"));
-
         if (user == null) {
-            return "Usuario ou senha incorretos";
+            return "Incorrect email or password";
         } else if (user.getPassword().equals(request.getParameter("password"))) {
             user.setPassword(null);
             request.getSession(true).setAttribute("user", user);
-            return "Logado";
+            return "User logged in";
         } else {
-            return "Usuario ou senha incorretos";
+            return "Incorrect email or password";
         }
     }
 }

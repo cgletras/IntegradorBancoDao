@@ -1,8 +1,7 @@
 package com.leilaodequadrinhos.api.application;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.PersonagemDao;
-import com.leilaodequadrinhos.api.model.entities.Personagem;
+import com.leilaodequadrinhos.api.model.dao.CharacterDao;
+import com.leilaodequadrinhos.api.model.entities.Character;
 
 import java.util.List;
 
@@ -23,29 +22,29 @@ public class ProgramPersonagem {
 			
 	}
 
-	public static List<Personagem> listarPersonagemsPorProduto(int id_produto) {
-		PersonagemDao personagemDao = DaoFactory.createPersonagemDao();
-		return personagemDao.findByProduto(ProgramProduto.carregarProdutoByID(id_produto));
+	public static List<Character> listarPersonagemsPorProduto(int id_produto) {
+		CharacterDao characterDao = DaoFactory.createPersonagemDao();
+		return characterDao.findByProduto(ProgramProduto.carregarProdutoByID(id_produto));
 	}
 
-	public static Personagem carregarPersonagemPorID(int id_personagem) {
-		PersonagemDao personagemDao = DaoFactory.createPersonagemDao();
-		return personagemDao.findById(id_personagem);
+	public static Character carregarPersonagemPorID(int id_personagem) {
+		CharacterDao characterDao = DaoFactory.createPersonagemDao();
+		return characterDao.findById(id_personagem);
 	}
 
 	public static void relacionarPersonagemAProduto(int id_personagem, int id_produto) {
-		PersonagemDao personagemDao = DaoFactory.createPersonagemDao();
-		personagemDao.relacionarPersonagemProduto(carregarPersonagemPorID(id_personagem), ProgramProduto.carregarProdutoByID(id_produto));
+		CharacterDao characterDao = DaoFactory.createPersonagemDao();
+		characterDao.relateCharacterToProduct(carregarPersonagemPorID(id_personagem), ProgramProduto.carregarProdutoByID(id_produto));
 	}
 
-	public static List<Personagem> listarPersonagems() {
-		PersonagemDao personagemDao = DaoFactory.createPersonagemDao();
-		return personagemDao.findByAll();
+	public static List<Character> listarPersonagems() {
+		CharacterDao characterDao = DaoFactory.createPersonagemDao();
+		return characterDao.findByAll();
 	}
 
 	public static void inserirPersonagem() {
-		PersonagemDao personagemDao = DaoFactory.createPersonagemDao();
-		personagemDao.insertPersonagem(new Personagem(null, "Superman"));
+		CharacterDao characterDao = DaoFactory.createPersonagemDao();
+		characterDao.insertPersonagem(new Character(null, "Superman"));
 	}
 
 	
