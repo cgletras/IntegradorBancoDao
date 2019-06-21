@@ -19,6 +19,6 @@ public class InsertNewUser extends BaseUserTask implements Task {
         User user = getUser(request);
         user.setStatus(ACTIVE);
         userDao.insert(user);
-        return "Usuário cadastrado";
+        return "Registered user";
     }
 }

@@ -17,6 +17,6 @@ public class UpdateUser extends BaseUserTask implements Task {
         user.setUserID(Integer.parseInt(request.getParameter("userID")));
         user.setStatus(Boolean.parseBoolean(request.getParameter("status")));
         userDao.update(user);
-        return "Usuário atualizado";
+        return "User updated";
     }
 }

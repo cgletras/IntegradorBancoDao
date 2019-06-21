@@ -1,11 +1,11 @@
 package com.leilaodequadrinhos.api.model.task.writer;
 
-import com.leilaodequadrinhos.api.model.dao.EscritorDao;
-import com.leilaodequadrinhos.api.model.dao.ProdutoDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.EscritorDAO;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProdutoDAO;
-import com.leilaodequadrinhos.api.model.entities.Escritor;
-import com.leilaodequadrinhos.api.model.entities.Produto;
+import com.leilaodequadrinhos.api.model.dao.WriterDao;
+import com.leilaodequadrinhos.api.model.dao.ProductDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProductDAO;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.WriterDAO;
+import com.leilaodequadrinhos.api.model.entities.Writer;
+import com.leilaodequadrinhos.api.model.entities.Product;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +15,12 @@ import java.util.List;
 public class FindWriterByProduct implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long id = Long.parseLong(request.getParameter("productID"));
-        EscritorDao escritorDao = new EscritorDAO();
-        ProdutoDao produtoDao = new ProdutoDAO();
-        List<Escritor> list = escritorDao.findByProduto((Produto) produtoDao.findById(id));
-        request.setAttribute("escritores", list);
-        return list;
+        WriterDao writerDao = new WriterDAO();
+        ProductDao productDao = new ProductDAO();
+        List<Writer> writers = writerDao.findByProduct((Product) productDao.findById(id));
+        request.setAttribute("writers", writers);
+        return writers;
     }
 }

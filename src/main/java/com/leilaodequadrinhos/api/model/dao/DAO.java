@@ -6,7 +6,6 @@ public interface DAO<T> {
 
     T findById(Long id);
     List<T> findAll();
-    Long count();
     void deleteById(Long id);
     void update(T entity);
     void insert(T entity);

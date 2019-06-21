@@ -1,8 +1,8 @@
 package com.leilaodequadrinhos.api.model.task.character;
 
-import com.leilaodequadrinhos.api.model.dao.PersonagemDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.PersonagemDAO;
-import com.leilaodequadrinhos.api.model.entities.Personagem;
+import com.leilaodequadrinhos.api.model.dao.CharacterDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.CharacterDAO;
+import com.leilaodequadrinhos.api.model.entities.Character;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,10 +12,10 @@ import java.util.List;
 public class FindAllCharacters implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        PersonagemDao personagemDao = new PersonagemDAO();
-        List<Personagem> list = personagemDao.findAll();
-        request.setAttribute("personagens", list);
-        return list;
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
+        CharacterDao characterDao = new CharacterDAO();
+        List characters = characterDao.findAll();
+        request.setAttribute("characters", characters);
+        return characters;
     }
 }
