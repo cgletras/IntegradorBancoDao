@@ -51,7 +51,7 @@ stages:
   jobs:
   - deployment: DeployLinuxWebApp
     displayName: Deploy Linux Web App
-    environment: 'development'
+    environment: 'production'
     pool: 
       vmImage: $(vmImageName)
     strategy:
@@ -69,4 +69,4 @@ stages:
               azureSubscription: $(azureSubscription)
               appType: webAppLinux
               appName: $(webAppName)
-              package: '$(System.ArtifactsDirectory)/drop/**/target/*.?(war|jar)'
+              package: '$(System.ArtifactsDirectory)/drop/target/webserver-leilao.war'
