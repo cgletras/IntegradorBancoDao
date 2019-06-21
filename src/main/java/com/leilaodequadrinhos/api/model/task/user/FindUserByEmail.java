@@ -14,7 +14,7 @@ public class FindUserByEmail implements Task {
     public User execute(HttpServletRequest request, HttpServletResponse response) {
         UserDao userDao = new UserDAO();
         User user = userDao.findByEmail(request.getParameter("email"));
-        request.setAttribute("usuario", user);
+        request.setAttribute("user", user);
         return user;
     }
 }

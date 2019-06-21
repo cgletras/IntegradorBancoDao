@@ -12,8 +12,8 @@ public class ActivateUserByID implements Task {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         UserDao userDao = new UserDAO();
-        Integer id = Integer.parseInt(request.getParameter("userID"));
-        userDao.activate(id);
-        return "Usuário ativado";
+        Integer userID = Integer.parseInt(request.getParameter("userID"));
+        userDao.activate(userID);
+        return "User enabled";
     }
 }
