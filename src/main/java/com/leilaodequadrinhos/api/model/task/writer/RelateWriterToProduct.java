@@ -1,11 +1,11 @@
 package com.leilaodequadrinhos.api.model.task.writer;
 
-import com.leilaodequadrinhos.api.model.dao.EscritorDao;
-import com.leilaodequadrinhos.api.model.dao.ProdutoDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.EscritorDAO;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProdutoDAO;
-import com.leilaodequadrinhos.api.model.entities.Escritor;
-import com.leilaodequadrinhos.api.model.entities.Produto;
+import com.leilaodequadrinhos.api.model.dao.WriterDao;
+import com.leilaodequadrinhos.api.model.dao.ProductDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProductDAO;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.WriterDAO;
+import com.leilaodequadrinhos.api.model.entities.Writer;
+import com.leilaodequadrinhos.api.model.entities.Product;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +15,11 @@ public class RelateWriterToProduct implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        EscritorDao escritorDao = new EscritorDAO();
-        ProdutoDao produtoDao = new ProdutoDAO();
-        Long idEscritor = Long.parseLong(request.getParameter("writerID"));
-        Long idProduto = Long.parseLong(request.getParameter("productID"));
-        escritorDao.relacionarEscritorProduto((Escritor) escritorDao.findById(idEscritor), (Produto) produtoDao.findById(idProduto));
-        return "Escritor relacionado ao quadrinho";
+        WriterDao writerDao = new WriterDAO();
+        ProductDao productDao = new ProductDAO();
+        Long writerID = Long.parseLong(request.getParameter("writerID"));
+        Long productID = Long.parseLong(request.getParameter("productID"));
+        writerDao.relateWriterToProduct((Writer) writerDao.findById(writerID), (Product) productDao.findById(productID));
+        return "Writer related to the comic";
     }
 }

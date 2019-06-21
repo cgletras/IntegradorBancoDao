@@ -1,8 +1,8 @@
 package com.leilaodequadrinhos.api.model.task.auction;
 
-import com.leilaodequadrinhos.api.model.dao.LeilaoDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.LeilaoDAO;
-import com.leilaodequadrinhos.api.model.entities.Leilao;
+import com.leilaodequadrinhos.api.model.dao.AuctionDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.AuctionDAO;
+import com.leilaodequadrinhos.api.model.entities.Auction;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +12,11 @@ public class UpdateCurrentAuctionPrice implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        LeilaoDao leilaoDao = new LeilaoDAO();
-        Leilao leilao = new Leilao();
-        leilao.setIdLeilao(Long.parseLong(request.getParameter("id")));
-        leilao.setLancePadrao(Float.parseFloat(request.getParameter("baseBid")));
-        leilaoDao.updateValorAtual(leilao);
-        return "O valor atual do leilão foi atualizado";
+        AuctionDao auctionDao = new AuctionDAO();
+        Auction auction = new Auction();
+        auction.setAuctionID(Long.parseLong(request.getParameter("auctionID")));
+        auction.setDefaultBid(Float.parseFloat(request.getParameter("baseBid")));
+        auctionDao.updateInitialValue(auction);
+        return "The current value of the auction has been updated";
     }
 }

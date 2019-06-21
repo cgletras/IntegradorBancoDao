@@ -7,5 +7,6 @@ import java.util.List;
 public interface UserDao extends DAO {
 
 	void activate(Integer id);
+	Long count();
 	User findByEmail(String email);
 }

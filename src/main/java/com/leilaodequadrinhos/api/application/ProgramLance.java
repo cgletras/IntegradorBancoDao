@@ -1,8 +1,7 @@
 package com.leilaodequadrinhos.api.application;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.LanceDao;
-import com.leilaodequadrinhos.api.model.entities.Lance;
+import com.leilaodequadrinhos.api.model.dao.BidDao;
+import com.leilaodequadrinhos.api.model.entities.Bid;
 
 import java.util.List;
 
@@ -28,37 +27,37 @@ public class ProgramLance {
 	}
 
 	public static void deletarLance(int id_lance) {
-		LanceDao lanceDao = DaoFactory.createLanceDao();
-		lanceDao.deleteLanceById(id_lance);
+		BidDao bidDao = DaoFactory.createLanceDao();
+		bidDao.deleteLanceById(id_lance);
 		
 	}
 
-	public static List<Lance> carregaLancesPorUsuario(int id_usuario) {
-		LanceDao lanceDao = DaoFactory.createLanceDao();
-		return lanceDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));
+	public static List<Bid> carregaLancesPorUsuario(int id_usuario) {
+		BidDao bidDao = DaoFactory.createLanceDao();
+		return bidDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));
 	}
 
 	public static List carregaLancesPorLeilao(int id_leilao) {
-		LanceDao lanceDao = DaoFactory.createLanceDao();
-		return lanceDao.findByLeilao(ProgramLeilao.carregaLeilaoPorId(id_leilao));
+		BidDao bidDao = DaoFactory.createLanceDao();
+		return bidDao.findByLeilao(ProgramLeilao.carregaLeilaoPorId(id_leilao));
 	}
 
-	public static List<Lance> carregaTodosLances() {
-		LanceDao lanceDao = DaoFactory.createLanceDao();
-		return lanceDao.findAll();
+	public static List<Bid> carregaTodosLances() {
+		BidDao bidDao = DaoFactory.createLanceDao();
+		return bidDao.findAll();
 	}
 
-	public static Lance carregaLance(int id_lance) {
-		LanceDao lanceDao = DaoFactory.createLanceDao();
-		return lanceDao.findById(id_lance);
+	public static Bid carregaLance(int id_lance) {
+		BidDao bidDao = DaoFactory.createLanceDao();
+		return bidDao.findById(id_lance);
 	}
 
 	public static void insereLance(int id_usuario, int id_leilao) {
 		
-		LanceDao lanceDao = DaoFactory.createLanceDao();
-		lanceDao.insert
-		(new Lance(null, 
-				ProgramLeilao.carregaLeilaoPorId(id_leilao).getLancePadrao(), 
+		BidDao bidDao = DaoFactory.createLanceDao();
+		bidDao.insert
+		(new Bid(null,
+				ProgramLeilao.carregaLeilaoPorId(id_leilao).getDefaultBid(),
 				null, 
 				ProgramLeilao.carregaLeilaoPorId(id_leilao), 
 //				ProgramUsuario.carregaUsuario(id_usuario)));
