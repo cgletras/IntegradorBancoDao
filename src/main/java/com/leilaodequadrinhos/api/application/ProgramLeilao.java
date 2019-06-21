@@ -1,9 +1,8 @@
 package com.leilaodequadrinhos.api.application;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.LeilaoDao;
-import com.leilaodequadrinhos.api.model.entities.Lance;
-import com.leilaodequadrinhos.api.model.entities.Leilao;
+import com.leilaodequadrinhos.api.model.dao.AuctionDao;
+import com.leilaodequadrinhos.api.model.entities.Auction;
+import com.leilaodequadrinhos.api.model.entities.Bid;
 
 import java.util.Date;
 import java.util.List;
@@ -32,74 +31,74 @@ public class ProgramLeilao {
 
 	public static void cancelarLeilao(int id_leilao) {
 		
-		List<Lance> lances = ProgramLance.carregaLancesPorLeilao(id_leilao);
-		System.out.println(lances.size());
+		List<Bid> bids = ProgramLance.carregaLancesPorLeilao(id_leilao);
+		System.out.println(bids.size());
 		
-		if(lances.size()==0) {
+		if(bids.size()==0) {
 			mudaStatusLeilao(id_leilao, 5);
 		} else {
-			System.out.println("Um leil�o com lances n�o pode ser cancelado");
+			System.out.println("Um leil�o com bids n�o pode ser cancelado");
 		}		
 	}
 
 	public static void mudaStatusLeilao(int id_leilao, int id_estado_leilao) {
-		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-		leilaoDao.changeStatusLeilao(id_leilao, ProgramEstadoLeilao.estadoLeilaoPorId(id_estado_leilao));
+		AuctionDao auctionDao = DaoFactory.createLeilaoDao();
+		auctionDao.changesAuctionStatus(id_leilao, ProgramEstadoLeilao.estadoLeilaoPorId(id_estado_leilao));
 	}
 
-	public static List<Leilao> listarLeilaoPorUsuario(int id_usuario) {
-		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-		return leilaoDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));
+	public static List<Auction> listarLeilaoPorUsuario(int id_usuario) {
+		AuctionDao auctionDao = DaoFactory.createLeilaoDao();
+		return auctionDao.findByUser(ProgramUsuario.carregaUsuario(id_usuario));
 	}
 
-	public static List<Leilao> listarLeiloes() {
-		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-		return leilaoDao.findAll();
+	public static List<Auction> listarLeiloes() {
+		AuctionDao auctionDao = DaoFactory.createLeilaoDao();
+		return auctionDao.findAll();
 	}
 
 	public static void insereLeilao() {
-		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-		Leilao leilao = new Leilao();
+		AuctionDao auctionDao = DaoFactory.createLeilaoDao();
+		Auction auction = new Auction();
 		//carregar dados informados na pagina de atualiza�ao abaixo
 		
-		leilao.setDuracao(10);
-		leilao.setDataInicio(new Date());
-		leilao.setValorInicial(450);
-		leilao.setValorAtual(leilao.getValorInicial());
-		leilao.setLancePadrao(20);
-		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
-		leilao.setProduto(ProgramProduto.carregarProdutoByID(5));
-		leilao.setUser(ProgramUsuario.carregaUsuario(2));
-		leilaoDao.insert(leilao);
+		auction.setDuration(10);
+		auction.setInitialDate(new Date());
+		auction.setInitialValue(450);
+		auction.setCurrentValue(auction.getInitialValue());
+		auction.setDefaultBid(20);
+		auction.setAuctionStatus(ProgramEstadoLeilao.estadoLeilaoPorId(1));
+		auction.setProduct(ProgramProduto.carregarProdutoByID(5));
+		auction.setUser(ProgramUsuario.carregaUsuario(2));
+		auctionDao.insert(auction);
 	}
 
 	public static void updateLeilao(int id_leilao) {
-		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-		Leilao leilao = new Leilao();
+		AuctionDao auctionDao = DaoFactory.createLeilaoDao();
+		Auction auction = new Auction();
 		//carregar dados informados na pagina de atualiza�ao abaixo
 		
-		leilao.setIdLeilao(id_leilao);
-		leilao.setDuracao(20);
-		leilao.setDataInicio(new Date());
-		leilao.setValorInicial(200);
-		leilao.setValorAtual(leilao.getValorInicial());
-		leilao.setLancePadrao(30);
-		leilao.setEstado(ProgramEstadoLeilao.estadoLeilaoPorId(1));
-		leilao.setProduto(ProgramProduto.carregarProdutoByID(3));
-		leilao.setUser(ProgramUsuario.carregaUsuario(1));
+		auction.setAuctionID(id_leilao);
+		auction.setDuration(20);
+		auction.setInitialDate(new Date());
+		auction.setInitialValue(200);
+		auction.setCurrentValue(auction.getInitialValue());
+		auction.setDefaultBid(30);
+		auction.setAuctionStatus(ProgramEstadoLeilao.estadoLeilaoPorId(1));
+		auction.setProduct(ProgramProduto.carregarProdutoByID(3));
+		auction.setUser(ProgramUsuario.carregaUsuario(1));
 		
-		List<Lance> lances = ProgramLance.carregaLancesPorLeilao(id_leilao);
-		System.out.println(lances.size());
+		List<Bid> bids = ProgramLance.carregaLancesPorLeilao(id_leilao);
+		System.out.println(bids.size());
 		
-		if(lances.size()==0) {
-			leilaoDao.update(leilao);
+		if(bids.size()==0) {
+			auctionDao.update(auction);
 		} else {
-			System.out.println("Um leil�o com lances n�o pode ser modificado");
+			System.out.println("Um leil�o com bids n�o pode ser modificado");
 		}
 	}
 
-	public static Leilao carregaLeilaoPorId(int id_leilao) {
-		LeilaoDao leilaoDao = DaoFactory.createLeilaoDao();
-		return leilaoDao.findById(id_leilao);
+	public static Auction carregaLeilaoPorId(int id_leilao) {
+		AuctionDao auctionDao = DaoFactory.createLeilaoDao();
+		return auctionDao.findById(id_leilao);
 	}
 }

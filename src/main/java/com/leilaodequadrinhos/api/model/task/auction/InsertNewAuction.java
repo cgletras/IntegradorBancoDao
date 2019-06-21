@@ -1,12 +1,12 @@
 package com.leilaodequadrinhos.api.model.task.auction;
 
-import com.leilaodequadrinhos.api.model.dao.EstadoLeilaoDao;
-import com.leilaodequadrinhos.api.model.dao.LeilaoDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.EstadoLeilaoDAO;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.LeilaoDAO;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProdutoDAO;
+import com.leilaodequadrinhos.api.model.dao.AuctionStatusDao;
+import com.leilaodequadrinhos.api.model.dao.AuctionDao;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.AuctionDAO;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.AuctionStatusDAO;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProductDAO;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
-import com.leilaodequadrinhos.api.model.entities.Leilao;
+import com.leilaodequadrinhos.api.model.entities.Auction;
 import com.leilaodequadrinhos.api.model.task.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +18,13 @@ public class InsertNewAuction extends BaseAuctionTask implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        LeilaoDao leilaoDao = new LeilaoDAO();
-        EstadoLeilaoDao estadoLeilaoDao = new EstadoLeilaoDAO();
-        ProdutoDAO produtoDao = new ProdutoDAO();
+        AuctionDao auctionDao = new AuctionDAO();
+        AuctionStatusDao auctionStatusDao = new AuctionStatusDAO();
+        ProductDAO productDAO = new ProductDAO();
         UserDAO userDao = new UserDAO();
-        Leilao leilao = getLeilao(request, produtoDao, userDao);
-        leilao.setEstado(estadoLeilaoDao.findById(ACTIVE));
-        leilaoDao.insert(leilao);
-        return "Leilao Cadastrado";
+        Auction auction = getAuction(request, productDAO, userDao);
+        auction.setAuctionStatus(auctionStatusDao.findById(ACTIVE));
+        auctionDao.insert(auction);
+        return "Registered auction";
     }
 }

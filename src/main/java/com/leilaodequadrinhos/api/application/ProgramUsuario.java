@@ -1,14 +1,5 @@
 package com.leilaodequadrinhos.api.application;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.UserDao;
-import com.leilaodequadrinhos.api.model.entities.User;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 public class ProgramUsuario {
 
 //	public static void main(String[] args) throws ParseException {
