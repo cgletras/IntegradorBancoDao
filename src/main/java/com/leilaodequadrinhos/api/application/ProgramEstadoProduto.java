@@ -1,8 +1,7 @@
 package com.leilaodequadrinhos.api.application;
 
-import com.leilaodequadrinhos.api.model.dao.DaoFactory;
-import com.leilaodequadrinhos.api.model.dao.EstadoProdutoDao;
-import com.leilaodequadrinhos.api.model.entities.EstadoProduto;
+import com.leilaodequadrinhos.api.model.dao.ProductStatusDao;
+import com.leilaodequadrinhos.api.model.entities.ProductStatus;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class ProgramEstadoProduto {
 		
 		
 		
-		//Find EstadoProduto by id
+		//Find ProductStatus by id
 		int id = 1;
 		
 //OK	estadoProdutoPorId(id);
@@ -24,13 +23,13 @@ public class ProgramEstadoProduto {
 				
 	}
 
-	public static List<EstadoProduto> listarEstadosProduto() {
-		EstadoProdutoDao estadoProdutoDao = DaoFactory.createEstadoProdutoDao();
-		return estadoProdutoDao.findAll();
+	public static List<ProductStatus> listarEstadosProduto() {
+		ProductStatusDao productStatusDao = DaoFactory.createEstadoProdutoDao();
+		return productStatusDao.findAll();
 	}
 
-	public static EstadoProduto estadoProdutoPorId(int id) {
-		EstadoProdutoDao estadoProdutoDao = DaoFactory.createEstadoProdutoDao();
-		return estadoProdutoDao.findById(id);
+	public static ProductStatus estadoProdutoPorId(int id) {
+		ProductStatusDao productStatusDao = DaoFactory.createEstadoProdutoDao();
+		return productStatusDao.findById(id);
 	}
 }

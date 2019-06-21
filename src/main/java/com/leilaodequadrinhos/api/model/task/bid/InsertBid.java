@@ -1,12 +1,12 @@
 package com.leilaodequadrinhos.api.model.task.bid;
 
-        import com.leilaodequadrinhos.api.model.dao.LanceDao;
-        import com.leilaodequadrinhos.api.model.dao.LeilaoDao;
-        import com.leilaodequadrinhos.api.model.dao.impl.jdbc.LanceDAO;
-        import com.leilaodequadrinhos.api.model.dao.impl.jdbc.LeilaoDAO;
+        import com.leilaodequadrinhos.api.model.dao.AuctionDao;
+        import com.leilaodequadrinhos.api.model.dao.BidDao;
+        import com.leilaodequadrinhos.api.model.dao.impl.jdbc.AuctionDAO;
+        import com.leilaodequadrinhos.api.model.dao.impl.jdbc.BidDAO;
         import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
-        import com.leilaodequadrinhos.api.model.entities.Lance;
-        import com.leilaodequadrinhos.api.model.entities.Leilao;
+        import com.leilaodequadrinhos.api.model.entities.Auction;
+        import com.leilaodequadrinhos.api.model.entities.Bid;
         import com.leilaodequadrinhos.api.model.entities.User;
         import com.leilaodequadrinhos.api.model.task.Task;
 
@@ -18,20 +18,20 @@ public class InsertBid implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        LanceDao lanceDao = new LanceDAO();
+        BidDao bidDao = new BidDAO();
         UserDAO userDao = new UserDAO();
-        LeilaoDao leilaoDAO = new LeilaoDAO();
+        AuctionDao auctionDAO = new AuctionDAO();
         String format = "dd/MM/yyyy";
-        Lance lance = new Lance();
-        lance.setDataLance(new SimpleDateFormat(format).parse(request.getParameter("dateOfBid")));
+        Bid bid = new Bid();
+        bid.setBidDate(new SimpleDateFormat(format).parse(request.getParameter("dateOfBid")));
         Long userID = Long.parseLong(request.getParameter("userID"));
         User user = userDao.findById(userID);
-        lance.setUser(user);
+        bid.setUser(user);
         Long auctionID = Long.parseLong(request.getParameter("auctionID"));
-        Leilao leilao = (Leilao) leilaoDAO.findById(auctionID);
-        lance.setValorLance(leilao.getLancePadrao());
-        lance.setLeilao(leilao);
-        lanceDao.insert(lance);
-        return "Lance inserido com sucesso";
+        Auction auction = (Auction) auctionDAO.findById(auctionID);
+        bid.setBidValue(auction.getDefaultBid());
+        bid.setAuction(auction);
+        bidDao.insert(bid);
+        return "Bid successfully entered";
     }
 }

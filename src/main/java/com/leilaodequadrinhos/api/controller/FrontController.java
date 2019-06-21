@@ -5,34 +5,34 @@ import com.leilaodequadrinhos.api.model.task.Task;
 import com.leilaodequadrinhos.api.model.task.TaskFactory;
 import com.leilaodequadrinhos.api.util.Json;
 
-import javax.servlet.ServletException;
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@WebFilter("/*")
 @WebServlet("/controller/*")
-public class FrontController extends HttpServlet {
+public class FrontController extends HttpServlet implements Filter {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        setAccessControlHeaders(response);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        if (request.getMethod().equalsIgnoreCase("OPTIONS")) doOptions(request, response);
-
         Map<String, Object> responseBodyObject = new HashMap<>();
-
+        Task task = TaskFactory.getTask(request);
 
         try {
-            verifyLogin(request, response, responseBodyObject);
+            responseBodyObject.put("data", task.execute(request, response));
+            responseBodyObject.put("user", request.getSession().getAttribute("user"));
+
             String jResponse = Json.objectToJson(responseBodyObject);
 
             PrintWriter out = response.getWriter();
@@ -42,14 +42,12 @@ public class FrontController extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println(e.getMessage());
         } catch (Exception e) {
-            throw new ServletException("Erro ao executar tarefa.", e);
+            throw new ServletException("Error executing task", e);
         }
     }
 
     @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        setAccessControlHeaders(response);
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
@@ -73,23 +71,40 @@ public class FrontController extends HttpServlet {
         super.doDelete(req, resp);
     }
 
-    private void setAccessControlHeaders(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, cache-control");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        setAccessControlHeaders(request, response);
+
+        HttpSession session = request.getSession(false);
+        String loginPath = "/login";
+        String publicPath = "/public";
+
+        boolean loggedIn = session != null && session.getAttribute("user") != null;
+        boolean loginRequest = request.getPathInfo().equals(loginPath);
+        boolean publicRequest = request.getPathInfo().startsWith(publicPath);
+        boolean corsRequest = request.getMethod().equalsIgnoreCase("OPTIONS");
+
+        if (loggedIn || loginRequest || publicRequest || corsRequest) {
+            chain.doFilter(request, response);
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        }
     }
 
-    private void verifyLogin(HttpServletRequest request, HttpServletResponse response, Map<String, Object> responseBodyObject) throws Exception {
-        if (!((request.getMethod() + request.getPathInfo()).equalsIgnoreCase("POST/login")) && request.getSession().getAttribute("user") == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        } else {
-            Task task = TaskFactory.getTask(request);
-            responseBodyObject.put("data", task.execute(request, response));
-        }
+    private void setAccessControlHeaders(HttpServletRequest request, HttpServletResponse response) {
+        List<String> incomingURLs = Arrays.asList(request.getServletContext().getInitParameter("incomingURLs").trim().split(";"));
+        String clientOrigin = request.getHeader("origin");
 
-        responseBodyObject.put(
-                "user", request.getSession().getAttribute("user")
-        );
+        if (incomingURLs.indexOf(clientOrigin) != -1) {
+            response.setHeader("Access-Control-Allow-Origin", clientOrigin);
+            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, cache-control");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
+        }
     }
 }
