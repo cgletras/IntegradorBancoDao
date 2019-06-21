@@ -19,13 +19,14 @@ import java.util.Map;
 @WebServlet("/controller/*")
 public class FrontController extends HttpServlet {
 
-    @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         setAccessControlHeaders(response);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
+        if (request.getMethod().equalsIgnoreCase("OPTIONS")) doOptions(request, response);
 
         Map<String, Object> responseBodyObject = new HashMap<>();
 
@@ -46,10 +47,30 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doOptions(HttpServletRequest req, HttpServletResponse resp)
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        setAccessControlHeaders(resp);
-        resp.setStatus(HttpServletResponse.SC_OK);
+        setAccessControlHeaders(response);
+        response.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doDelete(req, resp);
     }
 
     private void setAccessControlHeaders(HttpServletResponse response) {
