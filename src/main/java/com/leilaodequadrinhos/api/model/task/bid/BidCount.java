@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public class BidCount implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long auctionID = Long.parseLong(request.getParameter("auctionID"));
         BidDao bidDao = new BidDAO();
         Long bidCount = bidDao.BidCount(auctionID);

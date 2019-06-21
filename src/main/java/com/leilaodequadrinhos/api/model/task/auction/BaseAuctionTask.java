@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 
 abstract class BaseAuctionTask {
 
-    protected Auction getLeilao(HttpServletRequest request, ProductDAO produtoDao, UserDAO userDao) throws ParseException {
+    protected Auction getAuction(HttpServletRequest request, ProductDAO productDAO, UserDAO userDao) throws ParseException {
         Long userID = Long.parseLong(request.getParameter("userID"));
         Long productID = Long.parseLong(request.getParameter("productID"));
         Auction auction = new Auction();
@@ -20,7 +20,7 @@ abstract class BaseAuctionTask {
         auction.setInitialValue(Float.parseFloat(request.getParameter("initialValue")));
         auction.setCurrentValue(auction.getInitialValue());
         auction.setDefaultBid(Float.parseFloat(request.getParameter("baseBid")));
-        auction.setProduct(produtoDao.findById(productID));
+        auction.setProduct(productDAO.findById(productID));
         auction.setUser(userDao.findById(userID));
         return auction;
     }

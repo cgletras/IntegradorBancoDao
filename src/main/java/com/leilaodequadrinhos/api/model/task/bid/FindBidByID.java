@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FindBidByID implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         BidDao bidDao = new BidDAO();
         Bid bid = (Bid) bidDao.findById(Long.parseLong(request.getParameter("bidID")));
         request.setAttribute("bid", bid);

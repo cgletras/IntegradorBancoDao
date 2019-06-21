@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DeleteAuctionByID implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long auctionID = Long.parseLong(request.getParameter("auctionID"));
         AuctionDao auctionDao = new AuctionDAO();
         auctionDao.deleteById(auctionID);

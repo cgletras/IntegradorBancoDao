@@ -42,13 +42,12 @@ public class FrontController extends HttpServlet implements Filter {
             PrintWriter out = response.getWriter();
             out.println(e.getMessage());
         } catch (Exception e) {
-            throw new ServletException("Erro ao executar tarefa.", e);
+            throw new ServletException("Error executing task", e);
         }
     }
 
     @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
@@ -107,7 +106,5 @@ public class FrontController extends HttpServlet implements Filter {
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
         }
-
     }
-
 }

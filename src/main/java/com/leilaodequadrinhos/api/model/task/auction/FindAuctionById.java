@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FindAuctionById implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         AuctionDao auctionDao = new AuctionDAO();
         Long id = Long.parseLong(request.getParameter("auctionID"));
         Auction auction = (Auction) auctionDao.findById(id);

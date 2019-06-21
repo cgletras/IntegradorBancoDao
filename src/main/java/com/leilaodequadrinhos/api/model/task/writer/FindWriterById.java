@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FindWriterById implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Long writerID = Long.parseLong(request.getParameter("writerID"));
         WriterDao writerDao = new WriterDAO();
         Writer writer = (Writer) writerDao.findById(writerID);

@@ -110,11 +110,8 @@ public class User implements Serializable {
             return false;
         User other = (User) obj;
         if (userID == null) {
-            if (other.userID != null)
-                return false;
-        } else if (!userID.equals(other.userID))
-            return false;
-        return true;
+            return other.userID == null;
+        } else return userID.equals(other.userID);
     }
 
     @Override

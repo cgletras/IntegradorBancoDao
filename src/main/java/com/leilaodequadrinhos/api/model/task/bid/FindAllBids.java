@@ -12,9 +12,9 @@ import java.util.List;
 public class FindAllBids implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         BidDao bidDao = new BidDAO();
-        List<Bid> bids = bidDao.findAll();
+        List bids = bidDao.findAll();
         request.setAttribute("bids", bids);
         return bids;
     }

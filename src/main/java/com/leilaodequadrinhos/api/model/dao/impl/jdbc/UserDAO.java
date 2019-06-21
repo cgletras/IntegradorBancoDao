@@ -208,8 +208,6 @@ public class UserDAO implements UserDao {
 
             st.setBoolean(1, true);
             st.setInt(2, id);
-            ;
-
             st.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());

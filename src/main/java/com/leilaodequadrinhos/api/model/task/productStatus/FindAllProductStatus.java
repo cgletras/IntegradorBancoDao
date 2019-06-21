@@ -12,7 +12,7 @@ import java.util.List;
 public class FindAllProductStatus implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         ProductStatusDao productStatusDao = new ProductStatusDAO();
         List<ProductStatus> listProductStatus = productStatusDao.findAll();
         request.setAttribute("productStatus", listProductStatus);

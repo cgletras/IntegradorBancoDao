@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateCurrentAuctionPrice implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         AuctionDao auctionDao = new AuctionDAO();
         Auction auction = new Auction();
         auction.setAuctionID(Long.parseLong(request.getParameter("auctionID")));

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ChangeAuctionStatus implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         Integer auctionID = Integer.parseInt(request.getParameter("auctionID"));
         Long auctionStatusID = Long.parseLong(request.getParameter("auctionStatusID"));
         AuctionDao auctionDao = new AuctionDAO();

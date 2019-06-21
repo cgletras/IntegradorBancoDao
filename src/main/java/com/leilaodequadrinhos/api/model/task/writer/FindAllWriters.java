@@ -12,9 +12,9 @@ import java.util.List;
 public class FindAllWriters implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object execute(HttpServletRequest request, HttpServletResponse response) {
         WriterDao writerDao = new WriterDAO();
-        List<Writer> writers = writerDao.findAll();
+        List writers = writerDao.findAll();
         request.setAttribute("writers", writers);
         return writers;
     }

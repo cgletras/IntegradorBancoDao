@@ -14,7 +14,7 @@ public class FindAllUsers implements Task {
     @Override
     public List<User> execute(HttpServletRequest request, HttpServletResponse response) {
         DAO dao = new UserDAO();
-        List<User> users = dao.findAll();
+        List users = dao.findAll();
         request.setAttribute("users", users);
         return users;
     }

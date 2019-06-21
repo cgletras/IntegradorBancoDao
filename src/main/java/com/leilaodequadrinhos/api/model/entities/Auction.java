@@ -106,7 +106,7 @@ public class Auction implements Serializable {
         this.defaultBid = defaultBid;
     }
 
-    public static long getSerialversionuid() {
+    public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 

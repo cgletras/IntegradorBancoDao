@@ -22,7 +22,7 @@ public class InsertNewAuction extends BaseAuctionTask implements Task {
         AuctionStatusDao auctionStatusDao = new AuctionStatusDAO();
         ProductDAO productDAO = new ProductDAO();
         UserDAO userDao = new UserDAO();
-        Auction auction = getLeilao(request, productDAO, userDao);
+        Auction auction = getAuction(request, productDAO, userDao);
         auction.setAuctionStatus(auctionStatusDao.findById(ACTIVE));
         auctionDao.insert(auction);
         return "Registered auction";
