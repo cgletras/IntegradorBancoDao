@@ -106,6 +106,7 @@ public class FrontController extends HttpServlet implements Filter {
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
             response.setHeader("sotero", "teste");
+
         }
     }
 }
