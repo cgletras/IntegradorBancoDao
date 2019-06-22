@@ -102,9 +102,10 @@ public class FrontController extends HttpServlet implements Filter {
 
         if (incomingURLs.indexOf(clientOrigin) != -1) {
             response.setHeader("Access-Control-Allow-Origin", clientOrigin);
-            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, cache-control");
+            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, cache-control, sotero");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
+            response.setHeader("sotero", "teste");
         }
     }
 }
