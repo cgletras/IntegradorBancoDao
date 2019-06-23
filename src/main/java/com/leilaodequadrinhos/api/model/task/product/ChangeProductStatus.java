@@ -19,20 +19,20 @@ public class ChangeProductStatus implements Task {
         Long productID = Long.parseLong(request.getParameter("productID"));
         Long productStateID = Long.parseLong(request.getParameter("productStateID"));
         Product product = (Product) productDao.findById(productID);
-        switch (product.getProductStatus().getProductStatusID()){
-            case 1: if(productStateID == 2 ||productStateID == 3){
+        switch (product.getProductStatus().getStatus()){
+            case "ATIVO": if(productStateID == 2 ||productStateID == 3){
                 productDao.changeStatusProduct(productID, productStatusDao.findById(productStateID));
                 return "Successfully modified product status to "+productStatusDao.findById(productStateID).getStatus();
             } else {
                 return "Cannot modify product status";
             }
-            case 2: if(productStateID == 1) {
+            case "INATIVO": if(productStateID == 1) {
                 productDao.changeStatusProduct(productID, productStatusDao.findById(productStateID));
                 return "Successfully modified product status to "+productStatusDao.findById(productStateID).getStatus();
             } else {
                 return "Cannot modify product status";
             }
-            case 3: if(productStateID == 4){
+            case "EM_LEILAO": if(productStateID == 4){
                 productDao.changeStatusProduct(productID, productStatusDao.findById(productStateID));
                 return "Successfully modified product status to "+productStatusDao.findById(productStateID).getStatus();
             } else if (productStateID == 1) {
