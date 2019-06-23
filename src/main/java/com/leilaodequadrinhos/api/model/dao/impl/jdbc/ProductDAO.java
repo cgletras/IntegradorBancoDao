@@ -168,7 +168,7 @@ public class ProductDAO implements ProductDao {
     }
 
     @Override
-    public void changeStatusProduct(Integer id, ProductStatus productStatus) {
+    public void changeStatusProduct(Long id, ProductStatus productStatus) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -177,7 +177,7 @@ public class ProductDAO implements ProductDao {
                             "WHERE id_produto= ?");
 
             st.setInt(1, productStatus.getProductStatusID());
-            st.setInt(2, id);
+            st.setLong(2, id);
 
             st.executeUpdate();
         } catch (SQLException e) {
