@@ -7,4 +7,5 @@ public interface UserDao extends DAO {
 	void activate(Integer id);
 	Long count();
 	User findByEmail(String email);
+	Boolean hasActiveAuction(Long id);
 }

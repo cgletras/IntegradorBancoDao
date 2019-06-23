@@ -249,4 +249,34 @@ public class UserDAO implements UserDao {
             DB.closeResultSet(rs);
         }
     }
+
+    @Override
+    public Boolean hasActiveAuction(Long id) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "SELECT COUNT(id_usuario) count "
+                            + "FROM Leilao "
+                            + "WHERE id_usuario = ? AND id_estado_leilao = 1 ");
+
+            st.setLong(1, id);
+            rs = st.executeQuery();
+
+            Long count = null;
+            Map<Integer, User> map = new HashMap<>();
+
+            while (rs.next()) {
+                count = rs.getLong("count");
+            }
+
+            if(count == 0){return false;}
+            else {return true;}
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
 }
