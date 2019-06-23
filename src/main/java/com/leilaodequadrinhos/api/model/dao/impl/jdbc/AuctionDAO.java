@@ -269,7 +269,7 @@ public class AuctionDAO implements AuctionDao {
     }
 
     @Override
-    public void changesAuctionStatus(Integer id, AuctionStatus auctionStatus) {
+    public void changesAuctionStatus(Long id, AuctionStatus auctionStatus) {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -278,7 +278,26 @@ public class AuctionDAO implements AuctionDao {
                             "WHERE id_leilao= ?");
 
             st.setInt(1, auctionStatus.getAuctionStatusID());
-            st.setInt(2, id);
+            st.setLong(2, id);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
+    }
+
+    @Override
+    public void setAuctionDateNow(Long id) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "UPDATE Leilao " +
+                            "SET data_inicio = now() " +
+                            "WHERE id_leilao= ?");
+
+            st.setLong(1, id);
 
             st.executeUpdate();
         } catch (SQLException e) {
