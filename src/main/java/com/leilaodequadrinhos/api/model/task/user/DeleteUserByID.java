@@ -13,7 +13,11 @@ public class DeleteUserByID implements Task {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         UserDao userDao = new UserDAO();
         Long id = Long.parseLong(request.getParameter("userID"));
-        userDao.deleteById(id);
-        return "Deleted user";
+        if(!userDao.hasActiveAuction(id)){
+            userDao.deleteById(id);
+            return "Deleted user";
+        } else {
+            return "Users with active auctions cannot be deleted";
+        }
     }
 }
