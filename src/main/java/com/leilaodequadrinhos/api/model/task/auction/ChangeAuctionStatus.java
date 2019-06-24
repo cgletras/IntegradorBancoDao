@@ -27,21 +27,27 @@ public class ChangeAuctionStatus implements Task {
         Long bidCount = bidDao.BidCount(auctionID);
 
         if(bidCount == 0){
+            boolean changeStatusToActive = auctionStatusID == 1;
+            boolean changeStateToInactive = auctionStatusID == 2;
+            boolean changeStateToOnHold = auctionStatusID == 3;
+            boolean changeStateToCanceled = auctionStatusID == 5;
+
             switch (auction.getAuctionStatus().getStatus()){
-                case "ATIVO": if (auctionStatusID == 2 || auctionStatusID == 3 || auctionStatusID ==5){
+                case "ATIVO":
+                    if (changeStateToInactive || changeStateToOnHold || changeStateToCanceled){
                     auctionDao.changesAuctionStatus(auctionID, auctionStatus);
                     return "Auction status changed";
                 } else {
                     return "Cannot change the Auction status";
                 }
-                case "INATIVO": if (auctionStatusID == 1 || auctionStatusID == 3 || auctionStatusID ==5){
+                case "INATIVO": if (changeStatusToActive || changeStateToOnHold || changeStateToCanceled){
                     auctionDao.changesAuctionStatus(auctionID, auctionStatus);
                         if(auctionStatusID == 1){auctionDao.setAuctionDateNow(auctionID);}
                     return "Auction status changed";
                 } else {
                     return "Cannot change the Auction status";
                 }
-                case "EM_ESPERA": if (auctionStatusID == 1 || auctionStatusID == 2 || auctionStatusID ==5){
+                case "EM_ESPERA": if (changeStatusToActive || changeStateToInactive || changeStateToCanceled){
                     auctionDao.changesAuctionStatus(auctionID, auctionStatus);
                         if(auctionStatusID == 1){auctionDao.setAuctionDateNow(auctionID);}
                     return "Auction status changed";

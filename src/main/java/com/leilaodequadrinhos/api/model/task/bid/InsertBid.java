@@ -31,7 +31,13 @@ public class InsertBid implements Task {
         Auction auction = (Auction) auctionDAO.findById(auctionID);
         bid.setBidValue(auction.getDefaultBid());
         bid.setAuction(auction);
-        bidDao.insert(bid);
-        return "Bid successfully entered";
+
+        switch (auction.getAuctionStatus().getStatus()) {
+            case "ATIVO":
+                bidDao.insert(bid);
+                return "Bid successfully entered";
+            default:
+                return "Bids could only be placed on active auctions";
+        }
     }
 }
