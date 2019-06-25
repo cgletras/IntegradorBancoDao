@@ -12,7 +12,7 @@ public class DeleteUserByID implements Task {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         UserDao userDao = new UserDAO();
-        Long id = Long.parseLong(request.getParameter("userID"));
+        Long id = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
         if(!userDao.hasActiveAuction(id)){
             userDao.deleteById(id);
             return "Deleted user";

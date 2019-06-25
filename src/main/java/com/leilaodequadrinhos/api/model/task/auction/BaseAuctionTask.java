@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 abstract class BaseAuctionTask {
 
     protected Auction getAuction(HttpServletRequest request, ProductDAO productDAO, UserDAO userDao) throws ParseException {
-        Long userID = Long.parseLong(request.getParameter("userID"));
+        Long userID = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
         Long productID = Long.parseLong(request.getParameter("productID"));
         Auction auction = new Auction();
         auction.setDuration(Integer.parseInt(request.getParameter("duration")));

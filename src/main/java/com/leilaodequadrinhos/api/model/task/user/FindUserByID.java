@@ -13,7 +13,7 @@ public class FindUserByID implements Task {
     @Override
     public User execute(HttpServletRequest request, HttpServletResponse response) {
         DAO userDao = new UserDAO();
-        Long id = Long.parseLong(request.getParameter("userID"));
+        Long id = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
         User user = (User) userDao.findById(id);
         request.setAttribute("user", user);
         return user;
