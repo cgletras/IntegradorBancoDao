@@ -18,7 +18,7 @@ public class FindAllAuctionsByUser implements Task {
     public Object execute(HttpServletRequest request, HttpServletResponse response) {
         AuctionDao auctionDao = new AuctionDAO();
         DAO userDao = new UserDAO();
-        Long userID = Long.parseLong(request.getParameter("userID"));
+        Long userID = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
         List<Auction> auctions = auctionDao.findByUser((User) userDao.findById(userID));
         request.setAttribute("auctions", auctions);
         return auctions;

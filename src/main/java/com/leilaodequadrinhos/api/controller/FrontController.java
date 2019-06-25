@@ -1,6 +1,7 @@
 package com.leilaodequadrinhos.api.controller;
 
 import com.leilaodequadrinhos.api.db.DbException;
+import com.leilaodequadrinhos.api.model.entities.User;
 import com.leilaodequadrinhos.api.model.task.Task;
 import com.leilaodequadrinhos.api.model.task.TaskFactory;
 import com.leilaodequadrinhos.api.util.Json;
