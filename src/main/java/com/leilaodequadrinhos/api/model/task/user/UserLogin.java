@@ -16,12 +16,14 @@ public class UserLogin implements Task {
         UserDao userDao = new UserDAO();
         User user = userDao.findByEmail(request.getParameter("email"));
         if (user == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return "Incorrect email or password";
         } else if (user.getPassword().equals(request.getParameter("password"))) {
             user.setPassword(null);
             request.getSession(true).setAttribute("user", user);
             return "User logged in";
         } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return "Incorrect email or password";
         }
     }
