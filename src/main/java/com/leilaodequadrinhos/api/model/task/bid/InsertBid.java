@@ -27,8 +27,10 @@ public class InsertBid implements Task {
         Long userID = Long.parseLong(request.getParameter("userID"));
         User user = userDao.findById(userID);
         bid.setUser(user);
+
         Long auctionID = Long.parseLong(request.getParameter("auctionID"));
         Auction auction = (Auction) auctionDAO.findById(auctionID);
+
         bid.setBidValue(auction.getDefaultBid());
         bid.setAuction(auction);
 
