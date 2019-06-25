@@ -18,7 +18,7 @@ abstract class BaseProductTask {
         product.setPagesNumber(pages);
         int weight = Integer.parseInt(request.getParameter("weight"));
         product.setWeight(weight);
-        product.setCoverImage(HashGenerator.hashGenerator()+".jpeg");
+        product.setCoverImage("imagens/capas/"+HashGenerator.hashGenerator()+".jpeg");
         Long userID = Long.parseLong(request.getParameter("userID"));
         product.setUser((User) userDao.findById(userID));
         return product;
