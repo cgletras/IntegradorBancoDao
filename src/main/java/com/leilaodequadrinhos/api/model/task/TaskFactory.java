@@ -5,6 +5,7 @@ import com.leilaodequadrinhos.api.model.task.auction.*;
 import com.leilaodequadrinhos.api.model.task.character.*;
 import com.leilaodequadrinhos.api.model.task.auction.status.FindAllAuctionStatus;
 import com.leilaodequadrinhos.api.model.task.auction.status.FindAuctionStatusById;
+import com.leilaodequadrinhos.api.model.task.notification.NotificationByEmail;
 import com.leilaodequadrinhos.api.model.task.product.*;
 import com.leilaodequadrinhos.api.model.task.productStatus.FindProductStatusById;
 import com.leilaodequadrinhos.api.model.task.productStatus.FindAllProductStatus;
@@ -29,6 +30,7 @@ public class TaskFactory {
         tasks.put("POST/update-user", new UpdateUser());
         tasks.put("POST/login", new UserLogin());
         tasks.put("GET/session", new Session());
+        tasks.put("POST/notification-by-email", new NotificationByEmail());
 
         tasks.put("GET/find-writer-by-id", new FindWriterById());
         tasks.put("GET/find-writers-by-product", new FindWriterByProduct());
