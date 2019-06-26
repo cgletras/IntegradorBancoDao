@@ -3,6 +3,7 @@ package com.leilaodequadrinhos.api.model.task.auction;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProductDAO;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
 import com.leilaodequadrinhos.api.model.entities.Auction;
+import com.leilaodequadrinhos.api.model.entities.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
