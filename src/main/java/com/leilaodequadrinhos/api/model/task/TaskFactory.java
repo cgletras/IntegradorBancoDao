@@ -26,7 +26,7 @@ public class TaskFactory {
         tasks.put("GET/find-all-users", new FindAllUsers());
         tasks.put("GET/find-user-by-email", new FindUserByEmail());
         tasks.put("GET/find-user-by-id", new FindUserByID());
-        tasks.put("POST/insert-user", new InsertNewUser());
+        tasks.put("POST/public/insert-user", new InsertNewUser());
         tasks.put("POST/update-user", new UpdateUser());
         tasks.put("POST/login", new UserLogin());
         tasks.put("GET/session", new Session());
