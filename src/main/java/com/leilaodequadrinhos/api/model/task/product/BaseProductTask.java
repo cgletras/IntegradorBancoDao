@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 abstract class BaseProductTask {
 
-    protected Product getProduct(HttpServletRequest request, UserDao userDao) {
+    protected Product buildProduct(HttpServletRequest request, UserDao userDao) {
         Product product = new Product();
         product.setPublisher(request.getParameter("publishingCompany"));
         product.setTitle(request.getParameter("title"));

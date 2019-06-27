@@ -34,7 +34,8 @@ public class AddProductImage extends BaseProductTask implements Task {
         }
 
         for (Part filePart : fileParts) {
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            fileName.lastIndexOf(".");
 
             try {
                 InputStream fileContent = filePart.getInputStream();

@@ -19,7 +19,7 @@ public class UpdateProduct extends BaseProductTask implements Task {
         ProductDao productDao = new ProductDAO();
         ProductStatusDao productStatusDao = new ProductStatusDAO();
         UserDao userDao = new UserDAO();
-        Product product = getProduct(request, userDao);
+        Product product = buildProduct(request, userDao);
         Long statusID = Long.parseLong(request.getParameter("statusID"));
         product.setProductStatus(productStatusDao.findById(statusID));
         product.setProductID(Integer.parseInt(request.getParameter("productID")));
