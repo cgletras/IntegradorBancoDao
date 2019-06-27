@@ -21,7 +21,7 @@ public class InsertProduct extends BaseProductTask implements Task {
         ProductDao productDao = new ProductDAO();
         ProductStatusDao productStatusDao = new ProductStatusDAO();
         UserDao userDao = new UserDAO();
-        Product product = getProduct(request, userDao);
+        Product product = buildProduct(request, userDao);
         product.setProductStatus(productStatusDao.findById(ACTIVE));
         productDao.insert(product);
         return "Product inserted successfully";

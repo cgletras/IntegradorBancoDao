@@ -20,7 +20,7 @@ public class UpdateAuction extends BaseAuctionTask implements Task {
         AuctionStatusDao auctionStatusDao = new AuctionStatusDAO();
         ProductDAO productDAO = new ProductDAO();
         UserDAO userDao = new UserDAO();
-        Auction auction = getAuction(request, productDAO, userDao);
+        Auction auction = buildAuction(request, productDAO, userDao);
         Long auctionStatusID = Long.parseLong(request.getParameter("auctionStatusID"));
         auction.setAuctionStatus(auctionStatusDao.findById(auctionStatusID));
         auction.setAuctionID(Long.parseLong(request.getParameter("auctionID")));
