@@ -7,8 +7,8 @@ import com.leilaodequadrinhos.api.model.task.auction.status.FindAllAuctionStatus
 import com.leilaodequadrinhos.api.model.task.auction.status.FindAuctionStatusById;
 import com.leilaodequadrinhos.api.model.task.notification.NotificationByEmail;
 import com.leilaodequadrinhos.api.model.task.product.*;
-import com.leilaodequadrinhos.api.model.task.productStatus.FindProductStatusById;
-import com.leilaodequadrinhos.api.model.task.productStatus.FindAllProductStatus;
+import com.leilaodequadrinhos.api.model.task.product.status.FindProductStatusById;
+import com.leilaodequadrinhos.api.model.task.product.status.FindAllProductStatus;
 import com.leilaodequadrinhos.api.model.task.user.*;
 import com.leilaodequadrinhos.api.model.task.writer.*;
 

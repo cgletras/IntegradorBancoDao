@@ -1,4 +1,4 @@
-package com.leilaodequadrinhos.api.model.task.productStatus;
+package com.leilaodequadrinhos.api.model.task.product.status;
 
 import com.leilaodequadrinhos.api.model.dao.ProductStatusDao;
 import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProductStatusDAO;
