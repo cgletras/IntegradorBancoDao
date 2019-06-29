@@ -2,10 +2,7 @@ package com.leilaodequadrinhos.api.model.task.auction;
 
 import com.leilaodequadrinhos.api.model.dao.AuctionStatusDao;
 import com.leilaodequadrinhos.api.model.dao.AuctionDao;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.AuctionDAO;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.AuctionStatusDAO;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.ProductDAO;
-import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
+import com.leilaodequadrinhos.api.model.dao.impl.jdbc.*;
 import com.leilaodequadrinhos.api.model.entities.Auction;
 import com.leilaodequadrinhos.api.model.task.Task;
 
