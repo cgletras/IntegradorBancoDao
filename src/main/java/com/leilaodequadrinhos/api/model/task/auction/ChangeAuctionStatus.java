@@ -30,12 +30,12 @@ public class ChangeAuctionStatus implements Task {
             boolean changeStatusToActive = auctionStatusID == 1;
             boolean changeStateToInactive = auctionStatusID == 2;
             boolean changeStateToOnHold = auctionStatusID == 3;
-            boolean changeStateToFinalized = auctionStatusID == 4;
+            boolean changeStateToConcluded = auctionStatusID == 4;
             boolean changeStateToCanceled = auctionStatusID == 5;
 
             switch (auction.getAuctionStatus().getStatus()){
                 case "ATIVO":
-                    if (changeStateToInactive || changeStateToOnHold || changeStateToCanceled || changeStateToFinalized){
+                    if (changeStateToInactive || changeStateToOnHold || changeStateToCanceled){
                     auctionDao.changesAuctionStatus(auctionID, auctionStatus);
                     return "Auction status changed";
                 } else {

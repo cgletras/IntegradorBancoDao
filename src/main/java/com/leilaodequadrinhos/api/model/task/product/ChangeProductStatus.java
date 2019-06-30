@@ -19,23 +19,29 @@ public class ChangeProductStatus implements Task {
         Long productID = Long.parseLong(request.getParameter("productID"));
         Long productStateID = Long.parseLong(request.getParameter("productStateID"));
         Product product = (Product) productDao.findById(productID);
+
+        boolean changeStateToActive = productStateID == 1;
+        boolean changeStateToInactive = productStateID == 2;
+        boolean changeStateToInAuction = productStateID == 3;
+        boolean changeStateToAuctioned = productStateID == 4;
+
         switch (product.getProductStatus().getStatus()){
-            case "ATIVO": if(productStateID == 2 ||productStateID == 3){
+            case "ATIVO": if(changeStateToInactive ||changeStateToInAuction){
                 productDao.changeStatusProduct(productID, productStatusDao.findById(productStateID));
                 return "Successfully modified product status to "+productStatusDao.findById(productStateID).getStatus();
             } else {
                 return "Cannot modify product status";
             }
-            case "INATIVO": if(productStateID == 1) {
+            case "INATIVO": if(changeStateToActive) {
                 productDao.changeStatusProduct(productID, productStatusDao.findById(productStateID));
                 return "Successfully modified product status to "+productStatusDao.findById(productStateID).getStatus();
             } else {
                 return "Cannot modify product status";
             }
-            case "EM_LEILAO": if(productStateID == 4){
+            case "EM_LEILAO": if(changeStateToAuctioned){
                 productDao.changeStatusProduct(productID, productStatusDao.findById(productStateID));
                 return "Successfully modified product status to "+productStatusDao.findById(productStateID).getStatus();
-            } else if (productStateID == 1) {
+            } else if (changeStateToActive) {
                 productDao.changeStatusProduct(productID, productStatusDao.findById(productStateID));
                 return "Successfully modified product status to "+productStatusDao.findById(productStateID).getStatus();
             } else {
