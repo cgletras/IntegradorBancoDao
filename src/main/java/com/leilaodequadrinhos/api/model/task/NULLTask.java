@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 public class NULLTask implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) {
-        return request;
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("request: " + request.toString());
+        return "index";
     }
 
     @Override
