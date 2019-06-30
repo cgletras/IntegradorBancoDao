@@ -10,6 +10,7 @@ import com.leilaodequadrinhos.api.model.entities.Auction;
 import com.leilaodequadrinhos.api.model.entities.Product;
 import com.leilaodequadrinhos.api.model.entities.ProductStatus;
 import com.leilaodequadrinhos.api.model.task.Task;
+import com.leilaodequadrinhos.api.model.task.product.ChangeProductStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,12 @@ public class DeleteAuctionByID implements Task {
         productDao.changeStatusProduct((long) product.getProductID(), productStatus);
 
         auctionDao.deleteById(auctionID);
+        // se quiser passar algum parametro pra dentro
+        request.setAttribute("xxx", " yyy");
+
+        // aqui vc chama....
+        String statusOfProduct = new ChangeProductStatus().execute(request, response);;
+
         return "This auction has been deleted";
     }
 }
