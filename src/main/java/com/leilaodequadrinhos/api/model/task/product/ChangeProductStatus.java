@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ChangeProductStatus implements Task {
 
     @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         ProductDao productDao = new ProductDAO();
         ProductStatusDao productStatusDao = new ProductStatusDAO();
         Long productID = Long.parseLong(request.getParameter("productID"));
