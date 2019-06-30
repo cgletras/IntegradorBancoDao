@@ -8,13 +8,12 @@ import com.leilaodequadrinhos.api.model.task.product.ChangeProductStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*
-@param: UserInput:
-auctionID: Recebe do leilao que ser quer INATIVAR
-productID: Recebe do produto ligado ao leilao
-productStateID: 1 (ATIVO) Pois um leilao inativado muda o estado do produto de EM_LEILAO para ATIVO
+/**
+ * @param: UserInput:
+ * auctionID: Recebe do leilao que ser quer INATIVAR
+ * productID: Recebe do produto ligado ao leilao
+ * productStateID: 1 (ATIVO) Pois um leilao inativado muda o estado do produto de EM_LEILAO para ATIVO
  */
-
 public class DeleteAuctionByID implements Task {
 
     @Override
@@ -23,6 +22,11 @@ public class DeleteAuctionByID implements Task {
         AuctionDao auctionDao = new AuctionDAO();
         auctionDao.deleteById(auctionID);
         String statusOfProduct = new ChangeProductStatus().execute(request, response);
+
+        if (!statusOfProduct.equalsIgnoreCase("Successfully modified product status")) {
+            return "Failed to Delete";
+        }
+
         return "This auction has been deleted";
     }
 }
