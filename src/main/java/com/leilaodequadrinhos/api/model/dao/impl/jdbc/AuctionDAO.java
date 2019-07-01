@@ -269,6 +269,30 @@ public class AuctionDAO implements AuctionDao {
     }
 
     @Override
+    public Integer returnAuctionDuration(Long id) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "SELECT duracao FROM Leilao "
+                            + "WHERE id_leilao = ?");
+
+            st.setLong(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("duracao");
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+
+    @Override
     public void changesAuctionStatus(Long id, AuctionStatus auctionStatus) {
         PreparedStatement st = null;
         try {
