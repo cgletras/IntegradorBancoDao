@@ -7,7 +7,7 @@ public class NULLTask implements Task {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return "index";
+        return request.getMethod() + request.getPathInfo();
     }
 
     @Override
