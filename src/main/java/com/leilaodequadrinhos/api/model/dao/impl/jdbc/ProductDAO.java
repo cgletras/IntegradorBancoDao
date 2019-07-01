@@ -20,10 +20,9 @@ import java.util.Map;
 
 public class ProductDAO implements ProductDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public Product findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -59,11 +58,12 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
-    //This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
+    // TODO: This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
     @Override
     public List findAll() {
         return null; //There is no need for a method to list all products on the site. The list in this scope is per user and is implemented in another role.
@@ -71,6 +71,7 @@ public class ProductDAO implements ProductDao {
 
     @Override
     public void deleteById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -86,11 +87,13 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void update(Object entity) {
+        Connection conn = DB.getConnection();
 
         PreparedStatement st = null;
         try {
@@ -119,7 +122,7 @@ public class ProductDAO implements ProductDao {
                     int id = rs.getInt(1);
                     obj.setProductID(id);
                 }
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -127,11 +130,13 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void insert(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -156,7 +161,7 @@ public class ProductDAO implements ProductDao {
                     int id = rs.getInt(1);
                     obj.setProductID(id);
                 }
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -164,11 +169,13 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void changeStatusProduct(Long id, ProductStatus productStatus) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -184,11 +191,13 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public List<Product> findAllByUser(Long UserId) {
+        Connection conn = DB.getConnection();
 
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -228,7 +237,8 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 }

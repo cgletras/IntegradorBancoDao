@@ -17,10 +17,9 @@ import java.util.Map;
 
 public class WriterDAO implements WriterDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public Object findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -42,12 +41,14 @@ public class WriterDAO implements WriterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public List<Writer> findByProduct(Product product) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -76,12 +77,14 @@ public class WriterDAO implements WriterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void insert(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -99,7 +102,7 @@ public class WriterDAO implements WriterDao {
                     int id = rs.getInt(1);
                     obj.setWriterID(id);
                 }
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -107,11 +110,13 @@ public class WriterDAO implements WriterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public List findAll() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -137,12 +142,14 @@ public class WriterDAO implements WriterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void relateWriterToProduct(Writer writer, Product product) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -157,7 +164,7 @@ public class WriterDAO implements WriterDao {
             if (rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
 
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -165,16 +172,18 @@ public class WriterDAO implements WriterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
-    //This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
+    // TODO: This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
     @Override
     public void deleteById(Long id) {
     }
 
     @Override
     public void update(Object entity) {
+        Connection conn = DB.getConnection();
 
         PreparedStatement st = null;
         try {
@@ -192,6 +201,7 @@ public class WriterDAO implements WriterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 }

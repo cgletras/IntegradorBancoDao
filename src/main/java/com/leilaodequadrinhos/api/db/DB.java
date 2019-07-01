@@ -10,15 +10,16 @@ public class DB {
     private static Connection conn = null;
 
     public static Connection getConnection() {
-
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e1) {
-            e1.printStackTrace();
-        }
-        try {
-            String url = "jdbc:mysql://cluster01.c1pou0akhdto.us-east-1.rds.amazonaws.com:3306/leilao_quadrinhos";
-            conn = DriverManager.getConnection(url, "root", "iftm1234");
+            if (conn == null || conn.isClosed()) {
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    String url = "jdbc:mysql://cluster01.c1pou0akhdto.us-east-1.rds.amazonaws.com:3306/leilao_quadrinhos";
+                    conn = DriverManager.getConnection(url, "root", "iftm1234");
+            }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }

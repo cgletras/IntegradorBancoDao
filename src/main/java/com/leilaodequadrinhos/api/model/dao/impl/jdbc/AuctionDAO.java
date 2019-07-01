@@ -19,10 +19,9 @@ import java.util.Map;
 
 public class AuctionDAO implements AuctionDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public void insert(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -48,7 +47,7 @@ public class AuctionDAO implements AuctionDao {
                     Long id = rs.getLong(1);
                     obj.setAuctionID(id);
                 }
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -56,11 +55,13 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void update(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -85,11 +86,13 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void updateInitialValue(Auction obj) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -105,11 +108,13 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public Object findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -149,12 +154,14 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public List<Auction> findAll() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -196,12 +203,14 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void deleteById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -221,6 +230,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public List<Auction> findByUser(User user) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -264,7 +274,8 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -294,6 +305,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public void changesAuctionStatus(Long id, AuctionStatus auctionStatus) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -309,11 +321,13 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void setAuctionDateNow(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -328,6 +342,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 }
