@@ -281,6 +281,8 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public Integer returnAuctionDuration(Long id) {
+
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
