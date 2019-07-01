@@ -1,5 +1,6 @@
 package com.leilaodequadrinhos.api.controller;
 
+import com.leilaodequadrinhos.api.db.DB;
 import com.leilaodequadrinhos.api.db.DbException;
 import com.leilaodequadrinhos.api.model.entities.User;
 import com.leilaodequadrinhos.api.model.task.Task;
@@ -37,6 +38,9 @@ public class FrontController extends HttpServlet implements Filter {
             String jResponse = Json.objectToJson(responseBodyObject);
 
             PrintWriter out = response.getWriter();
+
+            DB.closeConnection();
+
             out.println(jResponse);
         } catch (DbException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -50,6 +54,7 @@ public class FrontController extends HttpServlet implements Filter {
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_OK);
+        DB.closeConnection();
     }
 
     @Override
