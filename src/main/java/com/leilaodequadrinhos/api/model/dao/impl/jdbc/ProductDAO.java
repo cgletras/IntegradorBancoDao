@@ -57,9 +57,9 @@ public class ProductDAO implements ProductDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 
@@ -86,8 +86,8 @@ public class ProductDAO implements ProductDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -122,15 +122,15 @@ public class ProductDAO implements ProductDao {
                     int id = rs.getInt(1);
                     obj.setProductID(id);
                 }
-                // DB.closeResultSet(rs);
+                DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -161,15 +161,15 @@ public class ProductDAO implements ProductDao {
                     int id = rs.getInt(1);
                     obj.setProductID(id);
                 }
-                // DB.closeResultSet(rs);
+                DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -190,8 +190,8 @@ public class ProductDAO implements ProductDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -236,9 +236,9 @@ public class ProductDAO implements ProductDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 }

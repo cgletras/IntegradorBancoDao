@@ -40,9 +40,9 @@ public class CharacterDAO implements CharacterDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 
@@ -76,9 +76,9 @@ public class CharacterDAO implements CharacterDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 
@@ -110,9 +110,9 @@ public class CharacterDAO implements CharacterDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 
@@ -136,15 +136,15 @@ public class CharacterDAO implements CharacterDao {
                     int id = rs.getInt(1);
                     obj.setCharacterID(id);
                 }
-                // DB.closeResultSet(rs);
+                DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
 
     }
@@ -166,15 +166,15 @@ public class CharacterDAO implements CharacterDao {
             if (rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
 
-                // DB.closeResultSet(rs);
+                DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
 
     }
@@ -202,8 +202,8 @@ public class CharacterDAO implements CharacterDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 }

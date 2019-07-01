@@ -43,9 +43,9 @@ public class ProductStatusDAO implements ProductStatusDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 
@@ -73,9 +73,9 @@ public class ProductStatusDAO implements ProductStatusDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 }
