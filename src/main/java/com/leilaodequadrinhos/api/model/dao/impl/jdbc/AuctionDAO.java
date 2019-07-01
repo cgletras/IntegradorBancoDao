@@ -166,8 +166,16 @@ public class AuctionDAO implements AuctionDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT id_leilao, data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, id_estado_leilao, id_usuario, id_produto "
-                            + "FROM Leilao ");
+                    "SELECT l.id_leilao, data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
+                            "el.estado estado_leilao, " +
+                            "nome, email, senha, cidade, u.estado, data_nascimento, ativo, " +
+                            "editora, titulo, formato_do_quadrinho, numero_paginas, peso, capa_imagem, " +
+                            "p.id_estado_produto, ep.estado estado_produto " +
+                            "FROM Leilao l INNER JOIN Usuario u ON l.id_usuario = u.id_usuario " +
+                            "INNER JOIN Estado_leilao el ON l.id_estado_leilao = el.id_estado_leilao " +
+                            "INNER JOIN Produto p ON l.id_produto = p.id_produto " +
+                            "INNER JOIN Estado_produto ep ON p.id_estado_produto = ep.id_estado_produto " +
+                            "GROUP BY id_leilao");
 
             rs = st.executeQuery();
 
@@ -184,16 +192,30 @@ public class AuctionDAO implements AuctionDao {
                 obj.setCurrentValue(rs.getDouble("valor_atual"));
                 obj.setDefaultBid(rs.getDouble("lance_padrao"));
 
-                AuctionStatusDao auctionStatusDAO = new AuctionStatusDAO();
-                AuctionStatus auctionStatus = auctionStatusDAO.findById(rs.getLong("id_estado_leilao"));
+                AuctionStatus auctionStatus = new AuctionStatus();
+                auctionStatus.setAuctionStatusID(rs.getInt("id_estado_leilao"));
+                auctionStatus.setStatus(rs.getString("estado_leilao"));
                 obj.setAuctionStatus(auctionStatus);
 
-                DAO dao = new UserDAO();
-                User user = (User) dao.findById(rs.getLong("id_usuario"));
+                User user = new User();
+                user.setUserID(rs.getInt("id_usuario"));
+                user.setName(rs.getString("nome"));
+                user.setEmail(rs.getString("email"));
+                user.setState(rs.getString("estado"));
+                user.setCity(rs.getString("cidade"));
+                user.setPassword(null);
+                user.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
+                user.setStatus(rs.getBoolean("ativo"));
                 obj.setUser(user);
 
-                DAO dao2 = new ProductDAO();
-                Product product = (Product) dao2.findById(rs.getLong("id_produto"));
+                Product product = new Product();
+                product.setProductID(rs.getInt("id_produto"));
+                product.setPublisher(rs.getString("editora"));
+                product.setTitle(rs.getString("titulo"));
+                product.setComicFormat(rs.getString("formato_do_quadrinho"));
+                product.setPagesNumber(rs.getInt("numero_paginas"));
+                product.setWeight(rs.getInt("peso"));
+                product.setCoverImage(rs.getString("capa_imagem"));
                 obj.setProduct(product);
 
                 list.add(obj);
