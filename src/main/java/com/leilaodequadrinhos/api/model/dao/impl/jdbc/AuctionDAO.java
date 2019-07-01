@@ -54,8 +54,8 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -85,8 +85,8 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -107,8 +107,8 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -153,9 +153,9 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
+            DB.closeStatement(st);
             // DB.closeResultSet(rs);
-            DB.closeConnection();
+            // DB.closeConnection();
         }
     }
 
@@ -202,9 +202,9 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
+            DB.closeStatement(st);
             // DB.closeResultSet(rs);
-            DB.closeConnection();
+            // DB.closeConnection();
         }
     }
 
@@ -224,7 +224,7 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
+            DB.closeStatement(st);
         }
     }
 
@@ -273,9 +273,9 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            // DB.closeResultSet(rs);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
         }
     }
 
@@ -301,7 +301,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
         }
     }
 
@@ -322,8 +322,8 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 
@@ -343,8 +343,8 @@ public class AuctionDAO implements AuctionDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            // DB.closeStatement(st);
-            DB.closeConnection();
+            DB.closeStatement(st);
+            // DB.closeConnection();
         }
     }
 }
