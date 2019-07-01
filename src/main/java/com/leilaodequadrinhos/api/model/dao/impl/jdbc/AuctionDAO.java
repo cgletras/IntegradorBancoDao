@@ -19,10 +19,9 @@ import java.util.Map;
 
 public class AuctionDAO implements AuctionDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public void insert(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -62,6 +61,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public void update(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -92,6 +92,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public void updateInitialValue(Auction obj) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -113,6 +114,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public Object findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -159,6 +161,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public List<Auction> findAll() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -207,6 +210,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public void deleteById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -226,6 +230,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public List<Auction> findByUser(User user) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -276,6 +281,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public void changesAuctionStatus(Long id, AuctionStatus auctionStatus) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -297,6 +303,7 @@ public class AuctionDAO implements AuctionDao {
 
     @Override
     public void setAuctionDateNow(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(

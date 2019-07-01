@@ -18,10 +18,9 @@ import java.util.Map;
 
 public class BidDAO implements BidDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public void insert(Object entity) {
+        Connection conn = DB.getConnection();
 
         PreparedStatement st = null;
         try {
@@ -69,6 +68,7 @@ public class BidDAO implements BidDao {
 
     @Override
     public Object findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -107,6 +107,7 @@ public class BidDAO implements BidDao {
 
     @Override
     public List<Bid> findAll() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -146,13 +147,13 @@ public class BidDAO implements BidDao {
         }
     }
 
-    //This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
+    // TODO: This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
     @Override
     public void deleteById(Long id) {
 
     }
 
-    //This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
+    // TODO: This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
     @Override
     public void update(Object entity) {
 
@@ -160,6 +161,7 @@ public class BidDAO implements BidDao {
 
     @Override
     public List<Bid> findBidsByUser(Long id_user) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -203,6 +205,7 @@ public class BidDAO implements BidDao {
 
     @Override
     public List<Bid> findBidsByAuction(Long auctionID) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -246,6 +249,7 @@ public class BidDAO implements BidDao {
 
     @Override
     public Long BidCount(Long auctionID) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
