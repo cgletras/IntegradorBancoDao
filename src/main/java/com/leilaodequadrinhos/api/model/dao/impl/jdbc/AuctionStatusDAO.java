@@ -16,10 +16,9 @@ import java.util.Map;
 
 public class AuctionStatusDAO implements AuctionStatusDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public AuctionStatus findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -48,6 +47,7 @@ public class AuctionStatusDAO implements AuctionStatusDao {
 
     @Override
     public List<AuctionStatus> findAll() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {

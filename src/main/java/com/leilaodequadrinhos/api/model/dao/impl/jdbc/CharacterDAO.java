@@ -17,10 +17,9 @@ import java.util.Map;
 
 public class CharacterDAO implements CharacterDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public Object findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -49,6 +48,7 @@ public class CharacterDAO implements CharacterDao {
 
     @Override
     public List<Character> findAllByProduct(Product product) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -84,6 +84,7 @@ public class CharacterDAO implements CharacterDao {
 
     @Override
     public List findAll() {
+        Connection conn = DB.getConnection();
 
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -117,6 +118,7 @@ public class CharacterDAO implements CharacterDao {
 
     @Override
     public void insert(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -149,6 +151,7 @@ public class CharacterDAO implements CharacterDao {
 
     @Override
     public void relateCharacterToProduct(Character character, Product product) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -176,13 +179,14 @@ public class CharacterDAO implements CharacterDao {
 
     }
 
-    //This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
+    // TODO: This method has not been implemented because it will only be used with functionality used in the report formulation and administration of the site, which is not in this scope.
     @Override
     public void deleteById(Long id) {
     }
 
     @Override
     public void update(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
