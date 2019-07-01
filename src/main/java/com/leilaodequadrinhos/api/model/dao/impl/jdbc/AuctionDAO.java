@@ -47,7 +47,7 @@ public class AuctionDAO implements AuctionDao {
                     Long id = rs.getLong(1);
                     obj.setAuctionID(id);
                 }
-                // DB.closeResultSet(rs);
+                DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -154,7 +154,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            // DB.closeResultSet(rs);
+            DB.closeResultSet(rs);
             // DB.closeConnection();
         }
     }
@@ -203,7 +203,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            // DB.closeResultSet(rs);
+            DB.closeResultSet(rs);
             // DB.closeConnection();
         }
     }
@@ -301,7 +301,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            // DB.closeResultSet(rs);
+            DB.closeResultSet(rs);
         }
     }
 
