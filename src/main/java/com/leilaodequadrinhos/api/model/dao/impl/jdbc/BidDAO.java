@@ -41,7 +41,7 @@ public class BidDAO implements BidDao {
                     int id = rs.getInt(1);
                     obj.setBidID(id);
                 }
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -100,7 +100,7 @@ public class BidDAO implements BidDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -142,7 +142,7 @@ public class BidDAO implements BidDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -198,7 +198,7 @@ public class BidDAO implements BidDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -242,7 +242,7 @@ public class BidDAO implements BidDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -272,7 +272,7 @@ public class BidDAO implements BidDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }

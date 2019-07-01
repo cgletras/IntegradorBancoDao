@@ -47,7 +47,7 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -86,7 +86,7 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -114,7 +114,7 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -195,7 +195,7 @@ public class UserDAO implements UserDao {
                     int id = rs.getInt(1);
                     obj.setUserID(id);
                 }
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -259,7 +259,7 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -291,7 +291,7 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
