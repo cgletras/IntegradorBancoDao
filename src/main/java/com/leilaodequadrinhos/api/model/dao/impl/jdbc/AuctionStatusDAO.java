@@ -40,7 +40,7 @@ public class AuctionStatusDAO implements AuctionStatusDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
@@ -73,7 +73,7 @@ public class AuctionStatusDAO implements AuctionStatusDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
             DB.closeConnection();
         }
     }
