@@ -16,10 +16,9 @@ import java.util.Map;
 
 public class UserDAO implements UserDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public User findById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -48,12 +47,14 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public List findAll() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -85,12 +86,14 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public Long count() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -111,12 +114,14 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void deleteById(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -132,11 +137,13 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void update(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -159,11 +166,13 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void insert(Object entity) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -186,7 +195,7 @@ public class UserDAO implements UserDao {
                     int id = rs.getInt(1);
                     obj.setUserID(id);
                 }
-                DB.closeResultSet(rs);
+                // DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
@@ -194,11 +203,13 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public void activate(Integer id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
@@ -213,11 +224,13 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
     @Override
     public User findByEmail(String email) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -246,12 +259,14 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public Boolean hasActiveAuction(Long id) {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -276,7 +291,8 @@ public class UserDAO implements UserDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 }

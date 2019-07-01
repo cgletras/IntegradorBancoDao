@@ -16,10 +16,9 @@ import java.util.Map;
 
 public class ProductStatusDAO implements ProductStatusDao {
 
-    Connection conn = DB.getConnection();
-
     @Override
     public List findAll() {
+        Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -45,12 +44,14 @@ public class ProductStatusDAO implements ProductStatusDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
     @Override
     public ProductStatus findById(Long id) {
+        Connection conn = DB.getConnection();
 
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -73,7 +74,8 @@ public class ProductStatusDAO implements ProductStatusDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
-            DB.closeResultSet(rs);
+            // DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 }
