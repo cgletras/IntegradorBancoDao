@@ -61,7 +61,7 @@ public class BidDAO implements BidDao {
                 throw new DbException("Failed the rollback");
             }
         } finally {
-            DB.closeStatement(st);
+            // DB.closeStatement(st);
             DB.closeConnection();
         }
     }
@@ -99,7 +99,7 @@ public class BidDAO implements BidDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            DB.closeStatement(st);
+            // DB.closeStatement(st);
             // DB.closeResultSet(rs);
             DB.closeConnection();
         }
@@ -141,7 +141,7 @@ public class BidDAO implements BidDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            DB.closeStatement(st);
+            // DB.closeStatement(st);
             // DB.closeResultSet(rs);
             DB.closeConnection();
         }
@@ -197,7 +197,7 @@ public class BidDAO implements BidDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            DB.closeStatement(st);
+            // DB.closeStatement(st);
             // DB.closeResultSet(rs);
             DB.closeConnection();
         }
@@ -241,7 +241,7 @@ public class BidDAO implements BidDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            DB.closeStatement(st);
+            // DB.closeStatement(st);
             // DB.closeResultSet(rs);
             DB.closeConnection();
         }
@@ -271,7 +271,7 @@ public class BidDAO implements BidDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
-            DB.closeStatement(st);
+            // DB.closeStatement(st);
             // DB.closeResultSet(rs);
             DB.closeConnection();
         }
