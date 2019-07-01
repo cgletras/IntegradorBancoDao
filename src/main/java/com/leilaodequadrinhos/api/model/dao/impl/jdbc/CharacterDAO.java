@@ -43,6 +43,7 @@ public class CharacterDAO implements CharacterDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -77,6 +78,7 @@ public class CharacterDAO implements CharacterDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -109,6 +111,7 @@ public class CharacterDAO implements CharacterDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -139,6 +142,7 @@ public class CharacterDAO implements CharacterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
 
     }
@@ -167,6 +171,7 @@ public class CharacterDAO implements CharacterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
 
     }
@@ -194,6 +199,7 @@ public class CharacterDAO implements CharacterDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 }

@@ -42,6 +42,7 @@ public class AuctionStatusDAO implements AuctionStatusDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -73,6 +74,7 @@ public class AuctionStatusDAO implements AuctionStatusDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 }

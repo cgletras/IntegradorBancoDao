@@ -60,6 +60,7 @@ public class ProductDAO implements ProductDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -86,6 +87,7 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -127,6 +129,7 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -164,6 +167,7 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -184,6 +188,7 @@ public class ProductDAO implements ProductDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -229,6 +234,7 @@ public class ProductDAO implements ProductDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 }

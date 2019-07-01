@@ -56,6 +56,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -85,6 +86,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -105,6 +107,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -150,6 +153,7 @@ public class AuctionDAO implements AuctionDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -197,6 +201,7 @@ public class AuctionDAO implements AuctionDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -265,6 +270,7 @@ public class AuctionDAO implements AuctionDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -285,6 +291,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -304,6 +311,7 @@ public class AuctionDAO implements AuctionDao {
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 }

@@ -63,6 +63,7 @@ public class BidDAO implements BidDao {
             }
         } finally {
             DB.closeStatement(st);
+            DB.closeConnection();
         }
     }
 
@@ -100,6 +101,7 @@ public class BidDAO implements BidDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -140,6 +142,7 @@ public class BidDAO implements BidDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -194,6 +197,7 @@ public class BidDAO implements BidDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -236,6 +240,7 @@ public class BidDAO implements BidDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -264,6 +269,7 @@ public class BidDAO implements BidDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 }

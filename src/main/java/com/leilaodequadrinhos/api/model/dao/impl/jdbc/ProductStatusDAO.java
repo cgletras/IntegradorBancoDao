@@ -46,6 +46,7 @@ public class ProductStatusDAO implements ProductStatusDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 
@@ -74,6 +75,7 @@ public class ProductStatusDAO implements ProductStatusDao {
         } finally {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
+            DB.closeConnection();
         }
     }
 }
