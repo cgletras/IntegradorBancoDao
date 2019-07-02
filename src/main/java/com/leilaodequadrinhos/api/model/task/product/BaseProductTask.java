@@ -20,8 +20,8 @@ abstract class BaseProductTask {
         product.setPagesNumber(pages);
         int weight = Integer.parseInt(request.getParameter("weight"));
         product.setWeight(weight);
-        product.setCoverImage(new ReceiveProductImage().execute(request));
-        Long userID = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
+        product.setCoverImage("https://leilaodequadrinhos.com/public/img/capas/"+HashGenerator.hashGenerator()+".jpeg");
+ Long userID = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
         product.setUser((User) userDao.findById(userID));
         return product;
     }
