@@ -5,11 +5,13 @@ import com.leilaodequadrinhos.api.model.entities.Product;
 import com.leilaodequadrinhos.api.model.entities.User;
 import com.leilaodequadrinhos.api.util.HashGenerator;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 abstract class BaseProductTask {
 
-    protected Product buildProduct(HttpServletRequest request, UserDao userDao) {
+    protected Product buildProduct(HttpServletRequest request, UserDao userDao) throws IOException, ServletException {
         Product product = new Product();
         product.setPublisher(request.getParameter("publishingCompany"));
         product.setTitle(request.getParameter("title"));
@@ -18,7 +20,7 @@ abstract class BaseProductTask {
         product.setPagesNumber(pages);
         int weight = Integer.parseInt(request.getParameter("weight"));
         product.setWeight(weight);
-        product.setCoverImage("img/capas/"+HashGenerator.hashGenerator()+".jpeg");
+        product.setCoverImage(new ReceiveProductImage().execute(request));
         Long userID = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
         product.setUser((User) userDao.findById(userID));
         return product;

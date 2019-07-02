@@ -9,8 +9,10 @@ import com.leilaodequadrinhos.api.model.dao.impl.jdbc.UserDAO;
 import com.leilaodequadrinhos.api.model.entities.Product;
 import com.leilaodequadrinhos.api.model.task.Task;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class UpdateProduct extends BaseProductTask implements Task {
 
@@ -19,7 +21,13 @@ public class UpdateProduct extends BaseProductTask implements Task {
         ProductDao productDao = new ProductDAO();
         ProductStatusDao productStatusDao = new ProductStatusDAO();
         UserDao userDao = new UserDAO();
-        Product product = buildProduct(request, userDao);
+        Product product = null;
+        try {
+            product = buildProduct(request, userDao);
+        } catch (IOException | ServletException e) {
+            e.printStackTrace();
+            return "Product not updated";
+        }
         Long statusID = Long.parseLong(request.getParameter("statusID"));
         product.setProductStatus(productStatusDao.findById(statusID));
         product.setProductID(Integer.parseInt(request.getParameter("productID")));
