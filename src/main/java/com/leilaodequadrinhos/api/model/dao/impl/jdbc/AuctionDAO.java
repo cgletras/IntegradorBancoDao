@@ -3,10 +3,7 @@ package com.leilaodequadrinhos.api.model.dao.impl.jdbc;
 import com.leilaodequadrinhos.api.db.DB;
 import com.leilaodequadrinhos.api.db.DbException;
 import com.leilaodequadrinhos.api.model.dao.*;
-import com.leilaodequadrinhos.api.model.entities.Auction;
-import com.leilaodequadrinhos.api.model.entities.AuctionStatus;
-import com.leilaodequadrinhos.api.model.entities.Product;
-import com.leilaodequadrinhos.api.model.entities.User;
+import com.leilaodequadrinhos.api.model.entities.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -159,6 +156,10 @@ public class AuctionDAO implements AuctionDao {
                 user.setStatus(rs.getBoolean("ativo"));
                 obj.setUser(user);
 
+                ProductStatus productStatus = new ProductStatus();
+                productStatus.setProductStatusID(rs.getInt("id_estado_produto"));
+                productStatus.setStatus(rs.getString("estado_produto"));
+
                 Product product = new Product();
                 product.setProductID(rs.getInt("id_produto"));
                 product.setPublisher(rs.getString("editora"));
@@ -167,6 +168,8 @@ public class AuctionDAO implements AuctionDao {
                 product.setPagesNumber(rs.getInt("numero_paginas"));
                 product.setWeight(rs.getInt("peso"));
                 product.setCoverImage(rs.getString("capa_imagem"));
+                product.setUser(user);
+                product.setProductStatus(productStatus);
                 obj.setProduct(product);
 
                 return obj;
@@ -230,6 +233,10 @@ public class AuctionDAO implements AuctionDao {
                 user.setStatus(rs.getBoolean("ativo"));
                 obj.setUser(user);
 
+                ProductStatus productStatus = new ProductStatus();
+                productStatus.setProductStatusID(rs.getInt("id_estado_produto"));
+                productStatus.setStatus(rs.getString("estado_produto"));
+
                 Product product = new Product();
                 product.setProductID(rs.getInt("id_produto"));
                 product.setPublisher(rs.getString("editora"));
@@ -238,6 +245,8 @@ public class AuctionDAO implements AuctionDao {
                 product.setPagesNumber(rs.getInt("numero_paginas"));
                 product.setWeight(rs.getInt("peso"));
                 product.setCoverImage(rs.getString("capa_imagem"));
+                product.setUser(user);
+                product.setProductStatus(productStatus);
                 obj.setProduct(product);
 
                 list.add(obj);
