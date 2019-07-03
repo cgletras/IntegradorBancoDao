@@ -28,7 +28,6 @@ import java.util.List;
 
 public class InsertBid implements Task, IObservableTask {
 
-    private List<IObserverSendEmail> observerList = new ArrayList<>();
     private static final String API_KEY = "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";
 
     @Override
