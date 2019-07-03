@@ -29,7 +29,6 @@ public class TaskFactory {
         tasks.put("POST/update-user", new UpdateUser());
         tasks.put("POST/login", new UserLogin());
         tasks.put("GET/session", new Session());
-        tasks.put("POST/notification-by-email", new NotificationByEmail());
 
         tasks.put("GET/find-writer-by-id", new FindWriterById());
         tasks.put("GET/find-writers-by-product", new FindWriterByProduct());
