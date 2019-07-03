@@ -13,5 +13,7 @@ public interface AuctionDao extends DAO {
 	void changesAuctionStatus(Long id, AuctionStatus auctionStatus);
 	void setAuctionDateNow(Long id);
 	List<Auction> findByUser(User obj);
+	List<Auction> findAllPaginate(Integer limit, Integer offset);
 	Integer returnAuctionDuration(Long id);
+
 }
