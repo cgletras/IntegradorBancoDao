@@ -1,4 +1,4 @@
-package com.leilaodequadrinhos.api.model.task.notification;
+package com.leilaodequadrinhos.api.model.task.observer.interfaces;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
