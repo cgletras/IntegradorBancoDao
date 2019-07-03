@@ -5,7 +5,6 @@ import com.leilaodequadrinhos.api.model.task.auction.*;
 import com.leilaodequadrinhos.api.model.task.character.*;
 import com.leilaodequadrinhos.api.model.task.auction.status.FindAllAuctionStatus;
 import com.leilaodequadrinhos.api.model.task.auction.status.FindAuctionStatusById;
-import com.leilaodequadrinhos.api.model.task.notification.NotificationByEmail;
 import com.leilaodequadrinhos.api.model.task.product.*;
 import com.leilaodequadrinhos.api.model.task.product.status.FindProductStatusById;
 import com.leilaodequadrinhos.api.model.task.product.status.FindAllProductStatus;
