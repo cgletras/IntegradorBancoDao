@@ -8,6 +8,7 @@ import com.leilaodequadrinhos.api.model.task.TaskFactory;
 import com.leilaodequadrinhos.api.util.Json;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @WebFilter("/*")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @WebServlet("/controller/*")
 public class FrontController extends HttpServlet implements Filter {
 
