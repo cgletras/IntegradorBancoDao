@@ -13,8 +13,10 @@ public class FindBidsByUser implements Task {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) {
+
+        Long userID = Long.parseLong(request.getParameter("userID"));
         BidDao bidDao = new BidDAO();
-        List<Bid> bids = bidDao.findBidsByUser(Long.parseLong("userID"));
+        List<Bid> bids = bidDao.findBidsByUser(userID);
         request.setAttribute("bids", bids);
         return bids;
     }
