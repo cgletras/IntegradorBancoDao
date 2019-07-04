@@ -34,7 +34,7 @@ public class InsertBid implements Task {
         AuctionDao auctionDAO = new AuctionDAO();
         String format = "dd/MM/yyyy";
         Bid bid = new Bid();
-        bid.setBidDate(new SimpleDateFormat(format).parse(request.getParameter("dateOfBid")));
+        bid.setBidDate(new Date());
         User user = ((User) request.getSession().getAttribute("user"));
         Long userID = Long.valueOf(user.getUserID());
 
