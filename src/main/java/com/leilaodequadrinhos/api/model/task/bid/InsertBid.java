@@ -48,7 +48,7 @@ public class InsertBid implements Task {
         switch (auction.getAuctionStatus().getStatus()) {
             case "ATIVO":
                 bidDao.insert(bid);
-                List<User> usersInThisAuction = bidDao.findBidsUsersByAuctionId(auctionID);
+                List<User> usersInThisAuction = userDao.findBidsUsersByAuctionId(auctionID);
                 new Thread(() -> {
                     try {
                         SendEmailToThoseWhoBid(auction, usersInThisAuction, user, bid.getBidValue());
