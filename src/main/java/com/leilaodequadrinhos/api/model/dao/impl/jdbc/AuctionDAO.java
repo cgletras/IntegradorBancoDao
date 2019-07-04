@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AuctionDAO implements AuctionDao {
 
@@ -22,12 +19,19 @@ public class AuctionDAO implements AuctionDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO Leilao (data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, id_estado_leilao, id_usuario, id_produto) " + "VALUES " + "(?, ?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO Leilao (data_inicio, data_fim, valor_inicial, valor_atual, lance_padrao, id_estado_leilao, id_usuario, id_produto) " + "VALUES " + "(?, ?, ?, ?, ?, ?, ?, ?)",
                     java.sql.Statement.RETURN_GENERATED_KEYS);
 
             Auction obj = (Auction) entity;
             st.setDate(1, new java.sql.Date(obj.getInitialDate().getTime()));
-            st.setInt(2, obj.getDuration());
+            // Incrementa a duração em dias a data inicial para enviar a data_fim para o banco de dados.
+            Date dataInicio = obj.getInitialDate();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dataInicio);
+            cal.add(Calendar.DAY_OF_MONTH, obj.getDuration());
+            Date dataFim = cal.getTime();
+            //
+            st.setDate(2, new java.sql.Date(dataFim.getTime()));
             st.setDouble(3, obj.getInitialValue());
             st.setDouble(4, obj.getInitialValue());
             st.setDouble(5, obj.getDefaultBid());
@@ -63,12 +67,19 @@ public class AuctionDAO implements AuctionDao {
         try {
             st = conn.prepareStatement(
                     "UPDATE Leilao " +
-                            "SET data_inicio= ?, duracao= ?, valor_inicial= ?, valor_atual= ?, lance_padrao= ?, id_estado_leilao= ?, id_usuario= ?, id_produto= ? " +
+                            "SET data_inicio= ?, data_fim= ?, valor_inicial= ?, valor_atual= ?, lance_padrao= ?, id_estado_leilao= ?, id_usuario= ?, id_produto= ? " +
                             "WHERE id_leilao= ?");
 
             Auction obj = (Auction) entity;
             st.setDate(1, new java.sql.Date(obj.getInitialDate().getTime()));
-            st.setInt(2, obj.getDuration());
+            // Incrementa a duração em dias a data inicial para enviar a data_fim para o banco de dados.
+            Date dataInicio = obj.getInitialDate();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dataInicio);
+            cal.add(Calendar.DAY_OF_MONTH, obj.getDuration());
+            Date dataFim = cal.getTime();
+            //
+            st.setDate(2, new java.sql.Date(dataFim.getTime()));
             st.setDouble(3, obj.getInitialValue());
             st.setDouble(4, obj.getInitialValue());
             st.setDouble(5, obj.getDefaultBid());
@@ -116,7 +127,7 @@ public class AuctionDAO implements AuctionDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT l.id_leilao, data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
+                    "SELECT l.id_leilao, data_inicio, DATEDIFF(data_fim, now()) duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
                             "el.estado estado_leilao, " +
                             "nome, email, senha, cidade, u.estado, data_nascimento, ativo, " +
                             "editora, titulo, formato_do_quadrinho, numero_paginas, peso, capa_imagem, " +
@@ -191,7 +202,7 @@ public class AuctionDAO implements AuctionDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT l.id_leilao, data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
+                    "SELECT l.id_leilao, data_inicio, DATEDIFF(data_fim, now()) duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
                             "el.estado estado_leilao, " +
                             "nome, email, senha, cidade, u.estado, data_nascimento, ativo, " +
                             "editora, titulo, formato_do_quadrinho, numero_paginas, peso, capa_imagem, " +
@@ -268,7 +279,7 @@ public class AuctionDAO implements AuctionDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT l.id_leilao, data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
+                    "SELECT l.id_leilao, data_inicio, DATEDIFF(data_fim, now()) duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
                             "el.estado estado_leilao, " +
                             "nome, email, senha, cidade, u.estado, data_nascimento, ativo, " +
                             "editora, titulo, formato_do_quadrinho, numero_paginas, peso, capa_imagem, " +
@@ -368,7 +379,7 @@ public class AuctionDAO implements AuctionDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT id_leilao, data_inicio, duracao, valor_inicial, valor_atual, lance_padrao, id_estado_leilao, id_usuario, id_produto "
+                    "SELECT id_leilao, data_inicio, DATEDIFF(data_fim, now()) duracao, valor_inicial, valor_atual, lance_padrao, id_estado_leilao, id_usuario, id_produto "
                             + "FROM Leilao "
                             + "WHERE id_usuario = ?");
 
@@ -420,7 +431,7 @@ public class AuctionDAO implements AuctionDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT duracao FROM Leilao "
+                    "SELECT DATEDIFF(data_fim, now()) duracao FROM Leilao "
                             + "WHERE id_leilao = ?");
 
             st.setLong(1, id);
