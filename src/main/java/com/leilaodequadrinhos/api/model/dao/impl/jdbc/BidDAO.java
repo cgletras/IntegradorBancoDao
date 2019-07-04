@@ -228,7 +228,7 @@ public class BidDAO implements BidDao {
                 obj.setBidDate(new java.sql.Date(rs.getDate("data_lance").getTime()));
                 //
                 AuctionDao auctionDao = new AuctionDAO();
-                Auction auction = (Auction) auctionDao.findById(rs.getLong("auctionID"));
+                Auction auction = (Auction) auctionDao.findById(rs.getLong("id_leilao"));
                 obj.setAuction(auction);
                 //
                 DAO dao = new UserDAO();
