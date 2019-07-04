@@ -10,5 +10,4 @@ public interface BidDao extends DAO {
 	List<Bid> findBidsByUser(Long userID);
 	List<Bid> findBidsByAuction(Long auctionID);
 	Long BidCount(Long auctionID);
-	List<User> findBidsUsersByAuctionId(Long auctionID);
 }

@@ -3,6 +3,7 @@ package com.leilaodequadrinhos.api.model.dao.impl.jdbc;
 import com.leilaodequadrinhos.api.db.DB;
 import com.leilaodequadrinhos.api.db.DbException;
 import com.leilaodequadrinhos.api.model.dao.UserDao;
+import com.leilaodequadrinhos.api.model.entities.Bid;
 import com.leilaodequadrinhos.api.model.entities.User;
 
 import java.sql.Connection;
@@ -287,6 +288,47 @@ public class UserDAO implements UserDao {
 
             if(count == 0){return false;}
             else {return true;}
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+            // DB.closeConnection();
+        }
+    }
+
+    @Override
+    public List<User> findBidsUsersByAuctionId(Long auctionID) {
+        Connection conn = DB.getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "SELECT DISTINCT U.* "+
+                            "FROM Lance L " +
+                            "INNER JOIN Usuario U on L.id_usuario = U.id_usuario " +
+                            "WHERE id_leilao = ?");
+
+            st.setLong(1, auctionID);
+            rs = st.executeQuery();
+
+            List<User> list = new ArrayList<>();
+            Map<Integer, Bid> map = new HashMap<>();
+
+            while (rs.next()) {
+                User obj = new User();
+                obj.setUserID(rs.getInt("id_usuario"));
+                obj.setName(rs.getString("nome"));
+                obj.setEmail(rs.getString("email"));
+                obj.setState(rs.getString("estado"));
+                obj.setCity(rs.getString("cidade"));
+                obj.setPassword(null);
+                obj.setDateOfBirth(new java.sql.Date(rs.getDate("data_nascimento").getTime()));
+                obj.setStatus(rs.getBoolean("ativo"));
+
+                list.add(obj);
+            }
+            return list;
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
