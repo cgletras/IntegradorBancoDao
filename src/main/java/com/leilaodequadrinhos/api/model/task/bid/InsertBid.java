@@ -87,7 +87,7 @@ public class InsertBid implements Task, IObservableTask {
                             "\n" +
                             "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Para continuar na disputa acesse nossa p&aacute;gina:&nbsp;</span></span></p>\n" +
                             "\n" +
-                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">O valor atual deste leilão é de: R$ "+ bid.getAuction().getCurrentValue() +"</span></span></p>\n" +
+                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">O valor atual deste leilão é de: R$ " + bid.getAuction().getCurrentValue() + "</span></span></p>\n" +
                             "\n" +
                             "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\"><a href=\"https://leilaodequadrinhos.com/leilao/" + auctionID + "\">https://leilaodequadrinhos.com/leilao/" + auctionID + "</a></span></span></p>\n" +
                             "\n" +
@@ -115,6 +115,7 @@ public class InsertBid implements Task, IObservableTask {
                     } catch (IOException ex) {
                         throw ex;
                     }
+                    break;
                 }
             }
         }
