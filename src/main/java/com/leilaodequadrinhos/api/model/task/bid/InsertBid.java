@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class InsertBid implements Task, IObservableTask {
@@ -41,69 +43,81 @@ public class InsertBid implements Task, IObservableTask {
         Long userID = Long.valueOf((((User) request.getSession().getAttribute("user")).getUserID()));
         User user = userDao.findById(userID);
         bid.setUser(user);
-
         Long auctionID = Long.parseLong(request.getParameter("auctionID"));
+        CallSendEmail(this, auctionID, bidDao);
         Auction auction = (Auction) auctionDAO.findById(auctionID);
-
         bid.setBidValue(auction.getDefaultBid());
         bid.setAuction(auction);
 
         switch (auction.getAuctionStatus().getStatus()) {
             case "ATIVO":
                 bidDao.insert(bid);
-                CallSendEmail(this,auctionID);
+                notifyObserver(request);
                 return "Bid successfully entered";
             default:
                 return "Bids could only be placed on active auctions";
         }
     }
 
-    private void CallSendEmail(InsertBid insertBid, Long auctionID) {
-        insertBid.observerList.add(request -> {
-            BidDao bidDao = new BidDAO();
+    private void CallSendEmail(InsertBid insertBid, Long auctionID, BidDao bidDao) {
+        insertBid.add(request -> {
             List<Bid> bids = bidDao.findBidsByAuction(auctionID);
-            for(Bid bid : bids){
-                Email from = new Email("notification@leilaoquadrinhos.com");
-                String subject = "Notificação de Lance no Leilão do Quadrinho "+ bid.getAuction().getProduct().getTitle();
-                Email to = new Email(bid.getUser().getEmail());
-                Content content = new Content("text/html", "<p><strong><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Ol&aacute; "+ bid.getUser().getName() +",</span></span></strong></p>\n" +
-                        "\n" +
-                        "<p>&nbsp;</p>\n" +
-                        "\n" +
-                        "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Informamos que outro usu&aacute;rio cobriu seu&nbsp;lance no quadrinho "+ bid.getAuction().getProduct().getTitle() +".&nbsp;</span></span></p>\n" +
-                        "\n" +
-                        "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Para continuar na disputa acesse nossa p&aacute;gina:&nbsp;</span></span></p>\n" +
-                        "\n" +
-                        "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\"><a href=\"https://leilaodequadrinhos.com/leilao/"+ auctionID +"\">https://leilaodequadrinhos.com/leilao/"+ auctionID +"</a></span></span></p>\n" +
-                        "\n" +
-                        "<p>&nbsp;</p>\n" +
-                        "\n" +
-                        "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Agradecemos sua participa&ccedil;&atilde;o!</span></span></p>\n" +
-                        "\n" +
-                        "<p>&nbsp;</p>\n" +
-                        "\n" +
-                        "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Atenciosamente,</span></span></p>\n" +
-                        "\n" +
-                        "<p><strong><font face=\"comic sans ms, cursive\"><span style=\"font-size:16px\">Equipe Leil&atilde;o de Quadrinhos</span></font></strong></p>\n");
-                Mail mail = new Mail(from, subject, to, content);
+            SendEmailToThoseWhoBid(auctionID, bids);
+            return "Notificações por email enviadas";
+        });
+    }
 
-                SendGrid sg = new SendGrid(API_KEY);
-                Request requestSG = new Request();
-                try {
-                    requestSG.setMethod(Method.POST);
-                    requestSG.setEndpoint("mail/send");
-                    requestSG.setBody(mail.build());
-                    Response responseSG = sg.api(requestSG);
-                    System.out.println(responseSG.getStatusCode());
-                    System.out.println(responseSG.getBody());
-                    System.out.println(responseSG.getHeaders());
-                } catch (IOException ex) {
-                    throw ex;
+    private void SendEmailToThoseWhoBid(Long auctionID, List<Bid> bids) throws IOException {
+        List<String> emailList = new ArrayList<>(new HashSet<>());
+        for (Bid bid : bids) {
+            emailList.add(bid.getUser().getEmail());
+        }
+        Collection<String> uniqueEmails = new ArrayList<>(new HashSet<>(emailList));
+        for (String email : uniqueEmails) {
+            for (Bid bid : bids) {
+                if (email.equals(bid.getUser().getEmail())) {
+                    Email from = new Email("notification@leilaoquadrinhos.com");
+                    String subject = "Notificação de Lance no Leilão do Quadrinho " + bid.getAuction().getProduct().getTitle();
+                    Email to = new Email(email);
+                    Content content = new Content("text/html", "<p><strong><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Ol&aacute; " + bid.getUser().getName() + ",</span></span></strong></p>\n" +
+                            "\n" +
+                            "<p>&nbsp;</p>\n" +
+                            "\n" +
+                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Informamos que outro usu&aacute;rio cobriu seu&nbsp;lance no quadrinho " + bid.getAuction().getProduct().getTitle() + ".&nbsp;</span></span></p>\n" +
+                            "\n" +
+                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Para continuar na disputa acesse nossa p&aacute;gina:&nbsp;</span></span></p>\n" +
+                            "\n" +
+                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">O valor atual deste leilão é de: R$ "+ bid.getAuction().getCurrentValue() +"</span></span></p>\n" +
+                            "\n" +
+                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\"><a href=\"https://leilaodequadrinhos.com/leilao/" + auctionID + "\">https://leilaodequadrinhos.com/leilao/" + auctionID + "</a></span></span></p>\n" +
+                            "\n" +
+                            "<p>&nbsp;</p>\n" +
+                            "\n" +
+                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Agradecemos sua participa&ccedil;&atilde;o!</span></span></p>\n" +
+                            "\n" +
+                            "<p>&nbsp;</p>\n" +
+                            "\n" +
+                            "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">Atenciosamente,</span></span></p>\n" +
+                            "\n" +
+                            "<p><strong><font face=\"comic sans ms, cursive\"><span style=\"font-size:16px\">Equipe Leil&atilde;o de Quadrinhos</span></font></strong></p>\n");
+                    Mail mail = new Mail(from, subject, to, content);
+
+                    SendGrid sg = new SendGrid(API_KEY);
+                    Request requestSG = new Request();
+                    try {
+                        requestSG.setMethod(Method.POST);
+                        requestSG.setEndpoint("mail/send");
+                        requestSG.setBody(mail.build());
+                        Response responseSG = sg.api(requestSG);
+                        System.out.println(responseSG.getStatusCode());
+                        System.out.println(responseSG.getBody());
+                        System.out.println(responseSG.getHeaders());
+                    } catch (IOException ex) {
+                        throw ex;
+                    }
                 }
             }
-
-            return "Notificações por email enviadas com sucesso";
-        });
+        }
     }
 
     @Override
