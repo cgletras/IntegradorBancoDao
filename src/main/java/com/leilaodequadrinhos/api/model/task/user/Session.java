@@ -9,6 +9,9 @@ public class Session implements Task {
 
     @Override
     public Boolean execute(HttpServletRequest request, HttpServletResponse response) {
+        if (request.getParameter("invalidate") != null && Boolean.parseBoolean(request.getParameter("invalidate"))) {
+            request.getSession().invalidate();
+        }
         return !(request.getSession().getAttribute("user") == null);
     }
 }
