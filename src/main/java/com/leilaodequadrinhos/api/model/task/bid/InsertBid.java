@@ -25,7 +25,7 @@ import java.util.*;
 
 public class InsertBid implements Task {
 
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "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";
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
