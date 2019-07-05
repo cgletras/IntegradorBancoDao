@@ -289,7 +289,7 @@ public class AuctionDAO implements AuctionDao {
                             "INNER JOIN Estado_leilao el ON l.id_estado_leilao = el.id_estado_leilao " +
                             "INNER JOIN Produto p ON l.id_produto = p.id_produto " +
                             "INNER JOIN Estado_produto ep ON p.id_estado_produto = ep.id_estado_produto " +
-                            "WHERE l.id_estado_leilao IN (1) AND p.id_estado_produto = 2" +
+                            "WHERE l.id_estado_leilao IN (1) AND p.id_estado_produto = 2 " +
                             "AND p.titulo LIKE ('%" + titleToSearch + "%') " +
                             "AND p.editora IN ('" + String.join("','", publishingCompanys) + "') " +
                             "GROUP BY id_leilao ) AS result " +
