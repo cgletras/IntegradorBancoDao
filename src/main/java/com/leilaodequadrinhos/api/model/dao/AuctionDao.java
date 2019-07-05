@@ -16,5 +16,6 @@ public interface AuctionDao extends DAO {
 	List<Auction> findByUser(User obj);
 	List<Auction> findAllPaginate(Integer limit, Integer offset);
 	List<Auction> findAllActiveAuctions();
+	List<Auction> listAllActiveAuctionOrderedBy(String OrderBy);
 	Integer returnAuctionDuration(Long id);
 }
