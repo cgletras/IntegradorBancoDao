@@ -14,7 +14,7 @@ public interface AuctionDao extends DAO {
 	void setAuctionDateNow(Long id);
 	void closeActiveAuction(Long id);
 	List<Auction> findByUser(User obj);
-	List<Auction> findAllPaginate(Integer limit, Integer offset);
+	List<Auction> findAllPaginate(Integer limit, Integer offset, String columnToOrderBy, String directionToOrderBy, String titleToSearch, List<String> publishingCompanys);
 	List<Auction> findAllActiveAuctions();
 	List<Auction> listAllActiveAuctionOrderedBy(String OrderBy);
 	Integer returnAuctionDuration(Long id);

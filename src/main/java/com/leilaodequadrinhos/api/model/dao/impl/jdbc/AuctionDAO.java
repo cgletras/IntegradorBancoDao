@@ -273,13 +273,14 @@ public class AuctionDAO implements AuctionDao {
     }
 
     @Override
-    public List<Auction> findAllPaginate(Integer limit, Integer offset) {
+    public List<Auction> findAllPaginate(Integer limit, Integer offset, String columnToOrderBy, String directionToOrderBy, String titleToSearch, List<String> publishingCompanys) {
         Connection conn = DB.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
+
             st = conn.prepareStatement(
-                    "SELECT l.id_leilao, data_inicio, DATEDIFF(data_fim, now()) duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
+                    "SELECT * FROM (SELECT l.id_leilao, data_inicio, DATEDIFF(data_fim, now()) duracao, valor_inicial, valor_atual, lance_padrao, l.id_estado_leilao, l.id_usuario, l.id_produto, " +
                             "el.estado estado_leilao, " +
                             "nome, email, senha, cidade, u.estado, data_nascimento, ativo, " +
                             "editora, titulo, formato_do_quadrinho, numero_paginas, peso, capa_imagem, " +
@@ -288,7 +289,11 @@ public class AuctionDAO implements AuctionDao {
                             "INNER JOIN Estado_leilao el ON l.id_estado_leilao = el.id_estado_leilao " +
                             "INNER JOIN Produto p ON l.id_produto = p.id_produto " +
                             "INNER JOIN Estado_produto ep ON p.id_estado_produto = ep.id_estado_produto " +
-                            "GROUP BY id_leilao " +
+                            "WHERE l.id_estado_leilao IN (1) " +
+                            "AND p.titulo LIKE ('%"+ titleToSearch +"%') " +
+                            "AND p.editora IN ('"+ String.join("','", publishingCompanys) +"') " +
+                            "GROUP BY id_leilao ) AS result " +
+                            "ORDER BY "+ columnToOrderBy + " " + directionToOrderBy + " " +
                             "LIMIT " + limit +
                             " OFFSET " + offset
             );
