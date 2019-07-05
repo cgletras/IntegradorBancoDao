@@ -24,7 +24,7 @@ public class FindAllAuctionsPaginate implements Task {
 
         if (request.getParameter("columnToOrderBy") != null &&
                 (request.getParameter("columnToOrderBy").equalsIgnoreCase("data_inicio") ||
-                        request.getParameter("columnToOrderBy").equalsIgnoreCase("valor_atual"))) {
+                        request.getParameter("columnToOrderBy").equalsIgnoreCase("lance_padrao"))) {
             columnToOrderBy = request.getParameter("columnToOrderBy").toLowerCase();
         }
 
