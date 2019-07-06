@@ -12,31 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class CloseActiveAuctions implements Task {
+public class CloseActiveAuctions {
 
     private static final int CLOSED = 4;
 
-    @Override
-    public Object execute(HttpServletRequest request, HttpServletResponse response) {
+    public void execute() {
         AuctionDao auctionDao = new AuctionDAO();
         ProductDao productDao = new ProductDAO();
         ProductStatus productStatus = new ProductStatus();
         productStatus.setProductStatusID(CLOSED);
         List<Auction> auctions = auctionDao.findAllActiveAuctions();
-        int count = 0;
 
         for (Auction auction : auctions) {
             if (auction.getDuration() == 0) {
                 auctionDao.closeActiveAuction(auction.getAuctionID());
                 productDao.changeStatusProduct((long) auction.getProduct().getProductID(), productStatus);
-                count++;
             }
-        }
-
-        if (count != 0) {
-            return "Auction successfully closed";
-        } else {
-            return "No Auction could be closed today";
         }
     }
 }
