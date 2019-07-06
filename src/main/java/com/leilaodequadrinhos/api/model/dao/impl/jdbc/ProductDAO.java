@@ -204,7 +204,7 @@ public class ProductDAO implements ProductDao {
         try {
             st = conn.prepareStatement(
                     "SELECT * FROM Produto "
-                            + "WHERE id_usuario = ?");
+                            + "WHERE id_usuario = ? ORDER BY id_produto DESC");
 
             st.setLong(1, UserId);
             rs = st.executeQuery();
