@@ -11,7 +11,7 @@ public class Json {
     private static ObjectMapper mapper = new ObjectMapper();
 
     public static String objectToJson(Object obj) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         mapper.setDateFormat(df);
         String json = null;
 
