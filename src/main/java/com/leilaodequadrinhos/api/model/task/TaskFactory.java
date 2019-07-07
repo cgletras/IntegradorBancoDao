@@ -68,7 +68,7 @@ public class TaskFactory {
 
         tasks.put("GET/bid-count", new BidCount());
         tasks.put("GET/find-all-bids", new FindAllBids());
-        tasks.put("GET/find-bid-by-auction", new FindBidsByAuction());
+        tasks.put("GET/public/find-bid-by-auction", new FindBidsByAuction());
         tasks.put("GET/find-bid-by-id", new FindBidByID());
         tasks.put("GET/find-bid-by-user", new FindBidsByUser());
         tasks.put("POST/insert-bid", new InsertBid());
