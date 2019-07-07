@@ -39,7 +39,7 @@ public class TaskFactory {
         tasks.put("POST/insert-new-auction", new InsertNewAuction());
         tasks.put("POST/update-auction", new UpdateAuction());
         tasks.put("POST/update-current-auction-price", new UpdateCurrentAuctionPrice());
-        tasks.put("GET/find-auction-by-id", new FindAuctionById());
+        tasks.put("GET/public/find-auction-by-id", new FindAuctionById());
         tasks.put("GET/public/find-all-auctions", new FindAllAuctions());
         tasks.put("POST/delete-auction-by-id", new DeleteAuctionByID());
         tasks.put("GET/find-all-auctions-by-user", new FindAllAuctionsByUser());
