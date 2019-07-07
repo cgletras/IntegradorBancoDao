@@ -213,7 +213,7 @@ public class BidDAO implements BidDao {
                     "SELECT id_lance, valor_lance, data_lance, id_leilao, id_usuario "
                             + "FROM Lance "
                             + "WHERE id_leilao = ? "
-                            + "ORDER BY id_lance");
+                            + "ORDER BY id_lance DESC");
 
             st.setLong(1, auctionID);
             rs = st.executeQuery();
