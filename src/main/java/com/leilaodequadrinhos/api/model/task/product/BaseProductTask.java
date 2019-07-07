@@ -15,7 +15,16 @@ abstract class BaseProductTask {
 
     protected Product buildProduct(HttpServletRequest request, UserDao userDao) throws IOException, ServletException {
         Product product = new Product();
-        product.setPublisher(request.getParameter("publishingCompany"));
+
+        String publishingCompany = request.getParameter("publishingCompany");
+        if (publishingCompany.equalsIgnoreCase("marvel")){
+            product.setPublisher("Marvel");
+        } else if (publishingCompany.equalsIgnoreCase("dc")){
+            product.setPublisher("DC");
+        } else {
+            product.setPublisher("Outras");
+        }
+
         product.setTitle(request.getParameter("title"));
         product.setComicFormat(request.getParameter("format"));
         int pages = Integer.parseInt(request.getParameter("pagesNumber"));
