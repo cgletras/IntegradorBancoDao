@@ -28,7 +28,7 @@ public class InsertProduct extends BaseProductTask implements Task {
             product = buildProduct(request, userDao);
         } catch (IOException | ServletException e) {
             e.printStackTrace();
-            return "Product not insected";
+            return "Product not inserted";
         }
         product.setProductStatus(productStatusDao.findById(ACTIVE));
         productDao.insert(product);
