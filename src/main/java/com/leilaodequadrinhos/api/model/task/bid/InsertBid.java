@@ -79,7 +79,7 @@ public class InsertBid implements Task {
                         "\n" +
                         "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\">O valor atual deste leilão é de: R$ " + currentValue + "</span></span></p>\n" +
                         "\n" +
-                        "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\"><a href=\"https://leilaodequadrinhos.com/leilao/" + auction.getAuctionID() + "\">https://leilaodequadrinhos.com/leilao/" + auction.getAuctionID() + "</a></span></span></p>\n" +
+                        "<p><span style=\"font-size:16px\"><span style=\"font-family:comic sans ms,cursive\"><a href=\"https://leilaodequadrinhos.com/?auction=" + auction.getAuctionID() + "\">https://leilaodequadrinhos.com/leilao/" + auction.getAuctionID() + "</a></span></span></p>\n" +
                         "\n" +
                         "<p>&nbsp;</p>\n" +
                         "\n" +
