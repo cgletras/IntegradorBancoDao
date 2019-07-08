@@ -41,7 +41,7 @@ public class BidDAO implements BidDao {
                     int id = rs.getInt(1);
                     obj.setBidID(id);
                 }
-//                DB.closeResultSet(rs);
+                DB.closeResultSet(rs);
             } else {
                 throw new DbException("Unexpected error! No rows affected!");
             }
