@@ -210,10 +210,16 @@ public class BidDAO implements BidDao {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                    "SELECT id_lance, valor_lance, data_lance, id_leilao, id_usuario "
-                            + "FROM Lance "
-                            + "WHERE id_leilao = ? "
-                            + "ORDER BY id_lance DESC");
+                    "SELECT L.id_lance    id_lance,\n" +
+                        "       L.valor_lance valor_lance,\n" +
+                        "       L.data_lance  data_lance,\n" +
+                        "       L.id_leilao   id_leilao,\n" +
+                        "       U.*\n" +
+                        "FROM Lance L\n" +
+                        "         INNER JOIN Leilao L2 on L.id_leilao = L2.id_leilao\n" +
+                        "         INNER JOIN Usuario U on L.id_usuario = U.id_usuario\n" +
+                        "WHERE L.id_leilao = ?\n" +
+                        "ORDER BY id_lance DESC");
 
             st.setLong(1, auctionID);
             rs = st.executeQuery();
